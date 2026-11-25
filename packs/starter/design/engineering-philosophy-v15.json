@@ -1,0 +1,540 @@
+{
+  "id": "durai.engineering.deliberate-design",
+  "version": "15",
+  "status": "DESIGNED",
+  "storeKind": "GENERIC",
+  "packId": "durai.software-generation",
+  "ontologyTypes": [
+    "KNOWLEDGE",
+    "MEMORY",
+    "PROCEDURE"
+  ],
+  "layers": [
+    "DESIGN",
+    "ENTITY",
+    "DAO",
+    "SERVICE",
+    "UI",
+    "TEST"
+  ],
+  "typeResponsibilities": {
+    "KNOWLEDGE": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+    "MEMORY": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+    "PROCEDURE": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow"
+  },
+  "runtimeEnforcement": "LOCAL_COMMENT_AND_WORKER_CONTRACT_GATE",
+  "owner": "Codex engineering orchestration; context and evaluation consumers retain track-X ownership",
+  "scope": "All Durai-owned implementation and test functions, including generated applications",
+  "authority": "Explicit user instructions, 2026-11-16; Task B live-run lessons; sample-only comment intent; failure triage plan 2026-11-18; retry minimum after live migration run 2026-11-18; resume retry from the previous candidate after live migration run 2026-11-18; user approved failing goal names in retry feedback 2026-11-18; user approved the task context pack and read-only query tools 2026-11-18",
+  "methodReference": "https://drensin.medium.com/elephants-goldfish-and-the-new-golden-age-of-software-engineering-c33641a48874",
+  "existingToolingToQualify": "https://egm.dev/",
+  "canonicalStorage": {
+    "proposedSchema": "durai_engineering",
+    "authority": "PostgreSQL",
+    "graph": "derived AGE projection",
+    "applied": false
+  },
+  "roles": [
+    {
+      "id": "design_reasoner",
+      "purpose": "Resolve business meaning and produce context-bound design artifacts",
+      "requires": [
+        "qualified-reasoning-model",
+        "authorized-context",
+        "bounded-budget"
+      ],
+      "canWriteApplicationCode": false
+    },
+    {
+      "id": "context_reader",
+      "purpose": "Explain the design from a fresh session using pinned artifacts only",
+      "inheritsPlannerConversation": false
+    },
+    {
+      "id": "design_critic",
+      "purpose": "Find contradictions, missing rules, unsupported assumptions, and recovery gaps",
+      "inheritsPlannerConversation": false
+    },
+    {
+      "id": "code_implementer",
+      "purpose": "Implement the ready brief with correct syntax, comments, walkthroughs, and useful tests",
+      "inheritsPlannerConversation": false,
+      "canApproveRelease": false
+    },
+    {
+      "id": "code_reviewer",
+      "purpose": "Review behavior, maintainability, walkthrough quality, and test relevance",
+      "canApproveRelease": false
+    }
+  ],
+  "concepts": [
+    "EngineeringPolicyVersion",
+    "BusinessObjective",
+    "BusinessRule",
+    "ContextManifest",
+    "ModelRoleProfile",
+    "DesignArtifact",
+    "DesignDecision",
+    "ImplementationBrief",
+    "ReadinessReview",
+    "FunctionContract",
+    "WalkthroughExample",
+    "AcceptanceGoal",
+    "EvidenceBinding"
+  ],
+  "relations": [
+    {
+      "from": "DesignArtifact",
+      "predicate": "GOVERNED_BY",
+      "to": "EngineeringPolicyVersion"
+    },
+    {
+      "from": "DesignArtifact",
+      "predicate": "USES_CONTEXT",
+      "to": "ContextManifest"
+    },
+    {
+      "from": "ImplementationBrief",
+      "predicate": "SATISFIES",
+      "to": "BusinessObjective"
+    },
+    {
+      "from": "DesignDecision",
+      "predicate": "JUSTIFIED_BY",
+      "to": "EvidenceBinding"
+    },
+    {
+      "from": "ReadinessReview",
+      "predicate": "REVIEWS",
+      "to": "DesignArtifact"
+    },
+    {
+      "from": "FunctionContract",
+      "predicate": "IMPLEMENTS",
+      "to": "BusinessRule"
+    },
+    {
+      "from": "WalkthroughExample",
+      "predicate": "EXEMPLIFIES",
+      "to": "FunctionContract"
+    },
+    {
+      "from": "FunctionContract",
+      "predicate": "VERIFIED_BY",
+      "to": "AcceptanceGoal"
+    },
+    {
+      "from": "DesignArtifact",
+      "predicate": "DEPENDS_ON",
+      "to": "DesignArtifact"
+    },
+    {
+      "from": "DesignArtifact",
+      "predicate": "SUPERSEDES",
+      "to": "DesignArtifact"
+    }
+  ],
+  "policies": [
+    {
+      "id": "design-before-code",
+      "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+    },
+    {
+      "id": "fresh-context-readiness",
+      "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+    },
+    {
+      "id": "separate-model-roles",
+      "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+    },
+    {
+      "id": "durable-decisions",
+      "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+    },
+    {
+      "id": "walkthrough-every-function",
+      "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+    },
+    {
+      "id": "walkthrough-language",
+      "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+    },
+    {
+      "id": "sample-comments-only",
+      "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+    },
+    {
+      "id": "useful-tests",
+      "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+    },
+    {
+      "id": "runnable-shell-before-business-red",
+      "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+    },
+    {
+      "id": "failing-business-test-first",
+      "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+    },
+    {
+      "id": "independent-evaluation",
+      "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+    },
+    {
+      "id": "clarification-before-invention",
+      "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+      "audience": [
+        "coding-worker"
+      ]
+    },
+    {
+      "id": "dependency-invalidation",
+      "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+    },
+    {
+      "id": "release-authority",
+      "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+    },
+    {
+      "id": "preserve-history",
+      "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+    },
+    {
+      "id": "do-not-edit-unrequested",
+      "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+      "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+    },
+    {
+      "id": "do-not-over-constrain",
+      "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+      "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+    },
+    {
+      "id": "do-not-write-explanatory-comments",
+      "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+      "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+    },
+    {
+      "id": "do-not-explore-after-deliverables",
+      "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+      "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+    },
+    {
+      "id": "do-not-create-age-graph-as-schema",
+      "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+      "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+    },
+    {
+      "id": "do-not-break-age-cypher-call-contract",
+      "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+      "audience": [
+        "coding-worker"
+      ],
+      "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+      "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+    },
+    {
+      "id": "do-not-omit-age-query-search-path",
+      "audience": [
+        "coding-worker"
+      ],
+      "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+    },
+    {
+      "id": "do-not-mismatch-sql-row-aliases",
+      "audience": [
+        "coding-worker"
+      ],
+      "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+    },
+    {
+      "id": "do-not-reuse-plpgsql-row-shapes",
+      "audience": [
+        "coding-worker"
+      ],
+      "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+    },
+    {
+      "id": "edit-guard-before-file-write",
+      "audience": [
+        "control-plane"
+      ],
+      "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+    },
+    {
+      "id": "failure-triage-before-next-call",
+      "audience": [
+        "control-plane"
+      ],
+      "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+    }
+  ],
+  "readiness": {
+    "states": [
+      "DRAFT",
+      "NEEDS_CLARIFICATION",
+      "UNDER_REVIEW",
+      "READY",
+      "INVALIDATED",
+      "CANCELLED"
+    ],
+    "bindings": [
+      "applicationId",
+      "artifactDigest",
+      "contextManifestDigest",
+      "policyVersion",
+      "sourceRevision",
+      "ruleVersions",
+      "reviewEvidence"
+    ],
+    "requiredArtifacts": [
+      "problem-brief",
+      "business-rules",
+      "context-map",
+      "architecture-decision",
+      "module-contracts",
+      "failure-recovery-plan",
+      "test-goals",
+      "function-documentation-plan",
+      "file-change-manifest",
+      "readiness-review"
+    ],
+    "implementationGates": [
+      "DESIGN_READY",
+      "EXECUTION_SHELL_READY",
+      "BASELINE_TEST_FAILURE_CONFIRMED",
+      "IMPLEMENTATION_READY"
+    ],
+    "redBaselineEvidence": [
+      "goalId",
+      "baselineSourceDigest",
+      "fixtureDigest",
+      "suiteDigest",
+      "shellBuildAndSmokeEvidence",
+      "failureCategory",
+      "assertionEvidence",
+      "environmentManifest"
+    ]
+  },
+  "walkthrough": {
+    "requiredFields": [
+      "qualifiedFunction",
+      "goal",
+      "sampleInputs",
+      "numberedActions",
+      "expectedResult",
+      "ruleReferences"
+    ],
+    "scopeIncludesTests": true,
+    "style": "ASD-STE100 sample walkthroughs only; language review required",
+    "example": {
+      "qualifiedFunction": "trading.correct",
+      "goal": "Remove a positive correction quantity",
+      "sampleInputs": {
+        "shares": 200,
+        "correction_lots": 1,
+        "lot_size": 100
+      },
+      "numberedActions": [
+        "Start with 200 shares.",
+        "Remove 1 lot of 100 shares.",
+        "Check that the result is 100 shares."
+      ],
+      "expectedResult": {
+        "shares": 100
+      },
+      "ruleReferences": [
+        "correction-unit:1"
+      ]
+    }
+  },
+  "implementationPlan": "plans/plan_durai_elephant_goldfish_ontology_2026-11-15.md",
+  "decisionPoints": {
+    "edit-guard": {
+      "rules": [
+        {
+          "id": "third-refusal",
+          "when": {
+            "hasFindings": true,
+            "repeatLimitReached": true
+          },
+          "choice": "STALLED"
+        },
+        {
+          "id": "invalid-proposal",
+          "when": {
+            "hasFindings": true
+          },
+          "choice": "REFUSED"
+        },
+        {
+          "id": "valid-proposal",
+          "choice": "APPLIED"
+        }
+      ]
+    },
+    "failure-triage": {
+      "rules": [
+        {
+          "id": "passed",
+          "when": {
+            "verdict": "PASS"
+          },
+          "choice": "SUBMIT_FOR_REVIEW"
+        },
+        {
+          "id": "stale-pin",
+          "when": {
+            "origin": "stale"
+          },
+          "choice": "STOP_STALE"
+        },
+        {
+          "id": "trusted-fixture",
+          "when": {
+            "origin": "fixture"
+          },
+          "choice": "STOP_FIXTURE"
+        },
+        {
+          "id": "provider-fault",
+          "when": {
+            "origin": "provider"
+          },
+          "choice": "STOP_PROVIDER"
+        },
+        {
+          "id": "stalled-worker",
+          "when": {
+            "origin": "guard"
+          },
+          "choice": "STOP_STALLED"
+        },
+        {
+          "id": "budget-stop",
+          "when": {
+            "origin": "budget"
+          },
+          "choice": "STOP_BUDGET"
+        },
+        {
+          "id": "infrastructure-repeat",
+          "when": {
+            "origin": "evaluator",
+            "evaluatorRetryAvailable": true,
+            "timeLeft": true
+          },
+          "choice": "REPEAT_EVALUATION"
+        },
+        {
+          "id": "infrastructure-stop",
+          "when": {
+            "origin": "evaluator"
+          },
+          "choice": "STOP_INFRASTRUCTURE"
+        },
+        {
+          "id": "candidate-retry",
+          "when": {
+            "origin": "candidate",
+            "attemptsLeft": true,
+            "callsForRetry": true,
+            "timeLeft": true
+          },
+          "choice": "RETRY_CANDIDATE"
+        },
+        {
+          "id": "candidate-exhausted",
+          "when": {
+            "origin": "candidate"
+          },
+          "choice": "STOP_BUDGET"
+        },
+        {
+          "id": "needs-review",
+          "choice": "STOP_NEEDS_REVIEW"
+        }
+      ],
+      "evaluatorRetryLimit": 1,
+      "minimumRetryCalls": 5,
+      "resumeReasons": [
+        "CANDIDATE_ASSERTION",
+        "CANDIDATE_COMMENT"
+      ],
+      "feedbackGoalNames": true
+    },
+    "context-pack": {
+      "enabled": true,
+      "maxCharacters": 60000,
+      "sections": [
+        "edit-rules",
+        "workspace-map",
+        "schema-index",
+        "file-text"
+      ],
+      "tools": [
+        "describe_table",
+        "find_function",
+        "show_lines",
+        "search_context"
+      ],
+      "sources": [
+        "sealed task",
+        "readable workspace files"
+      ],
+      "excluded": [
+        "protected suite",
+        "reference solution"
+      ]
+    },
+    "execution-strategy": {
+      "rules": [
+        {
+          "id": "budget-low",
+          "when": {
+            "budgetLow": true
+          },
+          "choice": "SINGLE"
+        },
+        {
+          "id": "role-split",
+          "when": {
+            "roleSplit": true
+          },
+          "choice": "TEAM"
+        },
+        {
+          "id": "loose-modules",
+          "when": {
+            "moduleShape": "LOOSE"
+          },
+          "choice": "SUBAGENTS"
+        },
+        {
+          "id": "default",
+          "choice": "SINGLE"
+        }
+      ],
+      "singleRunMedianModelCalls": 8
+    }
+  }
+}

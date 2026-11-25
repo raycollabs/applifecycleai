@@ -1,0 +1,123 @@
+{
+  "label": "a3-shell-book-r2-20261124",
+  "sampleId": "S-TRADE-BOOK",
+  "revision": 1,
+  "digest": "6d0b33212aa10f4f6900e51ceb64265723193efade075b0f2b0fd5e12d94a017",
+  "provider": "deepinfra-deepseek",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "startedAt": "2026-11-25T04:38:21.876574+00:00",
+  "finishedAt": "2026-11-25T04:50:42.421562+00:00",
+  "calls": 35,
+  "inputTokens": 659229,
+  "outputTokens": 66552,
+  "estimatedEnterpriseCost": 1.983978,
+  "estimatedListCost": 0.171777,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "1e165dc4dde43fe5470055a5fc362875daeab77a7a0a3ac73071eae0f6f6a1e8"
+      ],
+      "at": "2026-11-25T04:41:48.187317+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "b4c13d4945e4afbe520cd193dbff855402092ee326d660ce9258e518d9a3f34d"
+      ],
+      "at": "2026-11-25T04:44:04.200464+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/001_trade.sql",
+        "src/schema/002_instruments.sql",
+        "src/store.py",
+        "src/money.py",
+        "src/booking_model.py",
+        "src/instruments.py",
+        "src/errors.py",
+        "src/booking.py",
+        "src/routes.py",
+        "src/__init__.py"
+      ],
+      "sha256s": [
+        "c0f1e74552c056eca040e9c52db50bc7b4c8da195747281bd2fbfd9e92d432e8",
+        "ad60461bf7ab1de565b529e63edcf95318b2a4fb33ff0c566f0ef886f1f442e3",
+        "9e3b17af4c8ddbd55144879c9025a3243a53464fdbb07c3d03c89e7ba20ddadb",
+        "909393af0f3a780281d04a261e254fc3b44f4ea19cff91f3022adeeba795f972",
+        "fb87694dbd5a681ea6cf3388afed3b600e27c916c65bc89505c47dd3bf9dcebd",
+        "630b583223d289f762c378f1668afba4f59f7253b7475763bc8a230ad315d2a7",
+        "b76f868e2b8005146f10a7aabd282d4732736fdf93a6b90862135108b0180db2",
+        "893553290af0700e1b9a074dbbeeece50ec7432545e58f1d82d44d7c312c715e",
+        "db9bc34bb26ee7559f556ea5ea369866420b0a3555ad9da8558ff4e0fbd69b11",
+        "f5a499b914578229a0a146017b448d9cbb795ad869f50e6332e402f88688109b"
+      ],
+      "at": "2026-11-25T04:50:37.390788+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/support.py",
+        "tests/test_money.py",
+        "tests/test_store.py",
+        "tests/test_booking_model.py",
+        "tests/test_instruments.py",
+        "tests/test_book_trade.py",
+        "tests/test_trade_routes.py"
+      ],
+      "sha256s": [
+        "9a8c97af549386460d9e183e3de9c5e1a3b1de7eb858bf2a5451db168dd1e6eb",
+        "79a50712054b2edb05fb05c40ba67b72e18273acbe5b514cd4b31252688f7f9e",
+        "26e197b8e4481c826bced98de83ce5daf415a34c5bf9c68bc668923e8ddbcefc",
+        "d09eafe07575bda76d1b324f04b7903ce0259af398def812cacd31d0c757a243",
+        "62f9f2fe7be97184e351787ecb84499141847b9f6b1de6f0d8b28f18d97955ad",
+        "0bb156e5cc5b87803fc33820e9e5f449b6959b48404e4ce68cacc0b3a026dcff",
+        "ab23b5a6cde98cd59d5261a63d5958c9370c81d4c4c49dfc408d114bf5d7f2bd"
+      ],
+      "at": "2026-11-25T04:50:40.731901+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 32,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "providerErrors": 0,
+  "keepRecent": 40,
+  "traceDigest": "1e6649d8657611c57e4cebc1c61ea8fbae8e634ee48a1455d535377f4ecd1fb5",
+  "receiptSha256": "f4bb8da87cb7fc207725368f3514a878461edc5287ce84983f9d93bd7f67be45",
+  "shellManifestSha256": "b7e54edbab8355ff7d8d0334e8f18db2938e56eeb88093c68390cf6fd525f066",
+  "pinnedShellFilesVerified": 16,
+  "stageArchiveVerified": true,
+  "localRecheck": {
+    "passed": 32,
+    "failed": 0,
+    "exitCode": 0,
+    "timedOut": false
+  },
+  "appCheckStatus": 200,
+  "runtimeGuards": [
+    "immutable shell files",
+    "live sign-in check on DEPLOYED submission"
+  ],
+  "round3": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "calls": 28,
+    "estimatedEnterpriseCost": 3.024224
+  },
+  "protectedScoringRun": false
+}

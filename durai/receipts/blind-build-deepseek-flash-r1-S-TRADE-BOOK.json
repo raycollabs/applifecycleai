@@ -1,0 +1,103 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-BOOK",
+  "revision": 1,
+  "digest": "6d0b33212aa10f4f6900e51ceb64265723193efade075b0f2b0fd5e12d94a017",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:32:58.981724+00:00",
+  "finishedAt": "2026-11-22T15:37:56.981450+00:00",
+  "calls": 31,
+  "inputTokens": 1437195,
+  "outputTokens": 62217,
+  "estimatedEnterpriseCost": 3.49656,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "20d6de92d7758d15f117ce607d2633371a6e61d8483350d248b288433c6a855b"
+      ],
+      "at": "2026-11-22T15:35:32.352544+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "35cf63757671e18922e0fa0fc2b537c3101360d21fd3d5704a60e05c34465218"
+      ],
+      "at": "2026-11-22T15:35:41.764069+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/001_schema.sql",
+        "src/schema/002_reference_data.sql",
+        "src/db.py",
+        "src/errors.py",
+        "src/money.py",
+        "src/requests.py",
+        "src/fingerprint.py",
+        "src/models.py",
+        "src/references.py",
+        "src/audit.py",
+        "src/fees.py",
+        "src/idempotency.py",
+        "src/bookings.py",
+        "src/queries.py"
+      ],
+      "sha256s": [
+        "675303535825723569fbc38dba52e07c466db122dc9cca623903cdea400355f1",
+        "12f3fb05477250ced6b163e2054a74dca2ff8004f97057d14d5539555054d727",
+        "05431517df5b8971ebd78f9347040cf379081c5859319ffd34626c7be3a071c3",
+        "c1dc263dd37e05dc1f8695e8c23662eedaeedab8934b92e9e1490c471a02d894",
+        "87d2941a59dcac7f9176267cc997ab9e78229e12aa7883a9f6cb2d117fc33bd3",
+        "ef75b700cfc4a78baad4a0ec78975648307d81edaa33b434b4f8dc3b1eb7b582",
+        "23ddcec91491865d94daf9a707f51bd18ded2906844f314b8c6e47cb7b4c7cca",
+        "55549f204d7bf34b58127e329e19a8c639e88b0f9bcb1ad8d0d74da7effda841",
+        "c9ebeb01614b9c5b2a11efe6c32434c807d29471112dbb47f83647590c675b30",
+        "65944bb2bf1104bd4e124766fffce29d25b3b03f43703846e166f57fbe4299a4",
+        "566240b0197bf521d8b1cbfffc429fe5961b9b2b64193949eba28d830bdaacbb",
+        "e43819252e1aa521ec0de514b23928863bab142e989f1e6b5fae8f57f2d028ee",
+        "ff618eaa89bc5d6f4935c8674845708e4503edbd9e479e796cd8fb1a7fb5cba0",
+        "878705d2f0bb2534d479a7ee99311b41a8e73df17ca37c65aed38d32fa85667f"
+      ],
+      "at": "2026-11-22T15:37:53.798453+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/support.py",
+        "tests/test_schema.py",
+        "tests/test_validation.py",
+        "tests/test_booking.py",
+        "tests/test_idempotency.py",
+        "tests/test_access.py",
+        "tests/test_correction.py"
+      ],
+      "sha256s": [
+        "09d186200500d3103168f39e40d5c0723fa5216932490fa10c4a47458ac63260",
+        "c63b305c54d2b17fee52b63b95ef3089a1d80ff8269fa7b237a35979bcad5a99",
+        "543f31df5f8df975a82170776e1c4ffe70e4dc5bbfd0e427b97b8b6ebdddc960",
+        "1877f5b8f16e1126cb6cba6775cd6a76b36c48d40afcaaeee7d31bc885925fe2",
+        "c7fdd16e1b919cddca7c3ba379ea997f829263644de3972ea8cbecff86968399",
+        "8635ded95cf881de79a9fcd8a3925fb37ade5ed7a40f42b04306f2b59075b675",
+        "62708e2ddafc00b4762cd3ca458b30a7dfb20d0cc017d40584ec2d656fb9a017"
+      ],
+      "at": "2026-11-22T15:37:55.697863+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 31,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

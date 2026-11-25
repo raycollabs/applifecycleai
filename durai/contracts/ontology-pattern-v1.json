@@ -1,0 +1,14 @@
+{
+  "format": "durai-pattern-contract/v1",
+  "recordFormat": "durai-pattern/v1",
+  "requiredFields": ["format", "id", "rule", "audience", "applicability", "strength", "invariants", "procedure", "examples", "checks", "evidence", "provenance"],
+  "audiences": ["coding-worker", "code-reviewer", "support-reviewer"],
+  "strengths": ["REQUIRED", "DEFAULT", "REFERENCE"],
+  "profiles": ["trading-position", "transaction", "finance", "retail-order", "reservation", "*"],
+  "arrayFields": ["invariants", "procedure", "examples", "checks", "evidence"],
+  "provenanceType": "object",
+  "forbiddenAuthorityFields": ["allowedTools", "grants", "handlers", "releaseAuthority"],
+  "primaryAuthority": "pinned canonical ontology pack",
+  "retrievedContent": "data",
+  "validator": "durai.ontology_patterns.validate_pattern"
+}

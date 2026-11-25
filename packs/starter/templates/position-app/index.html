@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exchange positions | Durai generated sample</title>
+<style>body{margin:0;background:#101827;color:#e9eef7;font:16px system-ui}main{max-width:960px;margin:auto;padding:32px}h1{font-size:32px}section{background:#1c2940;padding:24px;margin:20px 0;border-radius:12px}form{display:flex;gap:12px;flex-wrap:wrap}label{display:grid;gap:6px}input,button{font:inherit;padding:10px;border:1px solid #6d809e;border-radius:6px;max-width:100%;box-sizing:border-box}input{width:160px}button{align-self:end;background:#b8f5ce;color:#102219;cursor:pointer}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #56657b}.muted{color:#bbc9df}#message{min-height:24px;color:#b8f5ce}strong{font-size:24px}</style>
+<main><p class="muted">DURAI / GENERATED APPLICATION / SYNTHETIC DATA</p><h1>Exchange positions</h1>
+<p>Book signed lots, apply lot corrections, and inspect positions in shares.</p>
+<section><h2>Book a trade</h2><form id="book"><label>Trade ID<input name="id" value="T-101" required></label><label>Signed lots<input name="lots" type="number" step="1" value="2" required></label><label>Shares per lot<input name="lot_size" type="number" step="1" min="1" value="100" required></label><button>Book trade</button></form></section>
+<section><h2>Correct a trade</h2><form id="correct"><label>Trade ID<input name="id" value="T-101" required></label><label>Lots to remove<input name="delta_lots" type="number" step="1" value="1" required></label><button>Apply correction</button></form></section>
+<p id="message" role="status"></p><section><h2>Positions</h2><p>Net position: <strong id="net">0 shares</strong></p><table><thead><tr><th>Trade</th><th>Shares per lot</th><th>Position</th></tr></thead><tbody id="rows"></tbody></table></section>
+<p class="muted">Local reference environment. State resets when the server stops. No broker connection or live order routing.</p></main>
+<script>
+function render(value){
+  // Sample: Read T-101 at 200 shares. Show one row and a net position of 200 shares.
+  document.querySelector('#net').textContent=value.netShares+' shares';
+  const body=document.querySelector('#rows');body.replaceChildren();
+  for(const trade of value.trades){const row=document.createElement('tr');for(const field of ['id','lot_size','shares']){const cell=document.createElement('td');cell.textContent=trade[field];row.append(cell)}body.append(row)}
+}
+async function submit(event){
+  // Sample: Submit 2 lots of 100 for T-101. Show 200 shares or a business error.
+  event.preventDefault();const form=event.target;const command={action:form.getAttribute('id')};
+  for(const [key,value] of new FormData(form)){command[key]=key==='id'?value:Number(value)}
+  const response=await fetch('/commands',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(command)});
+  const value=await response.json();document.querySelector('#message').textContent=value.error||'Position recorded.';if(!value.error)render(value);
+}
+async function load(){
+  // Sample: Open the page. Load the current snapshot before booking another trade.
+  const response=await fetch('/positions');render(await response.json());
+}
+document.querySelector('#book').addEventListener('submit',submit);document.querySelector('#correct').addEventListener('submit',submit);load();
+</script></html>

@@ -1,0 +1,6 @@
+psycopg[binary]==3.3.9
+langgraph
+langgraph-checkpoint-postgres
+deepagents
+langchain-openai
+redis==7.4.0

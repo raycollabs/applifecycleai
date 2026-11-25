@@ -1,0 +1,41 @@
+{
+  "format": "durai-architecture-defaults-contract/v1",
+  "catalogFormat": "durai-architecture-defaults/v1",
+  "patternFormat": "durai-pattern/v1",
+  "preferenceFormat": "durai-owner-preference/v1",
+  "defaultFields": [
+    "preferred",
+    "when",
+    "notApplicable",
+    "alternatives",
+    "exceptionEvidence"
+  ],
+  "alternativeFields": [
+    "id",
+    "when"
+  ],
+  "requiredPair": "relatedPolicyId names an applicable REQUIRED pattern",
+  "proposalFormat": "durai-architecture-proposal/v1",
+  "proposalContextKind": "decision",
+  "proposalChoicesField": "alternatives",
+  "choiceStates": [
+    "DEFAULT_PROPOSED",
+    "EXCEPTION_PROPOSED"
+  ],
+  "authority": "PROPOSED",
+  "executionAuthority": "NONE",
+  "sourceIdentityFields": [
+    "sourcePackId",
+    "sourcePackVersion",
+    "sourcePackDigest"
+  ],
+  "exceptionReferenceKinds": [
+    "record",
+    "receipt",
+    "verdict",
+    "commit"
+  ],
+  "exceptionRecordScope": "same plan and application; immutable current digest",
+  "artifactScope": "registered and authorized artifact bytes with matching digest",
+  "defaultInstall": false
+}

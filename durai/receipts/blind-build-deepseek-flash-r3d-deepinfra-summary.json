@@ -1,0 +1,34 @@
+{
+  "label": "deepseek-flash-r3d-deepinfra",
+  "provider": "deepinfra-deepseek",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "calls": 73,
+  "inputTokens": 3320165,
+  "outputTokens": 57415,
+  "estimatedEnterpriseCost": 7.21448,
+  "estimatedListCost": 0.698482,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "components": [
+    {
+      "sampleId": "S-TRADE-SCREENS-C1-5",
+      "stopReason": "FINISHED",
+      "calls": 73,
+      "lastRunTests": {
+        "passed": 222,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS",
+        "DEPLOYED"
+      ]
+    }
+  ]
+}

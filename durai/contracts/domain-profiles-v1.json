@@ -1,0 +1,15 @@
+{
+  "format": "durai-domain-profiles/v1",
+  "validator": "durai.domain_profiles.validate_domain",
+  "profiles": {
+    "trading-position": {"required": ["applicationName", "quantityUnit", "signedLots", "correctionDirection"], "quantityUnit": "shares", "signedLots": true, "correctionDirection": "REMOVE_LOTS", "renderer": "qualified position template"},
+    "transaction": {"required": ["applicationName", "quantityUnit", "identityFields", "invariants", "lifecycle"]},
+    "finance": {"extends": "transaction", "required": ["money"], "moneyFields": ["currency", "representation", "scale"], "moneyRepresentations": ["MINOR_UNITS", "DECIMAL"]},
+    "retail-order": {"extends": "transaction", "required": ["inventoryPolicy"]},
+    "reservation": {"extends": "transaction", "required": ["holdTtlSeconds", "capacityPolicy"]}
+  },
+  "lifecycleFields": ["states", "initialState", "terminalStates", "transitions"],
+  "transitionFields": ["from", "to"],
+  "missingRules": "NEEDS_CLARIFICATION",
+  "newBusinessProfiles": "Require an explicit profile. Keep units and policy choices in the public specification."
+}

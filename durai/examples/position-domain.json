@@ -1,0 +1,6 @@
+{
+  "applicationName": "My exchange positions",
+  "quantityUnit": "shares",
+  "signedLots": true,
+  "correctionDirection": "REMOVE_LOTS"
+}

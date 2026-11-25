@@ -1,0 +1,21 @@
+{
+  "contract": "durai-ontology-pack/v1",
+  "authority": "durai_ontology.pack and durai_ontology.record in PostgreSQL",
+  "projection": "durai_pack_graph; fixed operator queries only",
+  "kinds": ["GENERIC", "APPLICATION"],
+  "types": ["KNOWLEDGE", "MEMORY", "PROCEDURE"],
+  "layers": ["DESIGN", "ENTITY", "DAO", "SERVICE", "UI", "TEST"],
+  "packFields": ["format", "id", "version", "kind", "reviewState", "records", "edges", "provenance"],
+  "recordFields": ["id", "layer", "type", "body", "digest"],
+  "identity": ["scope", "id", "version", "digest"],
+  "completeMatrixCells": 18,
+  "bindingModes": ["REFERENCE_ONLY", "SYNTHETIC_LOCAL"],
+  "publicationPolicy": "Only the built-in generic pack is shared by default; imported custom packs and forks stay application-scoped",
+  "customization": "Fork to a new ID/version; bind the replacement explicitly; retain earlier pinned revisions",
+  "conflicts": "Reject multiple versions of the same pack and multiple generic procedure packs in one binding",
+  "memoryPolicy": "Generic memory contains schemas or explicitly synthetic examples; tenant observations stay application-scoped",
+  "executionPolicy": "Known trusted local handlers interpret declarative records; pack content cannot grant credentials or deployment authority",
+  "portableFormat": "durai-sqlite-package/v1 containing exactly ontology/pack.json with sealed bindings and path set",
+  "localLimits": {"recordsPerPack": 5000, "canonicalBytesPerPack": 8388608, "searchResults": 50},
+  "scaleQualification": "No large-production-graph throughput or capacity claim"
+}

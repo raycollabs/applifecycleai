@@ -1,0 +1,25 @@
+bundle:
+  name: durai-transaction-shell
+  databricks_cli_version: '>= 0.287.0'
+include:
+  - resources/lakebase.yml
+  - resources/apps.yml
+sync:
+  include:
+    - staged/**
+variables:
+  project_id:
+    default: durai-shell-spike
+  lakebase_branch:
+    description: Lakebase branch resource name
+  lakebase_database:
+    description: Lakebase database resource name
+  lakebase_endpoint:
+    description: Lakebase endpoint resource name
+  signin_scope:
+    description: Secret scope for the synthetic trader
+  signin_key:
+    default: durai-shell-signin
+targets:
+  spike:
+    default: true

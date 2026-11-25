@@ -1,0 +1,80 @@
+{
+  "label": "deepseek-flash-r3-diag",
+  "sampleId": "S-TRADE-CASH",
+  "revision": 1,
+  "digest": "37785b57bc272cd68611897996e694ec9b25035496f8bdf3f8e68d919f9efcab",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-24T17:34:24.700353+00:00",
+  "finishedAt": "2026-11-24T17:37:51.099485+00:00",
+  "calls": 43,
+  "inputTokens": 1289915,
+  "outputTokens": 26876,
+  "estimatedEnterpriseCost": 2.84859,
+  "estimatedListCost": 0.188113,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "ffe77edb5ab34f5c0f9d65046431d71d7a8b6851bffaab360db1bc8239618c27"
+      ],
+      "at": "2026-11-24T17:36:44.339708+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "2ba54f2ec01d583d3775f503979bd32ade610e7883c1479e62234593d922490a"
+      ],
+      "at": "2026-11-24T17:36:54.662174+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/tradebook/settlement.py",
+        "src/tradebook/errors.py"
+      ],
+      "sha256s": [
+        "6bdfaf25f84af1d29f3c31094c7ba0c9c898a70cb81f55f044a699bacbdcbabd",
+        "49a820f89864f6f04df53ab19bdf81c7312e9d3050c44f1a345ddb2bbe5009af"
+      ],
+      "at": "2026-11-24T17:37:47.947794+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_cash_guards.py"
+      ],
+      "sha256s": [
+        "88521c722456fcc9d8b6029fdd55f2b767dae45c56608a0dbac14d62f707f5e6"
+      ],
+      "at": "2026-11-24T17:37:49.304982+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 134,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-round3-20261123\\durai\\worker-evidence\\blind-deepseek-flash-r3-diag-S-TRADE-CASH-ab6e396ef10df2972598e3956275a0ce95a9dd21711ea5287941ae7ab7b87e17.json",
+  "traceDigest": "ab6e396ef10df2972598e3956275a0ce95a9dd21711ea5287941ae7ab7b87e17",
+  "messageCount": 101,
+  "toolErrors": {
+    "read_file": 1
+  }
+}

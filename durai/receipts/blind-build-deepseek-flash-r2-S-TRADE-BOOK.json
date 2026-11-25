@@ -1,0 +1,91 @@
+{
+  "label": "deepseek-flash-r2",
+  "sampleId": "S-TRADE-BOOK",
+  "revision": 1,
+  "digest": "6d0b33212aa10f4f6900e51ceb64265723193efade075b0f2b0fd5e12d94a017",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T20:49:42.125706+00:00",
+  "finishedAt": "2026-11-22T20:53:26.362140+00:00",
+  "calls": 30,
+  "inputTokens": 1041586,
+  "outputTokens": 46372,
+  "estimatedEnterpriseCost": 2.546892,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "45af3e2bddc625a9219311951f18d32ee8597476f74197877403c4a0fe95bfff"
+      ],
+      "at": "2026-11-22T20:51:32.374984+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "ef30bf8d5804c99745454bfa4a8dbd13ab09818f791f1dae5d2672e113ac7af7"
+      ],
+      "at": "2026-11-22T20:51:40.867973+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/001_tables.sql",
+        "src/tradebook/__init__.py",
+        "src/tradebook/db.py",
+        "src/tradebook/errors.py",
+        "src/tradebook/models.py",
+        "src/tradebook/validation.py",
+        "src/tradebook/store.py",
+        "src/tradebook/booking.py"
+      ],
+      "sha256s": [
+        "d8a19feb0394f77d9d7595b5dba777f96bf379e8cc41317b81bebf0960cb3756",
+        "fb194dd8eab7c38a049b38e5087c55cb547d0fe1d66abdd3cb831025a16f9a78",
+        "24f31cfcb2212145d8260914a26bab905495c15a4e88fdbcf564e659386cef7d",
+        "64714b1f0851acc24800ea1272096ff114b74d89caea1271d17eb7bc46fbd528",
+        "8d68ce394348932438f8ca04d79b444663d242613dad18642aaf6cf72751d805",
+        "cf8d160dca558df8336efd60f65aaa04968e10ad9389f1749778288faec14534",
+        "b1cf717e88f9307bc75205f533cfa8d08036f0e8bfa824fb87473f60bd8746e2",
+        "ecff3ff3e2d54651810d8b4b335cc1cb800237d60b401a1a0a889b189c34cdbd"
+      ],
+      "at": "2026-11-22T20:53:23.112439+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/support.py",
+        "tests/test_book_trade.py",
+        "tests/test_idempotency.py",
+        "tests/test_validation.py",
+        "tests/test_access.py",
+        "tests/test_totals.py",
+        "tests/test_concurrency.py"
+      ],
+      "sha256s": [
+        "53650f343f5b4992b64a55b7893a256895c5f252df1b1e219b26e99d245bb1ee",
+        "e28d5a334aabcf5d1a4ed6ab1b02c9460662467b571546da0fbb52ae46049f18",
+        "466adb60b931964a51e4b8324cc31ca536844c120f5d7b4840140eca66947bc2",
+        "9a56a1aad520935f52bdc4696f8e259b848c9626c0d12cc2f87db9eba43f2409",
+        "b609e8bf3dd433175ba172ae50386eab5fadcf93728c9a2b0fa3c0c4979e12c1",
+        "8b536feb62e6355b177f599937692681d68443ea1dc94478f17f5c10d9c15961",
+        "f409f8628d91d04a05a931c4ab7d8bb333a5819d6a97018622f015fe77d4e972"
+      ],
+      "at": "2026-11-22T20:53:24.703801+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 29,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

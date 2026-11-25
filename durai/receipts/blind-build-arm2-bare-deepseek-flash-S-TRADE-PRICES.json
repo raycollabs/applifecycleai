@@ -1,0 +1,33 @@
+{
+  "label": "arm2-bare-deepseek-flash",
+  "sampleId": "S-TRADE-PRICES",
+  "revision": 1,
+  "digest": "d3d1afa943b33af2c499819e6e742877f607938b100960e4d0dad91cbfdf4587",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-24T19:15:17.482325+00:00",
+  "finishedAt": "2026-11-24T19:18:04.290477+00:00",
+  "bare": true,
+  "calls": 17,
+  "inputTokens": 533609,
+  "outputTokens": 35004,
+  "estimatedEnterpriseCost": 1.417258,
+  "estimatedListCost": 0.084506,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": null,
+  "stopReason": "STOP_COST",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-round3-20261123\\durai\\worker-evidence\\blind-arm2-bare-deepseek-flash-S-TRADE-PRICES-b86f20a0e7489b1a7cb25a6f69b4ab4ce00d7bd76b5f3fc2ef970270b59a961e.json",
+  "traceDigest": "b86f20a0e7489b1a7cb25a6f69b4ab4ce00d7bd76b5f3fc2ef970270b59a961e",
+  "messageCount": 45,
+  "toolErrors": {}
+}

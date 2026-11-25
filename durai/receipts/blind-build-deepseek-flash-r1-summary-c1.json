@@ -1,0 +1,26 @@
+{
+  "label": "deepseek-flash-r1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 31,
+  "inputTokens": 1437195,
+  "outputTokens": 62217,
+  "estimatedEnterpriseCost": 3.49656,
+  "components": [
+    {
+      "sampleId": "S-TRADE-BOOK",
+      "stopReason": "FINISHED",
+      "calls": 31,
+      "lastRunTests": {
+        "passed": 31,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    }
+  ]
+}

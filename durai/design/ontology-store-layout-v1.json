@@ -1,0 +1,51 @@
+{
+  "contract": "durai-ontology-layout/v1",
+  "status": "DESIGNED",
+  "runtimeImplemented": false,
+  "canonicalAuthority": "PostgreSQL",
+  "graphRole": "Derived, authorized AGE projection",
+  "dimensions": {
+    "storeKind": ["GENERIC", "APPLICATION"],
+    "ontologyType": ["KNOWLEDGE", "MEMORY", "PROCEDURE"],
+    "layer": ["DESIGN", "ENTITY", "DAO", "SERVICE", "UI", "TEST"]
+  },
+  "identity": ["storeKind", "tenantOrPublisherScope", "packId", "packVersion", "applicationBinding", "layer", "ontologyType", "logicalId", "contentDigest"],
+  "requiredCoverage": "All 18 layer/type cells for each complete declared pack profile; inspectable drafts must report gaps explicitly.",
+  "nonFunctionalRequirements": "Cross-cutting measurable scenarios; not a seventh layer.",
+  "storeKindsDoNotRequireSeparateDatabaseServers": true,
+  "defaultDistributionTarget": {
+    "packId": "durai.software-generation",
+    "storeKind": "GENERIC",
+    "bundledByDefaultWhenImplemented": true,
+    "currentlyInstallable": false,
+    "knowledge": "Engineering vocabulary, specifications, model roles, quality, comments, walkthroughs, and test/release rules",
+    "memory": "Schemas and synthetic examples for decisions, findings, attempts, checks, and retained evidence; no customer history",
+    "procedure": "Design, fresh review, runnable shells, meaningful business-red, implementation, independent evaluation, human release review, activation, and verification",
+    "policySource": "engineering-philosophy-v1.json"
+  },
+  "optionalApplicationTarget": {
+    "packId": "durai.app.exchange-trading",
+    "storeKind": "APPLICATION",
+    "required": false,
+    "modes": ["REFERENCE_ONLY", "REVIEWED_APPLICATION_BINDING"],
+    "sourceProfile": "trade-go-next/3",
+    "sourceReference": "reference-packs/exchange-trading/implementation-source.json",
+    "fullLiveMigrationComplete": false,
+    "realExchangeRoutingProvided": false
+  },
+  "customization": {
+    "method": "Versioned user fork or explicit reviewed overlay",
+    "mutateSharedInstalledVersion": false,
+    "conflictPolicy": "Explicit resolution; no silent last-write-wins for contradictory meaning or invalid procedure order",
+    "packCanGrantExecutionCredentials": false,
+    "runBindings": "Pinned effective generic, application, and overlay versions/digests",
+    "upgrade": "Activate reviewed binding for new work; drain pinned work; preserve rollback"
+  },
+  "composition": {
+    "greenfield": "Generic engineering pack plus user-authored domain requirements; application packs are optional",
+    "reference": "Inspect an optional application pack without activating its procedures",
+    "application": "Bind exact generic and application versions with allowed overlays",
+    "privateMemory": "Application/tenant scope is retained even when a generic procedure produced the observation"
+  },
+  "plan": "plans/plan_durai_two_kind_ontology_distribution_2026-11-15.md"
+}

@@ -1,0 +1,7 @@
+body { margin: 0; color: #17233b; font-family: system-ui, sans-serif; }
+main { max-width: 72rem; margin: auto; padding: clamp(1rem, 4vw, 3rem); }
+header, nav { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+header { padding-bottom: 1rem; border-bottom: 1px solid #d9e0eb; }
+header span { margin-left: auto; }
+form { display: grid; gap: 1rem; width: fit-content; }
+input, button { font: inherit; margin-left: 0.5rem; padding: 0.45rem 0.7rem; }

@@ -1,0 +1,21 @@
+{
+  "name": "durai-eval-node",
+  "private": true,
+  "description": "Durai transaction shell",
+  "dependencies": {
+    "next": "16.4.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "scripts": {
+    "build": "next build",
+    "start": "next start"
+  }
+}

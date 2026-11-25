@@ -1,0 +1,90 @@
+{
+  "label": "deepseek-flash-r2",
+  "sampleId": "S-TRADE-CASH",
+  "revision": 1,
+  "digest": "37785b57bc272cd68611897996e694ec9b25035496f8bdf3f8e68d919f9efcab",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T21:10:43.616809+00:00",
+  "finishedAt": "2026-11-22T21:18:34.109776+00:00",
+  "calls": 89,
+  "inputTokens": 5978388,
+  "outputTokens": 91880,
+  "estimatedEnterpriseCost": 12.875576,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "bd469e2d43cdf61bca2b3e0a06431ff13a039f1f1ae6c0167fc603294ec97d8c"
+      ],
+      "at": "2026-11-22T21:14:12.226592+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "95428effbf0b371a4d578f9c67ed780e4f6e852885015492d1c701fee93e1ca1"
+      ],
+      "at": "2026-11-22T21:14:34.075699+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/003_cash.sql",
+        "src/tradebook/cash_math.py",
+        "src/tradebook/cash_input.py",
+        "src/tradebook/cash_store.py",
+        "src/tradebook/payments.py",
+        "src/tradebook/settlement.py",
+        "src/tradebook/models.py",
+        "src/tradebook/errors.py",
+        "src/tradebook/__init__.py"
+      ],
+      "sha256s": [
+        "2b412761c973d27d2e1621069738a05485c3d2556014fce9df5b3699b318a057",
+        "66b1ac847b9d41cd31a0ec9f2ec302033507d6d9212890919672706d6c1bd92f",
+        "bbffc8d683c53382bab8dc69039199c5a2f908d9f7def8bda7a3eb031541db1c",
+        "cd2dad17028cc7307e0e3bccf9bf1dd28902e70b49feb95158f6248aeb0457a0",
+        "436d692a650544c486f97b2681ddf133bb312809345d096f55477d6f45ac3b78",
+        "60abb114cc23313a7fb2df753833d888b0fcdc203094dd39d1a8acd37515b5b9",
+        "ea24a295d08b50b56d433580cb08845659db3c07ae7761fcdb6443a75cc40256",
+        "63e3f3ba39e920a2d359d6fdf121907a6f4d3c0df28f05a2e45976bdc101e42e",
+        "08961763d6ee7a15166dce8b39ea462fc268b4f2e179472902067bd21c94f951"
+      ],
+      "at": "2026-11-22T21:18:31.285327+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/support.py",
+        "tests/test_payments.py",
+        "tests/test_settlement.py",
+        "tests/test_cash_concurrency.py"
+      ],
+      "sha256s": [
+        "cf9afa1531e3ba9c6d0d7cc2dc9536c139794470545910df557bea6c2a0f153f",
+        "755680d7ce69ad803e5e3052d49be5479f48def06dd3df3d99d48badd81ed93a",
+        "f17caee17a147b7e8cb011035c380e261fe3ab5edfcf129bf3bc58436ab22813",
+        "b52ddee646bbc2234025f5e056a2426f5094ff211a1a5c221287e4fdf17ad4a3"
+      ],
+      "at": "2026-11-22T21:18:32.898468+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 126,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {
+    "edit_file": 1,
+    "read_file": 1
+  }
+}

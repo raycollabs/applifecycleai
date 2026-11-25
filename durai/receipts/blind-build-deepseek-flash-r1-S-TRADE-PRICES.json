@@ -1,0 +1,77 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-PRICES",
+  "revision": 1,
+  "digest": "d3d1afa943b33af2c499819e6e742877f607938b100960e4d0dad91cbfdf4587",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:45:36.694023+00:00",
+  "finishedAt": "2026-11-22T15:49:44.735271+00:00",
+  "calls": 44,
+  "inputTokens": 1386327,
+  "outputTokens": 42056,
+  "estimatedEnterpriseCost": 3.193214,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "97cbc963fff3bf21628edc35b1f2a6f3c8960c1a4c2680317e7bb188fd114868"
+      ],
+      "at": "2026-11-22T15:48:11.944898+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "de4da0ec929e41182a7910e27abb0776e57f503026f9123c41a18ceee34aaf5a"
+      ],
+      "at": "2026-11-22T15:48:19.631853+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/004_price_intake.sql",
+        "src/errors.py",
+        "src/access.py",
+        "src/references.py",
+        "src/fingerprint.py",
+        "src/price_requests.py",
+        "src/prices.py"
+      ],
+      "sha256s": [
+        "8497ca4b5db49e611b688a1ede6e31ddddaed37483cc1ac08e8ba91cbdc5d48f",
+        "b09514c1e03829643a758d2f81db93402885f28decbfae0c476e319a32a9ea10",
+        "b68ccadecb28002740268a105b7763eee3cf107036c2bc57eadfbb77c44a5ee8",
+        "0e6f2631d59851b2b90a90aee53916b6a61b4b57773befa4c14f0f2b06595e74",
+        "00550b47f35b7600178de4de3dea9c3c9796235ca044504d11848d94fef5d824",
+        "d47bd68eb3d8d5f70a587886b6437d2873e017e62606adfc99057ec33bd27719",
+        "db58b0e78fc16159af02658eac0251348b51e681c7854e5a7ec96f459c80897f"
+      ],
+      "at": "2026-11-22T15:49:41.464607+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_price_intake.py"
+      ],
+      "sha256s": [
+        "42f74252d7d6e099526fbfbda85ca1b2f2917a9260e00c1bf085ec8722a01b7d"
+      ],
+      "at": "2026-11-22T15:49:43.129292+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 65,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

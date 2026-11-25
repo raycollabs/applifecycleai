@@ -1,0 +1,12 @@
+{
+  "contractVersion": "durai/v1",
+  "owner": "Codex trading track",
+  "durability": {"authority": "PostgreSQL", "delivery": "at-least-once", "eventOrder": "per-run sequence", "terminalStates": ["SUCCEEDED", "FAILED", "CANCELLED", "LOST"]},
+  "registry": {"operations": ["define", "register", "get", "discover"], "versionIdentity": ["application", "versionId", "sourceDigest", "manifest"], "registrationAuthorizesDeployment": false},
+  "coordination": {"operations": ["enqueue", "claim", "renew", "commit", "checkpoint", "kv_put", "reserve", "book_once"], "fence": ["jobId", "owner", "generation", "unexpiredLease"], "idempotency": ["operationKey", "inputDigest"]},
+  "ontology": {"operations": ["get_rule", "project_rule"], "providers": ["postgres-relational", "apache-age"], "arbitraryCypher": false},
+  "release": {"operations": ["approve", "activate", "verify", "rollback"], "approvalBinding": ["artifactDigest", "target", "targetPreconditionDigest", "policyVersion"], "activeRequiresTargetVerification": true},
+  "evaluationConsumer": {"owner": "Claude Code track X", "localAdapter": "local-protected-deterministic/v1", "requiredFields": ["versionId", "digest", "suiteDigest", "verdict", "evidence"], "verdicts": ["PASS", "FAIL", "INCONCLUSIVE"], "acceptance": "PASS with all protected hard gates"},
+  "contextConsumer": {"owner": "Claude Code track X", "localAdapter": "static-immutable-manifest/v1", "requiredBindings": ["sourceDigest", "snapshotDigest", "ontologyVersion", "observedWrite", "sourceMapping"]},
+  "extensionPoints": ["AgentHarness", "CodingWorker", "SandboxProvider", "OntologyProvider", "FileProvider", "ActivationHandler", "MCP facade", "A2A agent cards", "authorized RAG provider"]
+}

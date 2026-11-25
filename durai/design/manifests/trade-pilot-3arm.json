@@ -1,0 +1,70 @@
+{
+  "format": "durai-manifest/v1",
+  "id": "trade-pilot-3arm",
+  "version": "1.0",
+  "routes": {
+    "builder": "deepseek-flash",
+    "c_rev": "deepseek-chat",
+    "p_rev": "gemini-1.5-flash",
+    "s_rev": "human",
+    "arm_round1": "deepseek-flash-r1",
+    "arm_round2": "deepseek-flash-r2",
+    "arm_round3": "deepseek-flash-r3c-deepinfra"
+  },
+  "caps": {
+    "callsPerComponent": 80,
+    "totalCalls": 400,
+    "costEnterpriseUSD": 20.0,
+    "stallNudge": 30,
+    "stallStop": 50
+  },
+  "reviewers": [
+    "C-REV",
+    "P-REV",
+    "S-REV"
+  ],
+  "components": [
+    "S-TRADE-BOOK",
+    "S-TRADE-ACCESS",
+    "S-TRADE-PRICES",
+    "S-TRADE-PNL",
+    "S-TRADE-CASH",
+    "S-TRADE-SCREENS-C1-5"
+  ],
+  "workflow": {
+    "format": "durai-workflow/v1",
+    "id": "trade-pilot-3arm-wf",
+    "steps": [
+      {
+        "id": "step-1-access",
+        "goal": "Desk access enforcement and trader authorization",
+        "strategy": "SINGLE"
+      },
+      {
+        "id": "step-2-book",
+        "goal": "Trade booking with fees and idempotent deduplication",
+        "strategy": "SINGLE"
+      },
+      {
+        "id": "step-3-prices",
+        "goal": "Price feed intake, staleness detection, and historical revisions",
+        "strategy": "SINGLE"
+      },
+      {
+        "id": "step-4-pnl",
+        "goal": "Position tracking, FIFO lots, and realized/unrealized PnL",
+        "strategy": "SINGLE"
+      },
+      {
+        "id": "step-5-cash",
+        "goal": "Cash payments, settlements, and outstanding trade balance tracking",
+        "strategy": "SINGLE"
+      },
+      {
+        "id": "step-6-screens",
+        "goal": "Next.js trader web dashboard connecting all five modules",
+        "strategy": "SINGLE"
+      }
+    ]
+  }
+}

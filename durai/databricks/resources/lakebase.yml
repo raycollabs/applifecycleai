@@ -1,0 +1,10 @@
+resources:
+  postgres_projects:
+    shell:
+      project_id: ${var.project_id}
+      pg_version: 17
+      display_name: Durai transaction shell
+      default_endpoint_settings:
+        autoscaling_limit_min_cu: 1
+        autoscaling_limit_max_cu: 1
+        suspend_timeout_duration: 60s

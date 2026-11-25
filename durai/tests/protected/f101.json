@@ -1,0 +1,10 @@
+{
+  "suiteId": "F-101-v1",
+  "rule": {"id": "quantity-unit", "version": "1", "unit": "shares", "expression": "shares = lots * lot_size"},
+  "cases": [
+    {"id": "open-two-lots", "input": {"lots": 2, "lot_size": 100}, "expectedShares": 200},
+    {"id": "correct-one-lot", "input": {"lots": 2, "lot_size": 100, "correction_lots": 1}, "expectedShares": 100},
+    {"id": "short-two-lots", "input": {"lots": -2, "lot_size": 100}, "expectedShares": -200},
+    {"id": "single-unit-instrument", "input": {"lots": 7, "lot_size": 1}, "expectedShares": 7}
+  ]
+}

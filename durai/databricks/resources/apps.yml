@@ -1,0 +1,38 @@
+resources:
+  apps:
+    api:
+      name: durai-shell-api
+      source_code_path: ../staged/api
+      config:
+        command: [python, launch_api.py]
+        env:
+          - name: LAKEBASE_ENDPOINT
+            value: ${var.lakebase_endpoint}
+          - name: DURAI_SHELL_TRADER
+            value: TR-BEN
+          - name: DURAI_SHELL_SIGNIN_SECRET
+            value_from: shell-signin
+      resources:
+        - name: lakebase
+          postgres:
+            branch: ${var.lakebase_branch}
+            database: ${var.lakebase_database}
+            permission: CAN_CONNECT_AND_CREATE
+        - name: shell-signin
+          secret:
+            scope: ${var.signin_scope}
+            key: ${var.signin_key}
+            permission: READ
+    web:
+      name: durai-shell-web
+      source_code_path: ../staged/web
+      config:
+        command: [node, launch_web.mjs]
+        env:
+          - name: DURAI_API_APP
+            value_from: shell-api
+      resources:
+        - name: shell-api
+          app:
+            name: ${resources.apps.api.name}
+            permission: CAN_USE

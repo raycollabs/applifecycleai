@@ -1,0 +1,75 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-ACCESS",
+  "revision": 1,
+  "digest": "a6ca1bb29c7375d5ba4186792333ccc2760961b5f20fac316aabad2a01cc208e",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:38:24.416984+00:00",
+  "finishedAt": "2026-11-22T15:45:36.691501+00:00",
+  "calls": 66,
+  "inputTokens": 3489146,
+  "outputTokens": 68934,
+  "estimatedEnterpriseCost": 7.667632,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "957cb53903de26c33b3f2af9ed3c2b0e2f65c0b37353743a2397cd13961cda5b"
+      ],
+      "at": "2026-11-22T15:42:08.314588+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "7429c503b0efc439ffc8aa0dc1416f25ad06249cee3208a3a30bf7aa6a917bde"
+      ],
+      "at": "2026-11-22T15:42:18.845986+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/003_desk_access.sql",
+        "src/access.py",
+        "src/queries.py",
+        "src/reports.py",
+        "src/models.py",
+        "src/bookings.py"
+      ],
+      "sha256s": [
+        "d7124851f63d269d9aefcec0c0e89621ee711c35935e2f9e59b50146490289e0",
+        "50ac22ad05bb8092fb9ecf91f6345049de2bab3d21fd767814565431366ca46a",
+        "2b0afafd95ffb75b94707f84db7250ae11efe1e81be4e8a3fd241c0b09b612d8",
+        "bf79f2774c7c8ac50add73129866886a32020ac7e163450a4afe73479073de61",
+        "a8731805f118c7f2d21c278716d21fd43e5295ba8724f18348916f97f32270c5",
+        "baac248dbd1381eba942177ebdf7114ebb7a5ef2c91eb4c899e9d4df39d72fa3"
+      ],
+      "at": "2026-11-22T15:45:34.249912+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_desk_access.py"
+      ],
+      "sha256s": [
+        "b9cdee1c5ee2a297662ed39cd1a304dae3657c69ac118b2c305367e3f8f61b52"
+      ],
+      "at": "2026-11-22T15:45:35.512152+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 50,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

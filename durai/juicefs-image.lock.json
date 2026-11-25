@@ -1,0 +1,5 @@
+{
+  "tag": "juicedata/mount:ce-v1.3.1",
+  "imageId": "sha256:f612849b9dae7d78ac6e73c5cd1238400f29ed296decc5f4bf1043cba906e1d3",
+  "source": "https://juicefs.com/docs/community/juicefs_on_docker/"
+}

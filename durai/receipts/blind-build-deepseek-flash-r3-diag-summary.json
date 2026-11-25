@@ -1,0 +1,33 @@
+{
+  "label": "deepseek-flash-r3-diag",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 43,
+  "inputTokens": 1289915,
+  "outputTokens": 26876,
+  "estimatedEnterpriseCost": 2.84859,
+  "estimatedListCost": 0.188113,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-TRADE-CASH",
+      "stopReason": "FINISHED",
+      "calls": 43,
+      "lastRunTests": {
+        "passed": 134,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    }
+  ]
+}

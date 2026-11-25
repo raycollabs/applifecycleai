@@ -1,0 +1,46 @@
+{
+  "label": "arm2-bare-deepseek-flash",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 117,
+  "bare": true,
+  "inputTokens": 4316738,
+  "outputTokens": 136661,
+  "estimatedEnterpriseCost": 10.000086,
+  "estimatedListCost": 0.642608,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-TRADE-BOOK",
+      "stopReason": "STOP_BUDGET",
+      "calls": 50,
+      "lastRunTests": {
+        "passed": 16,
+        "failed": 0
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-TRADE-ACCESS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 50,
+      "lastRunTests": {
+        "passed": 16,
+        "failed": 0
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-TRADE-PRICES",
+      "stopReason": "STOP_COST",
+      "calls": 17,
+      "lastRunTests": null,
+      "stages": []
+    }
+  ]
+}

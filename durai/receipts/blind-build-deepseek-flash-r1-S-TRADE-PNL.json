@@ -1,0 +1,71 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-PNL",
+  "revision": 1,
+  "digest": "ab387662b975af20215ca920510a9ffd0bda4ea882983de805c9c62f3cbf4fc2",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:49:44.737824+00:00",
+  "finishedAt": "2026-11-22T15:53:52.054427+00:00",
+  "calls": 51,
+  "inputTokens": 1598874,
+  "outputTokens": 42667,
+  "estimatedEnterpriseCost": 3.624418,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "2a5acc5e57d0585595cfe091ff6794532dd62934ff77795ab5d6a3f4e1510ffa"
+      ],
+      "at": "2026-11-22T15:52:07.016234+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "ba4ed7ff49ad35e2ddd25e7d74b0ab4ba19d98e7e17995996ce6203471d2c503"
+      ],
+      "at": "2026-11-22T15:52:16.834503+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/lots.py",
+        "src/positions.py",
+        "src/prices.py"
+      ],
+      "sha256s": [
+        "af75607ccc7e449c1fb1e8b21d39f6e04e56b78c67569f2a814114bb05ad818e",
+        "359473d246512eb1c9b051feb5213c0b1fac7b9adfa83fb625827412ec9069df",
+        "cd91214abd01b4cad3b044b5f2e46c294a7f4758ea0cd3f6130810088a670ce0"
+      ],
+      "at": "2026-11-22T15:53:49.538740+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_lots.py",
+        "tests/test_positions.py"
+      ],
+      "sha256s": [
+        "5787691f48913bd9f63c7198e4a3585be2929afda5f02896b213d8c78c1a1bfb",
+        "11235209685903bbc0747398358ef1a65ad21f6c0aea53a9a5674bcdb61ed650"
+      ],
+      "at": "2026-11-22T15:53:50.798249+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 88,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

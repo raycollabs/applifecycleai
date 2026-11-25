@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Durai dashboard</title>
+<style>
+:root { --bg: #f7f7f5; --fg: #1d1d1b; --muted: #66665f; --line: #d8d8d2; --panel: #ffffff; --accent: #1f5fbf; --ok: #1a7f37; --bad: #b42318; --warn: #9a6700; }
+@media (prefers-color-scheme: dark) { :root { --bg: #161615; --fg: #ececE8; --muted: #9a9a92; --line: #33332f; --panel: #1f1f1d; --accent: #7aa7ff; --ok: #56d364; --bad: #ff7b72; --warn: #e3b341; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif; }
+header { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+h1 { font-size: 16px; margin: 0; }
+h2 { font-size: 14px; margin: 24px 0 8px; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; }
+nav button { background: var(--panel); color: var(--fg); border: 1px solid var(--line); padding: 6px 12px; border-radius: 4px; cursor: pointer; font: inherit; }
+nav button[aria-selected="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+#stamp { color: var(--muted); margin-left: auto; }
+main { padding: 16px; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: var(--panel); }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+code { font-family: ui-monospace, Consolas, monospace; font-size: 12px; word-break: break-all; }
+.SUCCEEDED, .PASSED, .HELD { color: var(--ok); }
+.FAILED, .CANCELLED, .LOST { color: var(--bad); }
+.WAITING_GATE, .RUNNING, .PENDING { color: var(--warn); }
+.empty, .error { color: var(--muted); padding: 12px 0; }
+.error { color: var(--bad); }
+</style>
+</head>
+<body>
+<header>
+<h1>Durai dashboard (read-only)</h1>
+<nav id="tabs" role="tablist"></nav>
+<span id="stamp"></span>
+</header>
+<main id="view"></main>
+<script>
+const TABS = [
+  ['workflows', 'Workflows', '/api/workflows', [['workflowId', 'Workflow'], ['state', 'State'], ['steps', 'Steps'], ['startedAt', 'Started'], ['finishedAt', 'Finished']]],
+  ['gates', 'Pending gates', '/api/gates', [['workflowId', 'Workflow'], ['stepId', 'Step'], ['subjectDigest', 'Subject digest'], ['question', 'Question'], ['deadline', 'Deadline'], ['waitingSeconds', 'Waiting s'], ['approvalCommand', 'Reviewer approval command']]],
+  ['runs', 'Runs', '/api/runs', [['label', 'Label'], ['case_name', 'Case'], ['variant', 'Variant'], ['model_profile_id', 'Model profile'], ['outcome', 'Outcome'], ['pass_attempt', 'Pass attempt'], ['model_calls', 'Calls'], ['wall_seconds', 'Wall s'], ['started_at', 'Started']]],
+  ['scorecard', 'Scorecard', '/api/scorecard', [['model_profile_id', 'Model profile'], ['family', 'Family'], ['runs', 'Runs'], ['pass_rate', 'Pass rate'], ['first_attempt_pass_rate', 'First attempt'], ['median_calls', 'Median calls'], ['p90_calls', 'P90 calls'], ['median_wall_seconds', 'Median wall s'], ['median_cost', 'Median cost'], ['cost_per_pass', 'Cost per pass'], ['incomplete_usage_runs', 'Incomplete usage'], ['price_verification', 'Price']]],
+  ['experiments', 'Experiments', '/api/experiments', [['experimentId', 'Experiment'], ['pairs', 'Pairs'], ['bothPass', 'Both pass'], ['treatmentOnly', 'Treatment only'], ['baselineOnly', 'Baseline only'], ['bothFail', 'Both fail']]],
+  ['decisions', 'Decisions', '/api/decisions', [['workflowId', 'Workflow'], ['stepId', 'Step'], ['event', 'Event'], ['choice', 'Choice'], ['wanted', 'Wanted'], ['rule', 'Rule'], ['ruleDigest', 'Rule digest'], ['features', 'Features'], ['createdAt', 'At']]],
+  ['agents', 'Agents', '/api/agents', [['workflowId', 'Workflow'], ['stepId', 'Step'], ['subagentId', 'Subagent'], ['module', 'Module'], ['state', 'State'], ['packageDigest', 'Package digest'], ['budget', 'Budget'], ['usage', 'Usage'], ['merge', 'Merge'], ['acceptance', 'Acceptance'], ['startedAt', 'Started']],
+   ['/api/leases', 'Team file leases', [['workflowId', 'Workflow'], ['stepId', 'Step'], ['path', 'Path'], ['owner', 'Member'], ['role', 'Role'], ['generation', 'Generation'], ['state', 'State'], ['live', 'Live'], ['expiresAt', 'Expires']]]]
+];
+let current = 'workflows';
+
+function text(value, key) {
+  if (value === null || value === undefined) return '';
+  if (key === 'deadline' && typeof value === 'number') return new Date(value * 1000).toLocaleString();
+  if (key === 'steps' && Array.isArray(value)) return value.map(s => s.stepId + ' ' + s.state).join(', ');
+  if (typeof value === 'string' && /^\d{4}-\d\d-\d\dT/.test(value)) return new Date(value).toLocaleString();
+  return String(value);
+}
+
+function render(tab, rows, extra) {
+  const view = document.getElementById('view');
+  view.replaceChildren();
+  build(view, tab[3], rows);
+  if (extra) {
+    const title = document.createElement('h2');
+    title.textContent = extra[1];
+    view.append(title);
+    build(view, extra[2], extra[3]);
+  }
+}
+
+function build(view, columns, rows) {
+  if (!rows.length) {
+    const none = document.createElement('div');
+    none.className = 'empty';
+    none.textContent = 'No rows.';
+    view.append(none);
+    return;
+  }
+  const table = document.createElement('table');
+  const head = table.createTHead().insertRow();
+  for (const column of columns) {
+    const cell = document.createElement('th');
+    cell.textContent = column[1];
+    head.append(cell);
+  }
+  const body = table.createTBody();
+  for (const row of rows) {
+    const line = body.insertRow();
+    for (const column of columns) {
+      const cell = line.insertCell();
+      const value = text(row[column[0]], column[0]);
+      if (column[0] === 'subjectDigest' || column[0] === 'ruleDigest' || column[0] === 'approvalCommand') {
+        const code = document.createElement('code');
+        code.textContent = value;
+        cell.append(code);
+      } else {
+        cell.textContent = value;
+        if (column[0] === 'state' || column[0] === 'outcome') cell.className = value;
+      }
+    }
+  }
+  view.append(table);
+}
+
+async function load() {
+  const tab = TABS.find(item => item[0] === current);
+  const view = document.getElementById('view');
+  try {
+    const response = await fetch(tab[2], { credentials: 'same-origin' });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || String(response.status));
+    let extra = null;
+    if (tab[4]) {
+      const second = await fetch(tab[4][0], { credentials: 'same-origin' });
+      const more = await second.json();
+      if (!second.ok) throw new Error(more.error || String(second.status));
+      extra = [tab[4][0], tab[4][1], tab[4][2], more.rows];
+    }
+    render(tab, data.rows, extra);
+    document.getElementById('stamp').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  } catch (error) {
+    view.replaceChildren();
+    const box = document.createElement('div');
+    box.className = 'error';
+    box.textContent = tab[1] + ': ' + error.message;
+    view.append(box);
+  }
+}
+
+function select(name) {
+  current = name;
+  for (const button of document.querySelectorAll('#tabs button')) {
+    button.setAttribute('aria-selected', String(button.dataset.tab === name));
+  }
+  load();
+}
+
+for (const tab of TABS) {
+  const button = document.createElement('button');
+  button.textContent = tab[1];
+  button.dataset.tab = tab[0];
+  button.setAttribute('role', 'tab');
+  button.addEventListener('click', () => select(tab[0]));
+  document.getElementById('tabs').append(button);
+}
+select(current);
+setInterval(load, 10000);
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "label": "deepseek-flash-r3c-deepinfra",
+  "sampleId": "S-TRADE-SCREENS-C1-5",
+  "revision": 1,
+  "digest": "2e5a8c83c2d75af3e480c0fea117b11e24f2b0f819c87fc410230b6bc5a4b27e",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "provider": "deepinfra-deepseek",
+  "startedAt": "2026-11-24T17:04:07.815919+00:00",
+  "finishedAt": "2026-11-24T17:28:50.614023+00:00",
+  "calls": 90,
+  "inputTokens": 4405538,
+  "outputTokens": 96988,
+  "estimatedEnterpriseCost": 9.780956,
+  "estimatedListCost": 0.9393,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "e7dfb9eb214afabe90e832a116b1860e02e3a96eca1aeceeae43f7c826ed910f"
+      ],
+      "at": "2026-11-24T17:12:19.415900+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "6a9995e3ad5d4770765564814ed26356b776c8874cd4b8cacbd52f438442bd8f"
+      ],
+      "at": "2026-11-24T17:17:12.352286+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 180,
+    "failed": 0
+  },
+  "stopReason": "STOP_STALL",
+  "stopDetail": {
+    "lastStage": "PLAN",
+    "callsSinceLastStage": 50,
+    "recentTools": [
+      "edit_file",
+      "edit_file",
+      "edit_file",
+      "write_file",
+      "write_file"
+    ]
+  },
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-round3-20261123\\durai\\worker-evidence\\blind-deepseek-flash-r3c-deepinfra-S-TRADE-SCREENS-C1-5-95fbbcdbfdc636469726f36988901518208cefd45e18b7bb29f44ffe104e0b64.json",
+  "traceDigest": "95fbbcdbfdc636469726f36988901518208cefd45e18b7bb29f44ffe104e0b64",
+  "messageCount": 234,
+  "toolErrors": {
+    "list_files": 1,
+    "submit_stage": 1
+  }
+}

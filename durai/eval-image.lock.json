@@ -1,0 +1,11 @@
+{
+  "tag": "durai-eval-python:1",
+  "imageId": "sha256:e7ea84b86f544970d5a17706ac89ca22d4db57ff67ca5fd868554196365ce5aa",
+  "base": "python:3.13.7-slim-bookworm",
+  "packages": [
+    "psycopg",
+    "psycopg-binary",
+    "typing-extensions"
+  ],
+  "execution": "non-root, read-only root, internal network to one ephemeral database, no capabilities"
+}

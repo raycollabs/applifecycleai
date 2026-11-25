@@ -1,0 +1,68 @@
+{
+  "historicalBuild": "deepseek-flash-r3d-deepinfra",
+  "traceDigests": {
+    "r3e": "cb8f1b47c05d70a4d0d166ca525dec66d96a4798402d63c2118db2a2a56ce7bc",
+    "r3f": "15460ec6eece8bd563708bceecaaab1de2ea79097adbe80fac5a3bff4247a7ba",
+    "r3g": "626e2f1ce6c88ec625c49e18d13e5160b472edbd1cfadb255884ac5f25c210e7"
+  },
+  "historicalRuntimeFileDigests": {
+    "app/actions.ts": "80005bf027028ff9397d0016feb7a55cbe587c61aa7f2bbdcdc63b4903615714",
+    "app/globals.css": "aaa934ea07a52307ea594ca5df41e4e21da60e75e349096f34c2a099bd300903",
+    "app/layout.tsx": "2f5511db79d0079a6d27e5b5964aee1c3972aa1b6fb581fb74e09334342e791a",
+    "app/page.tsx": "354c944496a61eea531b996499cbf3ffaf9318b09a0357cab705de5dcb1a8395",
+    "app/signin/View.tsx": "5c85a9e9f949b0f509842f43336095add11c445f5275962d82689c63ef0a4654",
+    "app/signout/route.ts": "65d30f2a222de321a184ee862adf3364237fa8f3d4c18376efaef6ed30ab04c5",
+    "components/SignOut.tsx": "f496e47029d94a045fe23e8f9f605c1ff08e5c516a1a50f99e46c80569511774",
+    "components/SignedOut.tsx": "30d3146a812960f6f3a4b9677c8e2496cb05ce9412a0ccfc006a49ae10c0f36a",
+    "lib/session.ts": "7740c473ff989d39db14814b466fa274bd91f1914593859b903fbd5873bdaebe",
+    "lib/signin_view.ts": "f76a55a64ac24fcc553693c16a484b2ac39aa321956218bef4ed58313bbb0fc2"
+  },
+  "laterFilesOmitted": [
+    "lib/nav_view.ts",
+    "lib/signed_out.ts",
+    "tests/nav_view.test.ts",
+    "tests/session.test.ts",
+    "tests/test_probe_tmp.py",
+    "tests/test_session_cookie.py",
+    "tests/test_web_probe.py"
+  ],
+  "historicalStaticRules": [
+    "GET_CHANGES_COOKIE",
+    "ABSOLUTE_REDIRECT"
+  ],
+  "historical": {
+    "httpStatus": 422,
+    "passed": false,
+    "rule": "SCREEN_LOST_SESSION",
+    "path": "/prices",
+    "screens": [
+      "/positions",
+      "/book"
+    ]
+  },
+  "historicalPrefetchOnly": {
+    "httpStatus": 422,
+    "passed": false,
+    "rule": "PREFETCH_CHANGED_COOKIE",
+    "path": "/signout",
+    "screens": []
+  },
+  "current": {
+    "httpStatus": 200,
+    "passed": true,
+    "rule": null,
+    "screens": [
+      "/positions",
+      "/book",
+      "/prices",
+      "/cash",
+      "/positions?desk=DELTA%20ONE",
+      "/book?desk=DELTA%20ONE",
+      "/prices?desk=DELTA%20ONE",
+      "/cash?desk=DELTA%20ONE",
+      "/cash?desk=DELTA%20ONE&trade=TRD-00000003",
+      "/cash?desk=DELTA%20ONE&trade=TRD-00000002",
+      "/cash?desk=DELTA%20ONE&trade=TRD-00000001"
+    ]
+  }
+}

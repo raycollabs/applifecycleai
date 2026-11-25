@@ -1,0 +1,66 @@
+{
+  "label": "deepseek-flash-r1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 222,
+  "inputTokens": 8987037,
+  "outputTokens": 214813,
+  "estimatedEnterpriseCost": 20.122204,
+  "components": [
+    {
+      "sampleId": "S-TRADE-ACCESS",
+      "stopReason": "FINISHED",
+      "calls": 66,
+      "lastRunTests": {
+        "passed": 50,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-TRADE-PRICES",
+      "stopReason": "FINISHED",
+      "calls": 44,
+      "lastRunTests": {
+        "passed": 65,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-TRADE-PNL",
+      "stopReason": "FINISHED",
+      "calls": 51,
+      "lastRunTests": {
+        "passed": 88,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-TRADE-CASH",
+      "stopReason": "STOP_COST",
+      "calls": 61,
+      "lastRunTests": null,
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

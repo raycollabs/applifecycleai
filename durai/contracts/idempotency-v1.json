@@ -1,0 +1,31 @@
+{
+  "format": "durai-idempotency-contract/v1",
+  "api": "durai.idempotency.execute_request",
+  "identity": [
+    "database-derived application_id",
+    "operation",
+    "request_key"
+  ],
+  "isolation": "READ COMMITTED",
+  "conflictStrategy": "INSERT ON CONFLICT DO NOTHING, followed by a new SELECT statement",
+  "request": "JSON object with string keys, finite numbers, and no null text characters",
+  "requestDigest": "SHA-256 of sorted compact UTF-8 JSON",
+  "maxCanonicalRequestBytes": 65536,
+  "maxCanonicalOutcomeBytes": 65536,
+  "maxStoredJsonbTextBytes": 65536,
+  "maxOperationBytes": 128,
+  "maxRequestKeyBytes": 256,
+  "handler": "trusted local writes through the supplied connection; no commit or external call",
+  "retainedOutcome": "JSON object",
+  "resultFormat": "durai-idempotency-result/v1",
+  "unfinishedCommit": "refused by a deferred constraint trigger",
+  "completedMutation": "refused by a row trigger and delete grants",
+  "retention": "No automatic expiry. Review the full retry and reconciliation horizon before a separate archival design.",
+  "timeout": "Retry a transient wait or connection error with the same operation, key, and request. Resolve committed outcomes before a new logical command.",
+  "externalEffect": "Retain an unresolved external intent and original provider identity. Provider execution and reconciliation are separate work.",
+  "schemaFiles": [
+    "blueprints/idempotency/v1.sql",
+    "blueprints/idempotency/reference.sql"
+  ],
+  "primaryBusinessSchemaInstalled": false
+}

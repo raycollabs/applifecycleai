@@ -1,0 +1,80 @@
+{
+  "label": "deepseek-flash-r2",
+  "sampleId": "S-TRADE-ACCESS",
+  "revision": 1,
+  "digest": "a6ca1bb29c7375d5ba4186792333ccc2760961b5f20fac316aabad2a01cc208e",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T20:53:26.364511+00:00",
+  "finishedAt": "2026-11-22T20:58:36.260053+00:00",
+  "calls": 73,
+  "inputTokens": 3042252,
+  "outputTokens": 52242,
+  "estimatedEnterpriseCost": 6.606924,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "4fe28259f1f06ff6f14ff2a2343f545b953570fa6fffd3ed61378755768547c0"
+      ],
+      "at": "2026-11-22T20:55:27.558306+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "bbe39fc1834301d2ead2cd240b5bec10c363a3ee268f2cbc986df0c2c3e92751"
+      ],
+      "at": "2026-11-22T20:55:55.326617+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/tradebook/access.py",
+        "src/tradebook/models.py",
+        "src/tradebook/store.py",
+        "src/tradebook/reports.py",
+        "src/tradebook/booking.py",
+        "src/tradebook/__init__.py"
+      ],
+      "sha256s": [
+        "86ff07ae91cd236794cac8cc7c5e2b1be73bc977466217c382fa7a6a0c15879d",
+        "c42dde94fb9e1629571f01843c3ac6c8746f44387cc7d884d3c1b5b955701ec7",
+        "241f81eeef395e44b6c0838be223b79ef59accc515c3dee28a64b56bfe9c39ac",
+        "373e2da138f49c9056b521a3698042c7a6bb63092b5180cb2e21318196d63567",
+        "62d44b34f0cbf3e725da7be70ad8154be5086ab7c4a251d42f5a48e5723ede9c",
+        "506ce35abf07dd83870fbd6ede0008174cd5c9ec5a36a20150b7c2d497c86339"
+      ],
+      "at": "2026-11-22T20:58:33.446761+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/support.py",
+        "tests/test_desk_access.py"
+      ],
+      "sha256s": [
+        "59dc4195900373e5d8e695a40bd30dd55863b45a5e56a4fee39c76e7b1354ecd",
+        "66286b42f1261f5546cf76b2add15c8dbf3e5bb3c15caae8f4b1b278ed054205"
+      ],
+      "at": "2026-11-22T20:58:34.971014+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 41,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {
+    "submit_stage": 1,
+    "edit_file": 2
+  }
+}

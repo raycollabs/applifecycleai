@@ -1,0 +1,27 @@
+{
+  "label": "deepseek-flash-r2",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 68,
+  "inputTokens": 4721605,
+  "outputTokens": 91123,
+  "estimatedEnterpriseCost": 10.35444,
+  "components": [
+    {
+      "sampleId": "S-TRADE-SCREENS-C1-5",
+      "stopReason": "FINISHED",
+      "calls": 68,
+      "lastRunTests": {
+        "passed": 160,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS",
+        "DEPLOYED"
+      ]
+    }
+  ]
+}

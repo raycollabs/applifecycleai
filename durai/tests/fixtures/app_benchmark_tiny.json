@@ -1,0 +1,18 @@
+{
+ "app": {"app_key": "tiny-trade", "app_version": "E6", "display_name": "Tiny trade app", "domain": "trading",
+         "builder_model": "GPT-6.2-Sol", "builder_version": "E6/E7 local delivery", "durai_ranking": 8, "notes": "Fixture with one component"},
+ "samples": [
+  {"sample_id": "S-TINY", "revision": 1, "domain": "trading", "scope": "APP", "title": "Trading app", "status": "REVIEWED",
+   "request_text": "Build me a trading app where my desks book trades and see their positions.", "author": "author-1", "reviewer": "reviewer-1"},
+  {"sample_id": "S-TINY-BOOK", "revision": 1, "domain": "trading", "scope": "COMPONENT", "parent_sample_id": "S-TINY", "sort_order": 1,
+   "title": "Book trades", "status": "REVIEWED", "tags": ["booking"],
+   "request_text": "Book equity, futures and option trades for my desks. Never book a trade twice.", "author": "author-1", "reviewer": "reviewer-1"}
+ ],
+ "components": [
+  {"component_key": "booking", "category": "transactions", "goal": "Book each trade once", "design": "One lot row per trade id",
+   "built": "Booking service with a duplicate check", "status": "BUILT", "test_goal_count": 2, "limits": ["Single database node"],
+   "evidence": [{"path": "internal/service/booking.go", "sha256": "169ce78cb7681883dcd0b873c7e4d85650ee1e2d42e472e5e9655f2a6eb068aa", "lines": "1-1"}],
+   "sample_id": "S-TINY-BOOK", "sample_revision": 1,
+   "hidden_goals": ["The same trade id books once", "A rejected trade leaves no lot"]}
+ ]
+}

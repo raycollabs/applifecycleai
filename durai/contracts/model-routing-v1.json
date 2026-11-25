@@ -1,0 +1,22 @@
+{
+  "contract": "durai-model-routing/v1",
+  "roles": ["coding", "evaluation", "design", "context"],
+  "modelsPerProviderRole": 5,
+  "providerProfiles": 5,
+  "maxCodingRouteAttempts": 25,
+  "ordering": "Try each configured coding model in provider order, then the next enabled provider",
+  "disabledProfilesMayHaveNoModels": true,
+  "credentialBoundary": "Each provider uses only its own endpoint and key; public status contains presence flags only",
+  "primaryProvider": "openrouter",
+  "secondProvider": "mistral",
+  "selectedSecondProviderModel": "mistral-medium-3.5",
+  "transientStatuses": [404, 408, 429, 500, 502, 503, 504],
+  "otherTransientFailures": ["APIConnectionError", "APITimeoutError", "TimeoutError"],
+  "stopConditions": ["authentication", "authorization", "invalid request", "context/configuration error", "bad candidate output", "non-transient failure", "chain exhausted"],
+  "workspacePolicy": "Fresh workspace and original pinned source per attempt",
+  "candidateEvaluation": "Independent protected suite; business failure is not provider recovery",
+  "attemptFields": ["provider", "model", "role", "baselineDigest", "attempt", "outcome", "candidateDigest", "errorType", "statusCode"],
+  "evaluationRolePolicy": "Requires explicit routing and a separate execution adapter; never inherits coding models",
+  "releaseAuthority": false,
+  "jevUpdates": "DEFERRED_BY_USER"
+}

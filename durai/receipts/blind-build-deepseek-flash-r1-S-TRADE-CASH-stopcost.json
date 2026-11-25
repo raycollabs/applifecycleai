@@ -1,0 +1,42 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-CASH",
+  "revision": 1,
+  "digest": "37785b57bc272cd68611897996e694ec9b25035496f8bdf3f8e68d919f9efcab",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:53:52.056932+00:00",
+  "finishedAt": "2026-11-22T15:59:15.626649+00:00",
+  "calls": 61,
+  "inputTokens": 2512690,
+  "outputTokens": 61156,
+  "estimatedEnterpriseCost": 5.63694,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "3207dc2a29e658d40c6d89d8c9bcd68cb2d4b7adc3aea76a54d87c2a9c5d0f88"
+      ],
+      "at": "2026-11-22T15:57:14.336686+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "79c7c9f32d102da79bc838a94dbc309251ab66c63f3da2acb7573f68ce0ee3f8"
+      ],
+      "at": "2026-11-22T15:57:24.360900+00:00"
+    }
+  ],
+  "lastRunTests": null,
+  "stopReason": "STOP_COST",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

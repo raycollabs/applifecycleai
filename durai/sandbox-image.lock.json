@@ -1,0 +1,5 @@
+{
+  "tag": "python:3.13.7-slim-bookworm",
+  "imageId": "sha256:444ec9cb9b03c3be7c8b18d4a5e82e7cc908e2c0032c0a6e759338a48250b4de",
+  "execution": "non-root, network disabled, read-only root, no capabilities"
+}

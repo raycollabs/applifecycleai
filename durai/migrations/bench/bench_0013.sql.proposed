@@ -1,0 +1,11 @@
+-- Sample: Insert trace for attempt A-1 with 40 messages. Query trace by attempt_id. Check digest.
+CREATE TABLE IF NOT EXISTS durai_bench.build_trace(
+ trace_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+ attempt_id text NOT NULL,
+ trace_digest text NOT NULL CHECK(trace_digest ~ '^[a-f0-9]{64}$'),
+ format text NOT NULL CHECK(format = 'durai-worker-trace/v1'),
+ message_count int NOT NULL CHECK(message_count >= 0),
+ trace_path text NOT NULL CHECK(trace_path <> ''),
+ recorded_at timestamptz NOT NULL DEFAULT clock_timestamp()
+);
+CREATE INDEX IF NOT EXISTS build_trace_attempt ON durai_bench.build_trace(attempt_id);

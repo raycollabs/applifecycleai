@@ -1,0 +1,1883 @@
+{
+  "format": "durai-ontology-pack/v2",
+  "id": "durai.starter",
+  "version": "1.0.0",
+  "kind": "GENERIC",
+  "publisher": "durai.io",
+  "tier": "FREE",
+  "license_ref": "durai-pack-license-v1",
+  "min_shell_version": "1.0.0",
+  "valid_from": null,
+  "valid_until": null,
+  "records": [
+    {
+      "id": "design.knowledge",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "DESIGN",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "c2d85e097d414d2b764fec7b832ab44a6910d35a164c2b27d997da64d86ff414"
+    },
+    {
+      "id": "design.memory",
+      "layer": "DESIGN",
+      "type": "MEMORY",
+      "body": {
+        "layer": "DESIGN",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "bbb74636a7bf849d660f1e29d7d868ccf207e726219073f40f231a78e4856776"
+    },
+    {
+      "id": "design.procedure",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "DESIGN",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "0f0e576661dc68bb5649da5a589aa676be8f8e925b2cda010365ac9aa8e531f8"
+    },
+    {
+      "id": "entity.knowledge",
+      "layer": "ENTITY",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "ENTITY",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "ffa9346efdb60360b3b29265b73d434ea2d96890b99df62b88f346f8e28384b3"
+    },
+    {
+      "id": "entity.memory",
+      "layer": "ENTITY",
+      "type": "MEMORY",
+      "body": {
+        "layer": "ENTITY",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "01ab49d391efc0937ccdf6f05a04efbb58801cb7b2590afddfe725b756e85840"
+    },
+    {
+      "id": "entity.procedure",
+      "layer": "ENTITY",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "ENTITY",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "5601a07e600d3e55167109b91a9499231954bd4acb2bbf1593d30a0c2df3bc51"
+    },
+    {
+      "id": "dao.knowledge",
+      "layer": "DAO",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "DAO",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "29c43f705d14b22b4b955e8b0c292656c2b6e91a353fb3ca08491c8370f5fac3"
+    },
+    {
+      "id": "dao.memory",
+      "layer": "DAO",
+      "type": "MEMORY",
+      "body": {
+        "layer": "DAO",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "a6b0b3fcd7d4e5c1ffce0204d8a76894bd13a1673c73d22cc1ea77e77cae9bab"
+    },
+    {
+      "id": "dao.procedure",
+      "layer": "DAO",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "DAO",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "3685cb1eaa3fabcea6aa2068457716c32831f98f3d7e110dd583cb161a8cc33b"
+    },
+    {
+      "id": "service.knowledge",
+      "layer": "SERVICE",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "SERVICE",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "9ef765105be8aef94d7ad079e36f3d59e0c116f7a603c6f74223fbe033255a46"
+    },
+    {
+      "id": "service.memory",
+      "layer": "SERVICE",
+      "type": "MEMORY",
+      "body": {
+        "layer": "SERVICE",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "fe4c7677db21b75086eb7f75a2aae1b2ef447fcf205359918fb4d752c4e6db84"
+    },
+    {
+      "id": "service.procedure",
+      "layer": "SERVICE",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "SERVICE",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "c00599247821c5c2c07f2bb98211b0bea49ae027ae568d8eee11a9d3c084812f"
+    },
+    {
+      "id": "ui.knowledge",
+      "layer": "UI",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "UI",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "14890e5660914514318c7a58678a40f784bec785b65012c17695779ac0f65ea7"
+    },
+    {
+      "id": "ui.memory",
+      "layer": "UI",
+      "type": "MEMORY",
+      "body": {
+        "layer": "UI",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "454b6bfdad0969eac2067c12523af62d04afc3f561a03ae871ecad71ceca2bfa"
+    },
+    {
+      "id": "ui.procedure",
+      "layer": "UI",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "UI",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "b3828b1529c903bef9ed28f07fd32e2499971ec5d45fd3d89b9c4d251bc7c59f"
+    },
+    {
+      "id": "test.knowledge",
+      "layer": "TEST",
+      "type": "KNOWLEDGE",
+      "body": {
+        "layer": "TEST",
+        "responsibility": "Engineering concepts, policies, role requirements, test goals, and function walkthrough rules",
+        "policies": [
+          {
+            "id": "design-before-code",
+            "rule": "Application code requires a READY implementation brief bound to its context and policy digests."
+          },
+          {
+            "id": "fresh-context-readiness",
+            "rule": "A fresh reader and critic receive only the artifact package and authorized pinned references. Unresolved business or authority questions block coding."
+          },
+          {
+            "id": "separate-model-roles",
+            "rule": "Qualify design reasoning and implementation capabilities separately. Do not silently substitute an unqualified model."
+          },
+          {
+            "id": "durable-decisions",
+            "rule": "Store decisions, alternatives, evidence, and concise rationale. Do not require hidden chain-of-thought or full conversational history."
+          },
+          {
+            "id": "walkthrough-every-function",
+            "rule": "Every owned function and test function requires a sample walkthrough in source comments. Include methods, constructors, callbacks, nested and async helpers, entry points, and generated code."
+          },
+          {
+            "id": "walkthrough-language",
+            "rule": "Write sample walkthroughs in ASD-STE100 format. Use short imperative sentences, concrete inputs, actions, and observable results. Review language compliance explicitly."
+          },
+          {
+            "id": "sample-comments-only",
+            "rule": "Only sample walkthrough comments in ASD-STE100 format are permitted in code. Use concrete inputs, actions, and observable expected results. Do not add purpose, rationale, difficulty, or implementation-decision comments. This rule includes docstrings used as comments. Do not hide explanations under a Sample label. Keep design explanations in separate documents."
+          },
+          {
+            "id": "useful-tests",
+            "rule": "Each test function checks one stated business goal, failure boundary, or invariant. Reject vacuous assertions and weakening of protected gates."
+          },
+          {
+            "id": "runnable-shell-before-business-red",
+            "rule": "Complete function/module shells, imports, interfaces, dependencies, entry points, and fixture wiring. Pass compilation/type checks where applicable and a smoke invocation before qualifying a business-red test. The shell is not the completed business fix."
+          },
+          {
+            "id": "failing-business-test-first",
+            "rule": "After execution-shell readiness and before the business fix, seal a useful goal-specific test and confirm its intended business assertion fails against the pinned runnable baseline. Compile/type/syntax errors, missing symbols, NotImplementedError, environment, dependency, or authentication failures do not count. Reject manufactured failures. Evaluate the candidate with the same sealed test and independent regression gates."
+          },
+          {
+            "id": "independent-evaluation",
+            "rule": "Protected holdout cases and evaluator authority are inaccessible to the coding worker. Development examples can be included in the brief. Exception: after an attempt, the names of failing protected test functions may be returned to the worker. Assertions, inputs, messages, and test code stay hidden."
+          },
+          {
+            "id": "clarification-before-invention",
+            "rule": "Missing or contradictory requirements return to design. A coding worker does not invent business semantics.",
+            "audience": [
+              "coding-worker"
+            ]
+          },
+          {
+            "id": "dependency-invalidation",
+            "rule": "Relevant source, rule, policy, or interface changes invalidate affected readiness and lazily cached dependent summaries."
+          },
+          {
+            "id": "release-authority",
+            "rule": "Design readiness and model review do not authorize activation. Existing independent evaluation, human release approval, and target verification remain mandatory."
+          },
+          {
+            "id": "preserve-history",
+            "rule": "Backfill existing owned code through reviewed changes. Preserve immutable registered source and historical evidence; register new versions for changed packages."
+          },
+          {
+            "id": "do-not-edit-unrequested",
+            "rule": "DO NOT change, remove, reorder, or reformat code, comments, docstrings, imports, or files that the objective does not name. Change only the declared symbols. Add an import only when new code uses it. Keep every other byte the same.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "scope-guard: undeclared top-level symbols, module docstring, and removed imports must match the baseline",
+            "lesson": "Task B live run 2026-11-16: the worker deleted the module docstring that the objective did not name."
+          },
+          {
+            "id": "do-not-over-constrain",
+            "rule": "DO NOT reject valid input with broad substring or pattern checks. Check exact structure, for example path segments. Reject only the cases that the objective or specification names. Keep valid edge cases accepted, for example the file name a..b.py.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "protected suite: each rejection goal has a paired acceptance goal for a valid edge case",
+            "lesson": "Task B live run 2026-11-16: \"..\" in path also rejected the valid name a..b.py."
+          },
+          {
+            "id": "do-not-write-explanatory-comments",
+            "rule": "DO NOT write comments or docstrings that explain why, rationale, design decisions, difficulty, or what you changed. The code is the explanation. The only comment you write is one \"# Sample:\" walkthrough for each function you add or change, in ASD-STE100 style with concrete inputs, actions, and expected results. Keep existing comments unless the objective names them.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "comment delta check: every added comment or docstring must be a sample walkthrough without rationale words; every added or changed function needs a sample walkthrough",
+            "lesson": "User direction 2026-11-16: verbose explanatory comments add no value and confuse models; code is the truth."
+          },
+          {
+            "id": "do-not-explore-after-deliverables",
+            "rule": "DO NOT read more files after every declared write path has its change. Write the declared files as soon as you have the facts you need, then end the turn. Read each file once.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "budget finish: two model calls before the cap the worker is told to end the turn; when the cap stops a worker after a declared file changed, the captured files go to the evaluator",
+            "lesson": "Graph tenancy live runs 2026-11-17: Nemotron Ultra wrote both deliverables by call 12, then re-read 13 unrelated files until the 20-call cap discarded the work."
+          },
+          {
+            "id": "do-not-create-age-graph-as-schema",
+            "rule": "DO NOT create an Apache AGE graph with CREATE SCHEMA. When a migration uses Apache AGE, create each graph with ag_catalog.create_graph(name) first, then create its labels with ag_catalog.create_vlabel and ag_catalog.create_elabel. Include ag_catalog in the trusted search_path before AGE graph and label provisioning. Keep pg_temp last in SECURITY DEFINER search paths.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "database-setup: the evaluator applies the candidate migration in an ephemeral AGE database and returns the setup error to the worker",
+            "lesson": "Graph tenancy DeepSeek Flash run 2026-11-17: both attempts made per-application graphs with CREATE SCHEMA, and create_vlabel failed with graph does not exist."
+          },
+          {
+            "id": "do-not-break-age-cypher-call-contract",
+            "rule": "DO NOT bind the AGE graph name or quote its parameter map as a literal. Use all three arguments together. Python: sql.SQL(\"SELECT * FROM ag_catalog.cypher({}, $q$ MATCH (p:Policy {{key: $key}}) RETURN p.key $q$, %s::ag_catalog.agtype) AS (key ag_catalog.agtype)\").format(sql.Literal(trusted_graph)); connection.execute(statement, (json.dumps(parameters),)). PL/pgSQL: EXECUTE format($sql$SELECT * FROM ag_catalog.cypher(%L, $q$ MATCH (p:Policy {key: $key}) RETURN p.key $q$, $1::ag_catalog.agtype) AS (key ag_catalog.agtype)$sql$, trusted_graph) USING parameters::text::ag_catalog.agtype. Compose the graph name from the trusted registry only. Keep the query dollar-quoted. Bind the parameter map. Use %L for the graph name only.",
+            "audience": [
+              "coding-worker"
+            ],
+            "enforcement": "Pinned AGE call-shape tests and safe structured database feedback",
+            "lesson": "Split graph tasks alternated between a bound graph name and a literal parameter map."
+          },
+          {
+            "id": "do-not-omit-age-query-search-path",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT run AGE graph queries without ag_catalog in the trusted transaction-local search_path. Before calling cypher, run SET LOCAL search_path=pg_catalog,ag_catalog,pg_temp in the same transaction. Qualifying cypher and agtype does not resolve operators used by AGE property matching. Apply this rule to reads and writes, not only graph provisioning."
+          },
+          {
+            "id": "do-not-mismatch-sql-row-aliases",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT read a Python row key that differs from its SQL column alias. Use snake_case SQL aliases such as pack_digest and source_reference and read those exact Python keys. Unquoted SQL identifiers are folded to lower case."
+          },
+          {
+            "id": "do-not-reuse-plpgsql-row-shapes",
+            "audience": [
+              "coding-worker"
+            ],
+            "rule": "DO NOT use one PL/pgSQL record variable for different row shapes. Name each loop variable separately. Use explicit column aliases. For an application loop, SELECT DISTINCT p.application_id AS application_id. Access that field only on that application row. Keep graph catalog and label rows in separate variables."
+          },
+          {
+            "id": "edit-guard-before-file-write",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Check complete proposed text before a file write. Apply only a valid path, scope, syntax, and comment change. Return findings without a write. Stop the worker after three equal consecutive refused proposals. Record the rule and feature digests in DECISION_RECORDED. Keep the final evaluator checks."
+          },
+          {
+            "id": "failure-triage-before-next-call",
+            "audience": [
+              "control-plane"
+            ],
+            "rule": "Classify every failed attempt from trusted evaluator and controller facts before another worker call. Retry a candidate fault within the task budget. Repeat evaluation of the same package once for a confirmed infrastructure fault. Stop for a trusted fixture fault, a changed pin, a provider fault, a stalled worker, an exhausted budget, or an unclassified fault. Never let candidate output set the fault origin. Record the rule and feature digests in DECISION_RECORDED. A triage rule never approves or activates. Retry a candidate only when at least the pinned minimum of model calls remains. After a business assertion or comment failure, start the retry from the previous candidate package."
+          }
+        ]
+      },
+      "digest": "bdb180625aacd25d47a4aacf382eb5afe3b24fa6c418253011faa08ba4733b9a"
+    },
+    {
+      "id": "test.memory",
+      "layer": "TEST",
+      "type": "MEMORY",
+      "body": {
+        "layer": "TEST",
+        "responsibility": "Schemas for retained decisions, clarification findings, attempts, check results, and evidence; tenant observations are not shipped as global memory",
+        "contentKind": "SCHEMA",
+        "required": [
+          "goal",
+          "sourceDigest",
+          "contextDigest",
+          "policyDigest",
+          "evidence"
+        ]
+      },
+      "digest": "a712953d7956fca95811805fa3c10c357683907d511151ed696b61d30596aaed"
+    },
+    {
+      "id": "test.procedure",
+      "layer": "TEST",
+      "type": "PROCEDURE",
+      "body": {
+        "layer": "TEST",
+        "responsibility": "Ordered approved-design, runnable-shell, business-red, implementation, evaluation, release-review, activation, and verification workflow",
+        "inputs": [
+          "specification",
+          "effectiveBinding"
+        ],
+        "outputs": [
+          "versionedArtifact",
+          "verificationEvidence"
+        ],
+        "failureRoute": "NEEDS_CLARIFICATION",
+        "trustedHandler": "engineering-v1"
+      },
+      "digest": "5c32ee0ed428350e5458cc738e8617a5e8e70d13e90ee4077503234b3862a7c7"
+    },
+    {
+      "id": "generation.sequence",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "gates": [
+          "DESIGN_READY",
+          "EXECUTION_SHELL_READY",
+          "BASELINE_TEST_FAILURE_CONFIRMED",
+          "IMPLEMENTATION_READY",
+          "WAITING_FOR_REVIEW"
+        ],
+        "scope": "SYNTHETIC_LOCAL",
+        "releaseApprovalRequired": true
+      },
+      "digest": "fc511e419c223a3d836abef71c9f6ff1b3a733a67acdee865ec90a62bf5ccb92"
+    },
+    {
+      "id": "decision.edit-guard",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "rules": [
+          {
+            "id": "third-refusal",
+            "when": {
+              "hasFindings": true,
+              "repeatLimitReached": true
+            },
+            "choice": "STALLED"
+          },
+          {
+            "id": "invalid-proposal",
+            "when": {
+              "hasFindings": true
+            },
+            "choice": "REFUSED"
+          },
+          {
+            "id": "valid-proposal",
+            "choice": "APPLIED"
+          }
+        ],
+        "audience": [
+          "control-plane"
+        ],
+        "releaseAuthority": false
+      },
+      "digest": "eff830111a65160cf4579fc23e8562762d6995d7bc7c16f6497d54a067656e17"
+    },
+    {
+      "id": "decision.failure-triage",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "rules": [
+          {
+            "id": "passed",
+            "when": {
+              "verdict": "PASS"
+            },
+            "choice": "SUBMIT_FOR_REVIEW"
+          },
+          {
+            "id": "stale-pin",
+            "when": {
+              "origin": "stale"
+            },
+            "choice": "STOP_STALE"
+          },
+          {
+            "id": "trusted-fixture",
+            "when": {
+              "origin": "fixture"
+            },
+            "choice": "STOP_FIXTURE"
+          },
+          {
+            "id": "provider-fault",
+            "when": {
+              "origin": "provider"
+            },
+            "choice": "STOP_PROVIDER"
+          },
+          {
+            "id": "stalled-worker",
+            "when": {
+              "origin": "guard"
+            },
+            "choice": "STOP_STALLED"
+          },
+          {
+            "id": "budget-stop",
+            "when": {
+              "origin": "budget"
+            },
+            "choice": "STOP_BUDGET"
+          },
+          {
+            "id": "infrastructure-repeat",
+            "when": {
+              "origin": "evaluator",
+              "evaluatorRetryAvailable": true,
+              "timeLeft": true
+            },
+            "choice": "REPEAT_EVALUATION"
+          },
+          {
+            "id": "infrastructure-stop",
+            "when": {
+              "origin": "evaluator"
+            },
+            "choice": "STOP_INFRASTRUCTURE"
+          },
+          {
+            "id": "candidate-retry",
+            "when": {
+              "origin": "candidate",
+              "attemptsLeft": true,
+              "callsForRetry": true,
+              "timeLeft": true
+            },
+            "choice": "RETRY_CANDIDATE"
+          },
+          {
+            "id": "candidate-exhausted",
+            "when": {
+              "origin": "candidate"
+            },
+            "choice": "STOP_BUDGET"
+          },
+          {
+            "id": "needs-review",
+            "choice": "STOP_NEEDS_REVIEW"
+          }
+        ],
+        "evaluatorRetryLimit": 1,
+        "minimumRetryCalls": 5,
+        "resumeReasons": [
+          "CANDIDATE_ASSERTION",
+          "CANDIDATE_COMMENT"
+        ],
+        "feedbackGoalNames": true,
+        "audience": [
+          "control-plane"
+        ],
+        "releaseAuthority": false
+      },
+      "digest": "e8876d35ece71fc7e01e5130bc1e7d396dde939bad7d271990e971f458527356"
+    },
+    {
+      "id": "decision.context-pack",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "enabled": true,
+        "maxCharacters": 60000,
+        "sections": [
+          "edit-rules",
+          "workspace-map",
+          "schema-index",
+          "file-text"
+        ],
+        "tools": [
+          "describe_table",
+          "find_function",
+          "show_lines",
+          "search_context"
+        ],
+        "sources": [
+          "sealed task",
+          "readable workspace files"
+        ],
+        "excluded": [
+          "protected suite",
+          "reference solution"
+        ],
+        "audience": [
+          "control-plane"
+        ],
+        "releaseAuthority": false
+      },
+      "digest": "e4020f1602947cf8dd9765c1a4a0bcae7f69dcc19c57e7122988749ba42f968f"
+    },
+    {
+      "id": "decision.execution-strategy",
+      "layer": "DESIGN",
+      "type": "PROCEDURE",
+      "body": {
+        "rules": [
+          {
+            "id": "budget-low",
+            "when": {
+              "budgetLow": true
+            },
+            "choice": "SINGLE"
+          },
+          {
+            "id": "role-split",
+            "when": {
+              "roleSplit": true
+            },
+            "choice": "TEAM"
+          },
+          {
+            "id": "loose-modules",
+            "when": {
+              "moduleShape": "LOOSE"
+            },
+            "choice": "SUBAGENTS"
+          },
+          {
+            "id": "default",
+            "choice": "SINGLE"
+          }
+        ],
+        "singleRunMedianModelCalls": 8,
+        "audience": [
+          "control-plane"
+        ],
+        "releaseAuthority": false
+      },
+      "digest": "87528b9c670d6e2c7f5c1ace74fcd355b6c725c2592ce7156e5e1194cab47913"
+    },
+    {
+      "id": "pattern.architecture.storage",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "storage",
+        "preferred": "PostgreSQL",
+        "rule": "Prefer PostgreSQL for transactional system data. Preserve a documented customer database constraint.",
+        "when": [
+          "The service owns relational transaction data and needs durable atomic writes."
+        ],
+        "notApplicable": [
+          "A customer requires a compatible existing database.",
+          "The workload is an analytical copy or an object byte store."
+        ],
+        "alternatives": [
+          {
+            "id": "MySQL",
+            "when": "The customer requires MySQL and the chosen transactional engine meets the same invariants."
+          }
+        ],
+        "exceptionEvidence": [
+          "The customer constraint and owner.",
+          "The engine, isolation, migration, recovery, and integrity checks."
+        ],
+        "procedure": [
+          "Declare tenant and business keys. Add unique, foreign-key, and check constraints.",
+          "Index measured access paths. Check plans and contention before adding infrastructure.",
+          "Use read replicas only where the declared staleness is acceptable. Keep decision reads on an authoritative path.",
+          "Batch and apply backpressure before key-based write sharding. Measure hot keys and cross-shard transaction needs."
+        ],
+        "invariants": [
+          "Commit related local changes atomically.",
+          "Enforce tenant scope and durable business identity in every supported engine."
+        ],
+        "correctness": "Preserve atomic local transactions, tenant isolation, unique business identity, and declared durability with every storage choice.",
+        "checks": [
+          "Roll back a failed multi-row command. Check no partial business state.",
+          "Attempt a duplicate business key and a foreign-tenant read. Check refusal."
+        ],
+        "examples": [
+          "Sample: Create order O-1 and its lines. Fail line 2. Check no committed O-1."
+        ],
+        "sources": [
+          "pg-constraints",
+          "pg-isolation"
+        ]
+      },
+      "digest": "3f0587222fd3a3857e3e27292bf76707407324512ef2aaee3bbee1159659b717"
+    },
+    {
+      "id": "pattern.architecture.concurrency",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "concurrency",
+        "preferred": "conditional-update",
+        "rule": "Prefer an atomic conditional update for one-row state transitions. Select a lock or revision check when the invariant requires it.",
+        "when": [
+          "Two callers can change the same quantity, state, or revision."
+        ],
+        "notApplicable": [
+          "The invariant spans several rows or predicates and a one-row condition cannot protect it."
+        ],
+        "alternatives": [
+          {
+            "id": "row-lock",
+            "when": "The transaction must inspect and change several related values under a declared lock order."
+          },
+          {
+            "id": "optimistic-revision",
+            "when": "A versioned client update must detect a stale writer."
+          },
+          {
+            "id": "serializable-transaction",
+            "when": "A cross-row invariant needs serializable execution and bounded whole-transaction retries."
+          }
+        ],
+        "exceptionEvidence": [
+          "The invariant and transaction boundary.",
+          "The lock order or revision contract and a concurrent failure test."
+        ],
+        "procedure": [
+          "Name the legal source state and expected quantity or revision in the write condition.",
+          "Check the affected-row count. Return an explicit conflict when no row changes.",
+          "Keep lock scope short. Use one lock order. Bound retries for deadlocks or serialization failures."
+        ],
+        "invariants": [
+          "Only one valid transition wins a race.",
+          "Do not lose a concurrent update or create negative available quantity."
+        ],
+        "correctness": "Enforce the declared state and quantity invariants atomically. Refuse a stale or conflicting transition.",
+        "checks": [
+          "Race two callers for the last seat. Check one winner.",
+          "Repeat a stale revision. Check a conflict and unchanged quantity."
+        ],
+        "examples": [
+          "Sample: Start with 1 seat. Two callers reserve 1 seat. Check one success and 0 seats."
+        ],
+        "sources": [
+          "pg-isolation"
+        ]
+      },
+      "digest": "cd90b397acd304237229b7f51149b1eeb816286a7fa99e659c76d8aeae24bc20"
+    },
+    {
+      "id": "pattern.architecture.idempotency",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "idempotency",
+        "preferred": "database-idempotency",
+        "rule": "Prefer a durable database request record with a scoped unique key, request digest, and stored outcome for retried mutations.",
+        "when": [
+          "A caller can retry a mutating request or lose its response."
+        ],
+        "notApplicable": [
+          "The operation is a read with no business effect."
+        ],
+        "alternatives": [
+          {
+            "id": "provider-idempotency-with-local-reconciliation",
+            "when": "An external effect cannot share the local transaction. The provider supports a stable operation identity and result lookup."
+          }
+        ],
+        "exceptionEvidence": [
+          "The provider key scope, retention, and request mismatch contract.",
+          "The local intent, uncertain-result, reconciliation, and recovery checks."
+        ],
+        "procedure": [
+          "Use a non-null unique key over tenant, operation, and caller request ID. Store a canonical request digest separately.",
+          "Claim the key atomically. Commit the local effect and outcome in the same transaction. Return the retained result for an equal retry.",
+          "Refuse the same key with a different request. Do not treat an uncommitted claim as success.",
+          "Declare key retention from the retry and reconciliation horizon. A hash index is an access choice; it does not replace exact uniqueness.",
+          "Use the same provider identity after a timeout. Record an uncertain result and reconcile before a new external attempt."
+        ],
+        "invariants": [
+          "One accepted logical command has at most one business effect within the declared contract.",
+          "A request-key payload mismatch is refused."
+        ],
+        "correctness": "Preserve command identity across retries. Resolve an uncertain external result before a new charge or other irreversible effect.",
+        "checks": [
+          "Race 20 equal commands. Check one effect and equal outcomes.",
+          "Reuse K-1 with a different amount. Check refusal.",
+          "Lose the provider response. Check reconciliation with the original identity."
+        ],
+        "examples": [
+          "Sample: Use K-1 for 100 USD. Retry K-1 for 100 USD. Check the retained result. Use K-1 for 200 USD. Check refusal."
+        ],
+        "sources": [
+          "idempotency",
+          "pg-constraints"
+        ]
+      },
+      "digest": "29e11a225fe82cbacac00fa8da44d1441eac7c1acc821346b44e4a4abd7716ab"
+    },
+    {
+      "id": "pattern.architecture.publication",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "publication",
+        "preferred": "transactional-outbox-polling",
+        "rule": "Prefer a transactional outbox when a database change must produce an event. Start with a bounded polling relay when its measured load permits it.",
+        "when": [
+          "A committed business change must notify another service or publish an event."
+        ],
+        "notApplicable": [
+          "No event leaves the transaction boundary."
+        ],
+        "alternatives": [
+          {
+            "id": "transactional-outbox-cdc",
+            "when": "A supported change-data-capture path and measured volume justify its operations."
+          },
+          {
+            "id": "append-only-event-store",
+            "when": "The durable event is the authoritative business commit and consumers have a qualified replay contract."
+          }
+        ],
+        "exceptionEvidence": [
+          "The atomic publication boundary and retained event identity.",
+          "Crash, duplicate, per-entity ordering, replay, and recovery results."
+        ],
+        "procedure": [
+          "Write the business change and outbox row in one transaction. Give the event a stable ID and entity sequence.",
+          "Have the relay publish committed rows. Mark completion only after a broker acknowledgment.",
+          "Recover expired relay claims. Bound batches and retry delays. Retain failed rows for review.",
+          "Expect a duplicate after a lost acknowledgment. Preserve required per-entity order; do not assume global order."
+        ],
+        "invariants": [
+          "A rolled-back change produces no event.",
+          "A committed publication intent survives a publisher crash."
+        ],
+        "correctness": "Retain publication intent with the business commit. Permit safe duplicate delivery and enforce the declared ordering scope.",
+        "checks": [
+          "Crash after commit and before publish. Restart. Check eventual delivery.",
+          "Lose the acknowledgment after publish. Check safe redelivery."
+        ],
+        "examples": [
+          "Sample: Commit O-1 and E-1. Stop the relay. Restart it. Check E-1 is delivered with the same ID."
+        ],
+        "sources": [
+          "outbox"
+        ]
+      },
+      "digest": "9b3d7f33acbd58458d6b07b1284ab237a944e3d8d843743f1451c3cc6d917dbd"
+    },
+    {
+      "id": "pattern.architecture.consumption",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "consumption",
+        "preferred": "transactional-inbox",
+        "rule": "Prefer a durable consumer inbox when a delivered event changes local business state.",
+        "when": [
+          "A broker or publisher can deliver the same event more than once."
+        ],
+        "notApplicable": [
+          "The consumer has no business effect or retained state."
+        ],
+        "alternatives": [
+          {
+            "id": "transactional-offset-in-output-store",
+            "when": "A qualified ordered stream commits its offset and all output in the same durable transaction."
+          }
+        ],
+        "exceptionEvidence": [
+          "The consumer identity and exact deduplication or offset scope.",
+          "The output transaction, duplicate, crash, order, and replay checks."
+        ],
+        "procedure": [
+          "Enforce a non-null unique key over tenant, consumer, and event ID.",
+          "Commit the inbox receipt and local business effect together. Acknowledge only after commit.",
+          "Treat redelivery of the same committed event as a completed duplicate. Detect conflicting content for one event ID.",
+          "Use a separate outbox or stable external operation identity for an external effect. Kafka transactions alone do not make an external database write or charge atomic."
+        ],
+        "invariants": [
+          "A committed duplicate cannot repeat the local business effect.",
+          "A failed transaction leaves the event eligible for a safe retry."
+        ],
+        "correctness": "Commit duplicate detection and the local effect atomically. Keep external effects within their own durable idempotency contract.",
+        "checks": [
+          "Deliver E-1 twice. Check one inventory change.",
+          "Crash before commit. Redeliver. Check one final committed effect."
+        ],
+        "examples": [
+          "Sample: Receive E-1 twice for 2 items. Check one receipt and one decrease of 2 items."
+        ],
+        "sources": [
+          "outbox",
+          "kafka"
+        ]
+      },
+      "digest": "9ef5e9fa0f9892968c9debb72873152d9cf70f9ec5953a05429a07cd0f5ecc19"
+    },
+    {
+      "id": "pattern.architecture.jobs",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "jobs",
+        "preferred": "PostgreSQL-durable-jobs",
+        "rule": "Prefer a bounded durable job queue with job IDs and explicit status. Use PostgreSQL jobs first for a small service that already uses PostgreSQL.",
+        "when": [
+          "Work exceeds the request time budget or must survive a worker restart."
+        ],
+        "notApplicable": [
+          "A short bounded operation can complete within the declared request budget."
+        ],
+        "alternatives": [
+          {
+            "id": "RabbitMQ",
+            "when": "Routing, delivery controls, and measured throughput justify a separate broker."
+          },
+          {
+            "id": "Kafka",
+            "when": "Partitioned replayable streams and their ordering scope fit the workload."
+          },
+          {
+            "id": "Amazon-SQS",
+            "when": "The customer permits a managed queue and its delivery contract fits."
+          },
+          {
+            "id": "synchronous-bounded-handler",
+            "when": "The operation is short and bounded; no durable background acceptance is needed."
+          }
+        ],
+        "exceptionEvidence": [
+          "The latency, ordering, retention, and durable acceptance contract.",
+          "Measured backlog, overload, worker-loss, and recovery checks."
+        ],
+        "procedure": [
+          "Set admission and concurrency limits per workload. Reject before acceptance when capacity is unavailable.",
+          "Persist accepted work and return its job ID. Expose authorized status reads with explicit terminal states.",
+          "Use a lease, heartbeat, and fencing revision. Refuse completion from a stale worker.",
+          "Bound retries and delays. Retain exhausted jobs for review. Track oldest age, backlog, and reserved worker capacity.",
+          "Use polling first for progress. Add SSE or WebSocket delivery when the client contract requires it. Status remains authoritative."
+        ],
+        "invariants": [
+          "Accepted work is durable until an explicit terminal result.",
+          "A lost owner cannot overwrite a newer owner result."
+        ],
+        "correctness": "Preserve accepted jobs, bounded admission, ownership, and explicit terminal states under overload and worker loss.",
+        "checks": [
+          "Fill the admission limit. Check new work is rejected before acceptance and accepted work is retained.",
+          "Expire owner revision 3. Claim revision 4. Refuse completion from revision 3."
+        ],
+        "examples": [
+          "Sample: Accept J-1. Stop its worker. Reclaim J-1 with revision 4. Check revision 3 cannot complete it."
+        ],
+        "sources": [
+          "queues"
+        ]
+      },
+      "digest": "633032121d3b83cb9293d7674bc4ac3f2625fdda50119e1ba4336d7c65b1d157"
+    },
+    {
+      "id": "pattern.architecture.workflows",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "id": "workflows",
+        "preferred": "Temporal",
+        "rule": "Prefer Temporal for durable multi-service workflows with retries, timers, and compensation. Keep each service effect behind an explicit idempotent command.",
+        "when": [
+          "Payment, inventory, shipping, or another multi-step process spans durable service boundaries and needs recovery."
+        ],
+        "notApplicable": [
+          "One short local database transaction can perform the complete operation."
+        ],
+        "alternatives": [
+          {
+            "id": "AWS-Step-Functions",
+            "when": "The customer uses an approved AWS workflow platform and its history and retry limits fit."
+          },
+          {
+            "id": "explicit-durable-state-machine",
+            "when": "A small workflow has a persisted transition log, one fenced owner, and qualified retry and recovery paths."
+          }
+        ],
+        "exceptionEvidence": [
+          "The workflow states, service ownership, timers, and recovery contract.",
+          "The compensation, uncertain-result, replay, and operator-intervention checks."
+        ],
+        "procedure": [
+          "Declare forward steps, timeouts, terminal states, and compensation before dispatch.",
+          "Persist workflow identity and progress. Keep workflow code deterministic for engines that replay code.",
+          "Give every activity and compensation a stable business operation identity. Resolve uncertain outcomes before retrying an irreversible effect.",
+          "Record a failed compensation and escalate it for authorized review. A compensation is a new business action; it is not a database rollback of prior external effects.",
+          "Keep local commits in their owning services. Bound workflow history and declare version upgrades."
+        ],
+        "invariants": [
+          "Workflow replay cannot repeat an irreversible effect.",
+          "Repeated compensation has one logical effect and preserves audit history."
+        ],
+        "correctness": "Recover each durable step with stable identity. Keep compensation idempotent, auditable, and within the caller authority.",
+        "checks": [
+          "Replay after payment succeeds and the response is lost. Check no second charge.",
+          "Repeat inventory release. Check one release.",
+          "Fail compensation. Check an explicit unresolved state and operator evidence."
+        ],
+        "examples": [
+          "Sample: Reserve H-1. Payment fails. Release H-1 twice with the same compensation ID. Check one release."
+        ],
+        "sources": [
+          "temporal",
+          "saga"
+        ]
+      },
+      "digest": "4fe74224facda6e02aa45c1538368f4feae56d74926dbdf2524ef70cb5894859"
+    },
+    {
+      "id": "architecture.defaults.catalog",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "format": "durai-architecture-defaults/v1",
+        "id": "durai.owner.transaction-defaults",
+        "checkedAt": "2026-11-18",
+        "profiles": [
+          "trading-position",
+          "transaction",
+          "finance",
+          "retail-order",
+          "reservation"
+        ],
+        "authority": "OWNER_PREFERENCE"
+      },
+      "digest": "9d6f4063b7f2c3930a3e4b9ca511e78163f1ab50c9ef11cb96574c0cc29b9251"
+    }
+  ],
+  "edges": [
+    {
+      "from": "generation.sequence",
+      "to": "design.procedure",
+      "relation": "GOVERNS"
+    },
+    {
+      "from": "generation.sequence",
+      "to": "entity.procedure",
+      "relation": "GOVERNS"
+    },
+    {
+      "from": "generation.sequence",
+      "to": "dao.procedure",
+      "relation": "GOVERNS"
+    },
+    {
+      "from": "generation.sequence",
+      "to": "service.procedure",
+      "relation": "GOVERNS"
+    },
+    {
+      "from": "generation.sequence",
+      "to": "ui.procedure",
+      "relation": "GOVERNS"
+    },
+    {
+      "from": "generation.sequence",
+      "to": "test.procedure",
+      "relation": "GOVERNS"
+    }
+  ],
+  "provenance": {
+    "philosophy": "design/engineering-philosophy-v15.json",
+    "architecture": "design/architecture-defaults-v1.json"
+  },
+  "signature": {
+    "key_id": "durai-test-signer-2026",
+    "algorithm": "ed25519",
+    "value": "1bcd58f00cbeb5e55eb6acb8f2f34aabf51a06b6c5079b9bf79ad7b35d6b4a862e771594bfd5952857ae64ab21db9d88f43b9d855e9f9fd7a751b90ae5599d06"
+  }
+}

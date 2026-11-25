@@ -1,0 +1,20 @@
+{
+  "format": "durai-product-review/v1",
+  "project": "durai-app-deepseek-r3",
+  "appUrl": "http://127.0.0.1:54370/",
+  "startedAt": "2026-11-24T17:30:12Z",
+  "finishedAt": "2026-11-24T17:30:12Z",
+  "httpStatus": 200,
+  "criteriaChecked": 1,
+  "checks": [
+    {
+      "criterionIndex": 0,
+      "criterionText": "Web app serves trading dashboard with trade reference lines",
+      "verdict": "FAIL",
+      "evidence": "HTTP 200; missing key terms from criterion 1"
+    }
+  ],
+  "screenshots": [],
+  "uiScore": 1,
+  "passRatio": 0.0
+}

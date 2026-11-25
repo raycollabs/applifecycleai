@@ -1,0 +1,12 @@
+{
+  "tag": "durai-stage-python:1",
+  "imageId": "sha256:3e3cc6552849cad5c947e40f35d8d3a94876d4daf9769553e614ae2378e64c88",
+  "base": "python:3.13.7-slim-bookworm",
+  "packages": [
+    "psycopg",
+    "psycopg-binary",
+    "redis",
+    "typing-extensions"
+  ],
+  "execution": "non-root, read-only root, private network to the staging database and broker, no capabilities"
+}

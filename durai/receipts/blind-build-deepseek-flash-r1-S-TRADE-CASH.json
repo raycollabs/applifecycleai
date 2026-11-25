@@ -1,0 +1,73 @@
+{
+  "label": "deepseek-flash-r1",
+  "sampleId": "S-TRADE-CASH",
+  "revision": 1,
+  "digest": "37785b57bc272cd68611897996e694ec9b25035496f8bdf3f8e68d919f9efcab",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "startedAt": "2026-11-22T15:59:35.745240+00:00",
+  "finishedAt": "2026-11-22T16:07:10.582721+00:00",
+  "calls": 80,
+  "inputTokens": 3746703,
+  "outputTokens": 57445,
+  "estimatedEnterpriseCost": 8.067856,
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "a0ef1c0bc9d7b10fc6b0c58a3a6aeae9441e280b908e4aa61ded44ebbf8de4f4"
+      ],
+      "at": "2026-11-22T16:02:04.777062+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "945230feda945aa520970c3a8f667566bf5a990227141c1cc94875e13dc9db06"
+      ],
+      "at": "2026-11-22T16:02:20.332090+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/payments.py",
+        "src/money.py",
+        "src/schema/005_cash_payments.sql"
+      ],
+      "sha256s": [
+        "48e2500d0c043775b3c4f975ec392e96927509ba1f6e527c18320427451ae761",
+        "ef525f831806dff94b9e2dc11cd19c6eabc8b8324e86c5eece1728bd0d1157ac",
+        "3a05d1b974bf7ceb397c143ac0376864c4c60303154089b3b7cb8cdea6ed5de2"
+      ],
+      "at": "2026-11-22T16:07:09.150637+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_payments.py",
+        "tests/test_settlement.py",
+        "tests/support.py"
+      ],
+      "sha256s": [
+        "e352b4323f8eb2dccd1f12a7508739bd9588926305f88fbb4440388dd4c81129",
+        "21013167c07c2ce6e0cecde53c38cbe606e5a0567b67c3f09cb1eb405c9bead3",
+        "401bdede02c95bc5fdfe3b5158eb2121fd7356f24f379d792aee2eb9ccd7b460"
+      ],
+      "at": "2026-11-22T16:07:10.582684+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 125,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "toolErrors": {}
+}

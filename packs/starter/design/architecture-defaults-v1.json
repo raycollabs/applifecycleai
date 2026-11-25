@@ -1,0 +1,380 @@
+{
+  "format": "durai-architecture-defaults/v1",
+  "id": "durai.owner.transaction-defaults",
+  "checkedAt": "2026-11-18",
+  "profiles": [
+    "trading-position",
+    "transaction",
+    "finance",
+    "retail-order",
+    "reservation"
+  ],
+  "authority": "OWNER_PREFERENCE",
+  "sources": {
+    "pg-isolation": {
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "title": "PostgreSQL transaction isolation"
+    },
+    "pg-constraints": {
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "title": "PostgreSQL constraints"
+    },
+    "idempotency": {
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "title": "Making retries safe with idempotent APIs"
+    },
+    "outbox": {
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html",
+      "title": "Transactional outbox"
+    },
+    "kafka": {
+      "url": "https://kafka.apache.org/41/design/design/",
+      "title": "Kafka delivery semantics"
+    },
+    "queues": {
+      "url": "https://aws.amazon.com/builders-library/avoiding-insurmountable-queue-backlogs/",
+      "title": "Avoiding queue backlogs"
+    },
+    "temporal": {
+      "url": "https://docs.temporal.io/workflow-execution",
+      "title": "Temporal workflow execution"
+    },
+    "saga": {
+      "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/saga-orchestration.html",
+      "title": "Saga orchestration"
+    }
+  },
+  "patterns": [
+    {
+      "id": "storage",
+      "preferred": "PostgreSQL",
+      "rule": "Prefer PostgreSQL for transactional system data. Preserve a documented customer database constraint.",
+      "when": [
+        "The service owns relational transaction data and needs durable atomic writes."
+      ],
+      "notApplicable": [
+        "A customer requires a compatible existing database.",
+        "The workload is an analytical copy or an object byte store."
+      ],
+      "alternatives": [
+        {
+          "id": "MySQL",
+          "when": "The customer requires MySQL and the chosen transactional engine meets the same invariants."
+        }
+      ],
+      "exceptionEvidence": [
+        "The customer constraint and owner.",
+        "The engine, isolation, migration, recovery, and integrity checks."
+      ],
+      "procedure": [
+        "Declare tenant and business keys. Add unique, foreign-key, and check constraints.",
+        "Index measured access paths. Check plans and contention before adding infrastructure.",
+        "Use read replicas only where the declared staleness is acceptable. Keep decision reads on an authoritative path.",
+        "Batch and apply backpressure before key-based write sharding. Measure hot keys and cross-shard transaction needs."
+      ],
+      "invariants": [
+        "Commit related local changes atomically.",
+        "Enforce tenant scope and durable business identity in every supported engine."
+      ],
+      "correctness": "Preserve atomic local transactions, tenant isolation, unique business identity, and declared durability with every storage choice.",
+      "checks": [
+        "Roll back a failed multi-row command. Check no partial business state.",
+        "Attempt a duplicate business key and a foreign-tenant read. Check refusal."
+      ],
+      "examples": [
+        "Sample: Create order O-1 and its lines. Fail line 2. Check no committed O-1."
+      ],
+      "sources": [
+        "pg-constraints",
+        "pg-isolation"
+      ]
+    },
+    {
+      "id": "concurrency",
+      "preferred": "conditional-update",
+      "rule": "Prefer an atomic conditional update for one-row state transitions. Select a lock or revision check when the invariant requires it.",
+      "when": [
+        "Two callers can change the same quantity, state, or revision."
+      ],
+      "notApplicable": [
+        "The invariant spans several rows or predicates and a one-row condition cannot protect it."
+      ],
+      "alternatives": [
+        {
+          "id": "row-lock",
+          "when": "The transaction must inspect and change several related values under a declared lock order."
+        },
+        {
+          "id": "optimistic-revision",
+          "when": "A versioned client update must detect a stale writer."
+        },
+        {
+          "id": "serializable-transaction",
+          "when": "A cross-row invariant needs serializable execution and bounded whole-transaction retries."
+        }
+      ],
+      "exceptionEvidence": [
+        "The invariant and transaction boundary.",
+        "The lock order or revision contract and a concurrent failure test."
+      ],
+      "procedure": [
+        "Name the legal source state and expected quantity or revision in the write condition.",
+        "Check the affected-row count. Return an explicit conflict when no row changes.",
+        "Keep lock scope short. Use one lock order. Bound retries for deadlocks or serialization failures."
+      ],
+      "invariants": [
+        "Only one valid transition wins a race.",
+        "Do not lose a concurrent update or create negative available quantity."
+      ],
+      "correctness": "Enforce the declared state and quantity invariants atomically. Refuse a stale or conflicting transition.",
+      "checks": [
+        "Race two callers for the last seat. Check one winner.",
+        "Repeat a stale revision. Check a conflict and unchanged quantity."
+      ],
+      "examples": [
+        "Sample: Start with 1 seat. Two callers reserve 1 seat. Check one success and 0 seats."
+      ],
+      "sources": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "id": "idempotency",
+      "preferred": "database-idempotency",
+      "rule": "Prefer a durable database request record with a scoped unique key, request digest, and stored outcome for retried mutations.",
+      "when": [
+        "A caller can retry a mutating request or lose its response."
+      ],
+      "notApplicable": [
+        "The operation is a read with no business effect."
+      ],
+      "alternatives": [
+        {
+          "id": "provider-idempotency-with-local-reconciliation",
+          "when": "An external effect cannot share the local transaction. The provider supports a stable operation identity and result lookup."
+        }
+      ],
+      "exceptionEvidence": [
+        "The provider key scope, retention, and request mismatch contract.",
+        "The local intent, uncertain-result, reconciliation, and recovery checks."
+      ],
+      "procedure": [
+        "Use a non-null unique key over tenant, operation, and caller request ID. Store a canonical request digest separately.",
+        "Claim the key atomically. Commit the local effect and outcome in the same transaction. Return the retained result for an equal retry.",
+        "Refuse the same key with a different request. Do not treat an uncommitted claim as success.",
+        "Declare key retention from the retry and reconciliation horizon. A hash index is an access choice; it does not replace exact uniqueness.",
+        "Use the same provider identity after a timeout. Record an uncertain result and reconcile before a new external attempt."
+      ],
+      "invariants": [
+        "One accepted logical command has at most one business effect within the declared contract.",
+        "A request-key payload mismatch is refused."
+      ],
+      "correctness": "Preserve command identity across retries. Resolve an uncertain external result before a new charge or other irreversible effect.",
+      "checks": [
+        "Race 20 equal commands. Check one effect and equal outcomes.",
+        "Reuse K-1 with a different amount. Check refusal.",
+        "Lose the provider response. Check reconciliation with the original identity."
+      ],
+      "examples": [
+        "Sample: Use K-1 for 100 USD. Retry K-1 for 100 USD. Check the retained result. Use K-1 for 200 USD. Check refusal."
+      ],
+      "sources": [
+        "idempotency",
+        "pg-constraints"
+      ]
+    },
+    {
+      "id": "publication",
+      "preferred": "transactional-outbox-polling",
+      "rule": "Prefer a transactional outbox when a database change must produce an event. Start with a bounded polling relay when its measured load permits it.",
+      "when": [
+        "A committed business change must notify another service or publish an event."
+      ],
+      "notApplicable": [
+        "No event leaves the transaction boundary."
+      ],
+      "alternatives": [
+        {
+          "id": "transactional-outbox-cdc",
+          "when": "A supported change-data-capture path and measured volume justify its operations."
+        },
+        {
+          "id": "append-only-event-store",
+          "when": "The durable event is the authoritative business commit and consumers have a qualified replay contract."
+        }
+      ],
+      "exceptionEvidence": [
+        "The atomic publication boundary and retained event identity.",
+        "Crash, duplicate, per-entity ordering, replay, and recovery results."
+      ],
+      "procedure": [
+        "Write the business change and outbox row in one transaction. Give the event a stable ID and entity sequence.",
+        "Have the relay publish committed rows. Mark completion only after a broker acknowledgment.",
+        "Recover expired relay claims. Bound batches and retry delays. Retain failed rows for review.",
+        "Expect a duplicate after a lost acknowledgment. Preserve required per-entity order; do not assume global order."
+      ],
+      "invariants": [
+        "A rolled-back change produces no event.",
+        "A committed publication intent survives a publisher crash."
+      ],
+      "correctness": "Retain publication intent with the business commit. Permit safe duplicate delivery and enforce the declared ordering scope.",
+      "checks": [
+        "Crash after commit and before publish. Restart. Check eventual delivery.",
+        "Lose the acknowledgment after publish. Check safe redelivery."
+      ],
+      "examples": [
+        "Sample: Commit O-1 and E-1. Stop the relay. Restart it. Check E-1 is delivered with the same ID."
+      ],
+      "sources": [
+        "outbox"
+      ]
+    },
+    {
+      "id": "consumption",
+      "preferred": "transactional-inbox",
+      "rule": "Prefer a durable consumer inbox when a delivered event changes local business state.",
+      "when": [
+        "A broker or publisher can deliver the same event more than once."
+      ],
+      "notApplicable": [
+        "The consumer has no business effect or retained state."
+      ],
+      "alternatives": [
+        {
+          "id": "transactional-offset-in-output-store",
+          "when": "A qualified ordered stream commits its offset and all output in the same durable transaction."
+        }
+      ],
+      "exceptionEvidence": [
+        "The consumer identity and exact deduplication or offset scope.",
+        "The output transaction, duplicate, crash, order, and replay checks."
+      ],
+      "procedure": [
+        "Enforce a non-null unique key over tenant, consumer, and event ID.",
+        "Commit the inbox receipt and local business effect together. Acknowledge only after commit.",
+        "Treat redelivery of the same committed event as a completed duplicate. Detect conflicting content for one event ID.",
+        "Use a separate outbox or stable external operation identity for an external effect. Kafka transactions alone do not make an external database write or charge atomic."
+      ],
+      "invariants": [
+        "A committed duplicate cannot repeat the local business effect.",
+        "A failed transaction leaves the event eligible for a safe retry."
+      ],
+      "correctness": "Commit duplicate detection and the local effect atomically. Keep external effects within their own durable idempotency contract.",
+      "checks": [
+        "Deliver E-1 twice. Check one inventory change.",
+        "Crash before commit. Redeliver. Check one final committed effect."
+      ],
+      "examples": [
+        "Sample: Receive E-1 twice for 2 items. Check one receipt and one decrease of 2 items."
+      ],
+      "sources": [
+        "outbox",
+        "kafka"
+      ]
+    },
+    {
+      "id": "jobs",
+      "preferred": "PostgreSQL-durable-jobs",
+      "rule": "Prefer a bounded durable job queue with job IDs and explicit status. Use PostgreSQL jobs first for a small service that already uses PostgreSQL.",
+      "when": [
+        "Work exceeds the request time budget or must survive a worker restart."
+      ],
+      "notApplicable": [
+        "A short bounded operation can complete within the declared request budget."
+      ],
+      "alternatives": [
+        {
+          "id": "RabbitMQ",
+          "when": "Routing, delivery controls, and measured throughput justify a separate broker."
+        },
+        {
+          "id": "Kafka",
+          "when": "Partitioned replayable streams and their ordering scope fit the workload."
+        },
+        {
+          "id": "Amazon-SQS",
+          "when": "The customer permits a managed queue and its delivery contract fits."
+        },
+        {
+          "id": "synchronous-bounded-handler",
+          "when": "The operation is short and bounded; no durable background acceptance is needed."
+        }
+      ],
+      "exceptionEvidence": [
+        "The latency, ordering, retention, and durable acceptance contract.",
+        "Measured backlog, overload, worker-loss, and recovery checks."
+      ],
+      "procedure": [
+        "Set admission and concurrency limits per workload. Reject before acceptance when capacity is unavailable.",
+        "Persist accepted work and return its job ID. Expose authorized status reads with explicit terminal states.",
+        "Use a lease, heartbeat, and fencing revision. Refuse completion from a stale worker.",
+        "Bound retries and delays. Retain exhausted jobs for review. Track oldest age, backlog, and reserved worker capacity.",
+        "Use polling first for progress. Add SSE or WebSocket delivery when the client contract requires it. Status remains authoritative."
+      ],
+      "invariants": [
+        "Accepted work is durable until an explicit terminal result.",
+        "A lost owner cannot overwrite a newer owner result."
+      ],
+      "correctness": "Preserve accepted jobs, bounded admission, ownership, and explicit terminal states under overload and worker loss.",
+      "checks": [
+        "Fill the admission limit. Check new work is rejected before acceptance and accepted work is retained.",
+        "Expire owner revision 3. Claim revision 4. Refuse completion from revision 3."
+      ],
+      "examples": [
+        "Sample: Accept J-1. Stop its worker. Reclaim J-1 with revision 4. Check revision 3 cannot complete it."
+      ],
+      "sources": [
+        "queues"
+      ]
+    },
+    {
+      "id": "workflows",
+      "preferred": "Temporal",
+      "rule": "Prefer Temporal for durable multi-service workflows with retries, timers, and compensation. Keep each service effect behind an explicit idempotent command.",
+      "when": [
+        "Payment, inventory, shipping, or another multi-step process spans durable service boundaries and needs recovery."
+      ],
+      "notApplicable": [
+        "One short local database transaction can perform the complete operation."
+      ],
+      "alternatives": [
+        {
+          "id": "AWS-Step-Functions",
+          "when": "The customer uses an approved AWS workflow platform and its history and retry limits fit."
+        },
+        {
+          "id": "explicit-durable-state-machine",
+          "when": "A small workflow has a persisted transition log, one fenced owner, and qualified retry and recovery paths."
+        }
+      ],
+      "exceptionEvidence": [
+        "The workflow states, service ownership, timers, and recovery contract.",
+        "The compensation, uncertain-result, replay, and operator-intervention checks."
+      ],
+      "procedure": [
+        "Declare forward steps, timeouts, terminal states, and compensation before dispatch.",
+        "Persist workflow identity and progress. Keep workflow code deterministic for engines that replay code.",
+        "Give every activity and compensation a stable business operation identity. Resolve uncertain outcomes before retrying an irreversible effect.",
+        "Record a failed compensation and escalate it for authorized review. A compensation is a new business action; it is not a database rollback of prior external effects.",
+        "Keep local commits in their owning services. Bound workflow history and declare version upgrades."
+      ],
+      "invariants": [
+        "Workflow replay cannot repeat an irreversible effect.",
+        "Repeated compensation has one logical effect and preserves audit history."
+      ],
+      "correctness": "Recover each durable step with stable identity. Keep compensation idempotent, auditable, and within the caller authority.",
+      "checks": [
+        "Replay after payment succeeds and the response is lost. Check no second charge.",
+        "Repeat inventory release. Check one release.",
+        "Fail compensation. Check an explicit unresolved state and operator evidence."
+      ],
+      "examples": [
+        "Sample: Reserve H-1. Payment fails. Release H-1 twice with the same compensation ID. Check one release."
+      ],
+      "sources": [
+        "temporal",
+        "saga"
+      ]
+    }
+  ]
+}

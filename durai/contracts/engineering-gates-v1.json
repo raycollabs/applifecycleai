@@ -1,0 +1,15 @@
+{
+  "contract": "durai-engineering-gates/v1",
+  "modes": ["GREENFIELD", "REPLICA"],
+  "orderedStages": ["DESIGN_READY", "EXECUTION_SHELL_READY", "BASELINE_TEST_FAILURE_CONFIRMED", "IMPLEMENTATION_READY", "WAITING_FOR_REVIEW"],
+  "failureStage": "FAILED",
+  "terminalStages": ["FAILED", "WAITING_FOR_REVIEW"],
+  "evidencePins": ["contextDigest", "bindingDigest"],
+  "independentEvaluatorStages": ["BASELINE_TEST_FAILURE_CONFIRMED", "WAITING_FOR_REVIEW"],
+  "redCategory": "BUSINESS_ASSERTION",
+  "excludedRedFailures": ["compile", "syntax", "missing symbol", "NotImplementedError", "dependency", "authentication", "infrastructure"],
+  "sealedEvaluationIdentity": ["baselineDigest", "suiteDigest", "candidateDigest"],
+  "releaseAuthority": false,
+  "implementation": "Local approved position-domain adapter with explicit rules and independent protected checks",
+  "notImplementedByThisContract": ["general high-reasoning planner qualification", "arbitrary-domain generation", "new release approval UI", "multi-service production replication"]
+}

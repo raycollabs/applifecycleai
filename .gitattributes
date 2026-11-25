@@ -1,0 +1,5 @@
+/durai/** text eol=lf
+/durai/**/*.png -text
+/plans/plan_durai_local_trading_execution_2026-11-14.md text eol=lf
+/durai/durai/qualification.py -text
+/durai/durai/development_loop.py -text

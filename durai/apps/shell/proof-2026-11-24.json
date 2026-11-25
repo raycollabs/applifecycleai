@@ -1,0 +1,66 @@
+{
+  "label": "a3-shell-book-20261124",
+  "sampleId": "S-TRADE-BOOK",
+  "revision": 1,
+  "digest": "6d0b33212aa10f4f6900e51ceb64265723193efade075b0f2b0fd5e12d94a017",
+  "provider": "deepinfra-deepseek",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "startedAt": "2026-11-24T23:57:50.427152+00:00",
+  "finishedAt": "2026-11-25T00:16:23.484877+00:00",
+  "calls": 60,
+  "inputTokens": 1327883,
+  "outputTokens": 78810,
+  "estimatedEnterpriseCost": 3.443866,
+  "estimatedListCost": 0.312863,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "e07e7c8744e39e6c4c72b5aef11061ece44844e72bf2e936cbe7647112a9aaef"
+      ],
+      "at": "2026-11-25T00:00:16.263967+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "975a7ca6f8ba7409d4ce2ea865a921eb9a91c7010aa157f6567740babb8354ac"
+      ],
+      "at": "2026-11-25T00:00:57.600349+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 18,
+    "failed": 13
+  },
+  "stopReason": "STOP_BUDGET",
+  "providerErrors": 0,
+  "traceDigest": "bc21a9706a1c79dbc21fe3edb6f6eb7fe9c71a062735e1df95c166ac7bef58f2",
+  "receiptSha256": "08daae22da4172c6956e856e7813edf2d74c69d21afd608fc9a06e5bdf20d784",
+  "shellManifestSha256": "d41141ead433add0597ee297bb138c70496d701f9287791d2137929a91801e88",
+  "pinnedShellFilesVerified": 15,
+  "stageArchiveVerified": true,
+  "round3": {
+    "calls": 28,
+    "estimatedEnterpriseCost": 3.02
+  },
+  "protectedScoringRun": false,
+  "localRecheck": {
+    "modelCalls": 0,
+    "pythonPassed": 31,
+    "pythonFailed": 0,
+    "nodeTests": 0,
+    "combinedExitCode": 1
+  }
+}

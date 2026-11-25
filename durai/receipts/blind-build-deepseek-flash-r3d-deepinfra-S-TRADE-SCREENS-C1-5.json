@@ -1,0 +1,107 @@
+{
+  "label": "deepseek-flash-r3d-deepinfra",
+  "sampleId": "S-TRADE-SCREENS-C1-5",
+  "revision": 1,
+  "digest": "2e5a8c83c2d75af3e480c0fea117b11e24f2b0f819c87fc410230b6bc5a4b27e",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "provider": "deepinfra-deepseek",
+  "startedAt": "2026-11-24T18:55:14.056520+00:00",
+  "finishedAt": "2026-11-24T19:08:18.598753+00:00",
+  "calls": 73,
+  "inputTokens": 3320165,
+  "outputTokens": 57415,
+  "estimatedEnterpriseCost": 7.21448,
+  "estimatedListCost": 0.698482,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "e7dfb9eb214afabe90e832a116b1860e02e3a96eca1aeceeae43f7c826ed910f"
+      ],
+      "at": "2026-11-24T19:00:03.552099+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "6a9995e3ad5d4770765564814ed26356b776c8874cd4b8cacbd52f438442bd8f"
+      ],
+      "at": "2026-11-24T19:00:06.204771+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "app/actions.ts",
+        "app/page.tsx",
+        "tests/test_app.py"
+      ],
+      "sha256s": [
+        "80005bf027028ff9397d0016feb7a55cbe587c61aa7f2bbdcdc63b4903615714",
+        "354c944496a61eea531b996499cbf3ffaf9318b09a0357cab705de5dcb1a8395",
+        "343c6a47743add44721ba3e0144d296b21ae0bfe1ae89e9dd2b45f9987042211"
+      ],
+      "at": "2026-11-24T19:08:09.055548+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_app.py",
+        "tests/api_client.test.ts",
+        "tests/signin_view.test.ts",
+        "tests/message_key.test.ts",
+        "tests/positions_view.test.ts",
+        "tests/book_view.test.ts",
+        "tests/prices_view.test.ts",
+        "tests/cash_view.test.ts"
+      ],
+      "sha256s": [
+        "343c6a47743add44721ba3e0144d296b21ae0bfe1ae89e9dd2b45f9987042211",
+        "036daf4f85acde4c8d1ea74786d0f4d9d40d8645e023364aac271fbc17f7a469",
+        "217b21e526b5135e9cdeee5fa00b59b0311ae21804a3985966a2adb7c6e2c93e",
+        "fc1eea6264c2c3c0258dc9bcad0f4ad0aec645e4e623eacc3fcb6c56e357de91",
+        "d4ccf53546ef1612b957d49b3bf36f479376a6353508b9f097777772e363051a",
+        "65ca65a49d5224c2f1e1af6231bb546fda7a77793cc5cb394fdadc82e1514820",
+        "7b92beff40092a8736df1b8fa44ea27b4ec0c4bf54b66a76bae8e0785f526ed0",
+        "1b6e2f570765f49de4fc5d220154a9cd5ed9c26ba3898558ca5faa43b2a7bc45"
+      ],
+      "at": "2026-11-24T19:08:12.601285+00:00"
+    },
+    {
+      "stage": "DEPLOYED",
+      "paths": [
+        "src/app.py"
+      ],
+      "sha256s": [
+        "fed806682610ac8c301a7e1519db0cb89a6ed6a41a17945abe1a919a0e979962"
+      ],
+      "at": "2026-11-24T19:08:15.670305+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 222,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-round3-20261123\\durai\\worker-evidence\\blind-deepseek-flash-r3d-deepinfra-S-TRADE-SCREENS-C1-5-3d19658e78a23d3f8d6f6687dcdbe77deeecb3eb875544c24d70c483caf7d2bf.json",
+  "traceDigest": "3d19658e78a23d3f8d6f6687dcdbe77deeecb3eb875544c24d70c483caf7d2bf",
+  "messageCount": 215,
+  "toolErrors": {
+    "read_file": 1,
+    "list_files": 1
+  }
+}
