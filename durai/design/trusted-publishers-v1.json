@@ -1,0 +1,13 @@
+{
+  "format": "durai-trusted-publishers/v1",
+  "publishers": [
+    {
+      "keyId": "durai-publisher-2026",
+      "algorithm": "ed25519",
+      "publicKeyHex": "1556b99d264ef184770c2b13350ebbf9fbda21f4c233ee40b4196e0deae27ff1",
+      "status": "ACTIVE",
+      "addedBy": "user",
+      "addedOn": "2026-11-26"
+    }
+  ]
+}

@@ -38,6 +38,33 @@ class PublisherToolTests(unittest.TestCase):
             from durai.pack_signing import export_public_key_hex
             self.assertEqual(export_public_key_hex(private_key.public_key()), public)
 
+    def test_trusted_file_holds_user_key_only(self):
+        # Sample: Load the trusted publisher file. Key durai-publisher-2026 is trusted. An unknown id is not.
+        from durai import trusted_publishers
+        trusted = trusted_publishers.load()
+        self.assertTrue(trusted.is_trusted('durai-publisher-2026'))
+        self.assertFalse(trusted.is_trusted('durai-test-signer-2026'))
+
+    def test_pack_signed_by_other_key_not_valid(self):
+        # Sample: Sign with a throwaway key under the trusted id. Verify with the trusted file. The result is not valid.
+        from durai import trusted_publishers
+        from durai.pack_signing import verify_pack
+        private_key, _ = generate_key_pair()
+        signed = sign_egress_pack.build(private_key)
+        self.assertFalse(verify_pack(signed, trusted_publishers.load()).valid)
+
+    def test_signed_starter_egress_pack_is_valid(self):
+        # Sample: Load packs/durai.egress-starter-v1.0.0.json. The signature verifies with the trusted list. The body equals the code starter body.
+        import json
+        from durai import trusted_publishers
+        from durai.egress_presets import starter_body
+        from durai.pack_signing import verify_pack
+        root = Path(__file__).resolve().parents[1]
+        path = next(item for item in (root / 'packs/durai.egress-starter-v1.0.0.json', root.parent / 'packs/starter/packs/durai.egress-starter-v1.0.0.json') if item.is_file())
+        document = json.loads(path.read_text(encoding='utf-8'))
+        self.assertTrue(verify_pack(document, trusted_publishers.load()).valid)
+        self.assertEqual(document['records'][0]['body'], starter_body())
+
 
 if __name__ == '__main__':
     unittest.main()

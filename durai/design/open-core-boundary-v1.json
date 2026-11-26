@@ -41,6 +41,7 @@
     {"glob": "durai/design/samples/**", "class": "PAID_PACK", "reason": "Sample requests. Two starter samples may move to the free pack."},
     {"glob": "durai/design/manifests/**", "class": "OPEN", "reason": "Run manifests."},
     {"glob": "durai/design/open-core-boundary-*.json", "class": "OPEN", "reason": "This file."},
+    {"glob": "durai/design/trusted-publishers-v1.json", "class": "OPEN", "reason": "Public keys only. Verifiers need them."},
     {"glob": "durai/design/**", "class": "PRIVATE", "reason": "Unreviewed design data. Review before any class change."},
 
     {"glob": "durai/blueprints/**", "class": "PAID_PACK", "reason": "Qualified transaction blueprints."},
@@ -65,6 +66,7 @@
     {"glob": "durai/.gitignore", "class": "OPEN", "reason": "Ignore list."},
     {"glob": "packs/starter/**", "class": "FREE_PACK", "reason": "Starter pack folder of the public export."},
     {"glob": "durai/packs/durai.starter-*.json", "class": "FREE_PACK", "reason": "Signed free starter pack."},
+    {"glob": "durai/packs/durai.egress-starter-*.json", "class": "FREE_PACK", "reason": "Signed starter egress record."},
     {"glob": "durai/packs/test_public_key.hex", "class": "FREE_PACK", "reason": "Test public key for starter pack verification."},
     {"glob": "durai/packs/durai.blueprints.*.json", "class": "PAID_PACK", "reason": "Signed paid blueprint pack."},
     {"glob": "durai/examples/**", "class": "OPEN", "reason": "Example domain files."},

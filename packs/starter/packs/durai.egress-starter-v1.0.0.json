@@ -1,0 +1,42 @@
+{
+  "format": "durai-ontology-pack/v2",
+  "id": "durai.egress-starter",
+  "version": "1.0.0",
+  "kind": "GENERIC",
+  "publisher": "durai.io",
+  "tier": "FREE",
+  "license_ref": "durai-pack-license-v1",
+  "min_shell_version": "1.0.0",
+  "valid_from": null,
+  "valid_until": null,
+  "records": [
+    {
+      "id": "sandbox.egress",
+      "layer": "DESIGN",
+      "type": "KNOWLEDGE",
+      "body": {
+        "contentKind": "SANDBOX_EGRESS",
+        "revision": 1,
+        "tiers": {
+          "restricted": [],
+          "balanced": [
+            "model-host"
+          ]
+        },
+        "presets": {
+          "model-host": {
+            "host": "api.deepinfra.com",
+            "port": 443
+          }
+        }
+      },
+      "digest": "1dd39c97354f13cbbd97ad4d1175099b3f839323ebde796934663426d61ce716"
+    }
+  ],
+  "edges": [],
+  "signature": {
+    "key_id": "durai-publisher-2026",
+    "algorithm": "ed25519",
+    "value": "0869857dd38663183dbf25b60a515ec5b7fd9c83e9c003f04b7468a742b46884d44db2ebd9e19765111fff30ff947a8666f683be933cefc1021ce463dc651c04"
+  }
+}
