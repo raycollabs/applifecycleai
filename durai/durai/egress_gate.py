@@ -7,15 +7,17 @@ APPROVED = 'APPROVED'
 
 
 class EgressGate:
-    def __init__(self, gates=None, database='durai_local', step_id='egress'):
+    def __init__(self, gates=None, database='durai_local', step_id='egress', ceiling=None):
         # Sample: Use durai.workflow_gates on database durai_test. Tests pass a fake with the same three functions.
         if gates is None:
             from . import workflow_gates as gates
-        self.gates, self.database, self.step_id = gates, database, step_id
+        self.gates, self.database, self.step_id, self.ceiling = gates, database, step_id, ceiling
 
     def propose(self, workflow_id, entry, deadline):
         # Sample: Propose api.github.com:443 for workflow W-1 with deadline T+3600. Return the subject digest and the question. Propose it again. Return the same digest.
         entry = parse_allow(entry)
+        if self.ceiling is not None:
+            self.ceiling.require(entry)
         subject = digest(entry)
         self.gates.propose_subject(workflow_id, self.step_id, 'before', subject, self.database)
         gate = self.gates.open_gate(workflow_id, self.step_id, subject, gate_question(entry), deadline, self.database)

@@ -48,3 +48,13 @@ A pack can hold one record with id `sandbox.egress` (layer DESIGN, type KNOWLEDG
 
 The OpenShell process cap is `sandbox_pids_limit` in the Docker driver table of the gateway TOML. The default is 2048. Set a lower value to match the Docker adapter.
 Scope of the receipts: a local container or OpenShell run on one machine. They are not an independent kernel-escape qualification. Model-driven escape attempts are not part of this suite.
+
+## Operator ceiling (prover check)
+
+`durai/egress_ceiling.py` adds a hard limit that no reviewer click can raise.
+
+- The operator keeps a boundary list outside the pack and outside the agent.
+- `EgressGate(ceiling=EgressCeiling(boundary, current=...))` runs `openshell-prover check <candidate> --boundary <boundary> -o json` before the gate opens.
+- Exit 0 (`within_boundary`) lets the gate open. Exit 1 (`exceeds_boundary`) raises `CeilingExceeded` with the counterexample. Any other exit fails closed.
+- Set `DURAI_PROVER_CLI` for the prover command. With WSL it is `wsl -d Ubuntu -u rms -e /home/rms/openshell-spike/bin/openshell-prover`.
+- The prover covers filesystem, process, Landlock, layer 4 and REST rules. Other protocols are outside its model.

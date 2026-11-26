@@ -33,3 +33,9 @@ Status: implemented 2026-11-26 (plan Part D, D1 to D4). Spike report: <plans>\re
 - Python of the worker must be in the image. The Deep Agents stack is not yet run inside a sandbox (plan Part D6).
 - The deadline kills the local call. The process in the sandbox ends through `--timeout`.
 - OpenShell is v0.1.x. Interfaces may change in a patch release. Pin the version.
+
+## Worker inside a sandbox and model-driven escape tests
+
+- `tools/run_worker_in_sandbox.py` builds `durai-worker-sandbox:1` (deepagents, langchain-openai, psycopg and the Durai package) and runs `coding_worker.repair_workspace` inside an OpenShell sandbox. The key stays a placeholder. The receipt is `receipts/worker-in-openshell.json`.
+- `tools/run_adversary.py openshell` asks DeepSeek for six escape programs, runs them in one sandbox and checks the scripted invariants after each run. The receipt is `receipts/sandbox-adversary-openshell.json`.
+- DeepInfra can answer 429 "Model busy". The tools retry with a wait.
