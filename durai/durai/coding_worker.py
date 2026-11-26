@@ -64,8 +64,8 @@ def repair_workspace(folder, model, task, contract=None):
     before = {path.relative_to(root).as_posix(): digest(path.read_bytes()) for path in root.rglob('*') if path.is_file()}
     directories = {path.relative_to(root).as_posix() for path in root.rglob('*') if path.is_dir()}
     if contract is None:
-        from .packs import generic_pack
-        policies = generic_pack()['records'][0]['body']['policies']
+        from .pack_data import PolicySource
+        policies = PolicySource().policies()
         contract = {'policies': policies, 'allowedFiles': ['/workspace/program.py'], 'releaseAuthority': False}
         contract['digest'] = digest(contract)
     body = {k: v for k, v in contract.items() if k != 'digest'}

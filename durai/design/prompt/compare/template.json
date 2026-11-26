@@ -1,0 +1,107 @@
+{
+ "revision": 1,
+ "author": "durai-seed",
+ "kind": "comparative-research",
+ "digest": "c2b9ab652c7cd6dce3161299ebc3d8a8bb26ae3de5166146ab695da20709d693",
+ "rules": {
+  "verbs": [
+   "\\bcompar(?:e|es|ed|ing|ison)\\b",
+   "\\bvs\\.?(?=\\s|$)",
+   "\\bversus\\b",
+   "\\balternatives?\\s+to\\b",
+   "\\breplace\\b.{0,40}\\bwith\\b",
+   "\\badapt\\b.{0,30}\\bfrom\\b",
+   "\\bwhat\\s+(?:do\\s+)?we\\s+lack\\b",
+   "\\bhow\\s+does\\b.{0,60}\\bdiffer\\b"
+  ],
+  "targets": [
+   "github\\.com/[\\w.-]+/[\\w.-]+",
+   "\\b(?:github\\s+)?repos?\\b",
+   "\\bframeworks?\\b",
+   "\\blibrar(?:y|ies)\\b",
+   "\\btools?\\b",
+   "\\bplatforms?\\b",
+   "\\bsdks?\\b",
+   "\\bopen[\\s-]?sourced?\\b",
+   "\\bproducts?\\b",
+   "\\bruntimes?\\b"
+  ],
+  "verdicts": [
+   "ADOPT",
+   "ADAPT",
+   "KEEP",
+   "SKIP",
+   "REPLACE"
+  ],
+  "cost_scale": {
+   "S": "under 1 day",
+   "M": "2 to 5 days",
+   "L": "more than 1 week"
+  },
+  "columns": [
+   "Area",
+   "What it gives",
+   "Durai today and the lack",
+   "Verdict",
+   "Cost"
+  ]
+ },
+ "sections": [
+  {
+   "key": "bottom-line",
+   "title": "Bottom line",
+   "instruction": "Say replace, adapt or keep. Give three to five short points."
+  },
+  {
+   "key": "durai-today",
+   "title": "Durai today",
+   "instruction": "List facts about Durai. Give file and line for each fact. Read the code first. Do not guess."
+  },
+  {
+   "key": "fact-sheet",
+   "title": "Fact sheet per target",
+   "instruction": "Read primary pages first (repository, official docs). Give the URL for each fact. Mark a fact UNVERIFIED when no primary page shows it. Name each conflict between sources."
+  },
+  {
+   "key": "tables",
+   "title": "One table per target",
+   "instruction": "Use the columns Area, What it gives, Durai today and the lack, Verdict, Cost. Put the line 'Replace anything?' under each table."
+  },
+  {
+   "key": "verdict-words",
+   "title": "Verdict words",
+   "instruction": "Use only ADOPT, ADAPT, KEEP, SKIP and REPLACE. ADOPT means use it behind a port. ADAPT means copy the idea and build it in Durai. KEEP means Durai is equal or better. SKIP means not now."
+  },
+  {
+   "key": "cost-scale",
+   "title": "Cost scale",
+   "instruction": "Use S for under 1 day, M for 2 to 5 days, L for more than 1 week. Say that costs are estimates. State the licence cost and the paid-call cost."
+  },
+  {
+   "key": "unverified",
+   "title": "What could not be verified",
+   "instruction": "List each claim without a primary source."
+  },
+  {
+   "key": "phases",
+   "title": "Proposed phases",
+   "instruction": "List phases. Mark each one not started. Do not start any work."
+  },
+  {
+   "key": "decisions",
+   "title": "Decisions for the user",
+   "instruction": "List the choices the user must make."
+  },
+  {
+   "key": "sources",
+   "title": "Sources",
+   "instruction": "List every URL with the date checked. Mark secondary sources."
+  }
+ ],
+ "instructions": [
+  "Write short sentences in ASD-STE100 style.",
+  "Write the result to a research file in the plans folder. Show the tables in the chat.",
+  "Ask which Durai modules are in scope when the request does not say.",
+  "Do not start implementation. Write a plan file first."
+ ]
+}

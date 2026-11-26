@@ -7,6 +7,7 @@ from pathlib import Path
 
 from psycopg.types.json import Jsonb
 
+from . import compare_intent
 from .db import ROOT, transaction
 from .plans_dir import plans_dir
 
@@ -389,10 +390,28 @@ class Enhancer:
             feedback = '\n\nThe last rewrite was refused. Start with the request exactly and name no baseline file.'
         return text, calls, round(input_tokens * INPUT_RATE + output_tokens * OUTPUT_RATE, 6)
 
+    def compare_result(self, request, compare, session_ref, record, sample_id, build_label):
+        # Sample: A compare request returns the compare text, kind comparative-research, one template digest and no model call. With record off write no row.
+        text = compare['text']
+        self.check_blind(text[len(request):])
+        row = {'requestDigest': digest_text(request), 'sessionRef': session_ref['conversationId'] if session_ref else None,
+               'kind': compare['kind'], 'templateDigests': [compare['templateDigest']], 'conceptKeys': [], 'checklistKeys': [],
+               'historyRefs': [], 'skillDigests': [], 'enhancedDigest': digest_text(text), 'mode': 'RULES', 'modelCalls': 0,
+               'cost': 0.0, 'score': 1.0, 'sampleId': sample_id, 'buildLabel': build_label}
+        enhancement_id = None
+        if record:
+            if self.recorder is None:
+                raise ValueError('No recorder is configured')
+            enhancement_id = self.recorder.record(row)
+        return {'text': text, 'record': row, 'enhancementId': enhancement_id}
+
     def enhance(self, request, session_ref=None, kinds=None, use_model=False, record=False, sample_id=None, build_label=None):
         # Sample: Enhance the request with record on. Return the text, a record with digests and one enhancement id. With record off write no row.
         if not isinstance(request, str) or not request.strip():
             raise ValueError('Request must be a non-empty text')
+        compare = compare_intent.enhance(request) if kinds is None and self.kinds is None else None
+        if compare is not None:
+            return self.compare_result(request, compare, session_ref, record, sample_id, build_label)
         verdict = self.classify(request, kinds or self.kinds)
         kind = verdict['kind']
         history = {'items': [], 'text': ''}

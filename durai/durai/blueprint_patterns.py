@@ -6,6 +6,7 @@ from pathlib import Path
 from .architecture_defaults import PREFERENCE_FORMAT, catalog_patterns as architecture_patterns
 from .common import Conflict, digest
 from .domain_profiles import PROFILES, string_list
+from .pack_data import read_design
 from .packs import make_record, validate_pack
 
 FORMAT = 'durai-transaction-blueprints/v1'
@@ -18,7 +19,7 @@ ENTRY_KEYS = {'id', 'modules', 'preferred', 'rule', 'correctness', 'when', 'notA
 
 def load_catalog():
     # Sample: Read design/transaction-blueprints-v1.json. Return its 11 entries.
-    return json.loads(CATALOG.read_text(encoding='utf-8'))
+    return read_design('transaction-blueprints-v1.json')
 
 
 def file_digest(path, root=None):

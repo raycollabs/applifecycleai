@@ -3,7 +3,9 @@ import hashlib
 import json
 from pathlib import Path
 
-DEFAULT_FILE = Path(__file__).resolve().parents[1] / 'design/samples/trading-v1.json'
+from .pack_data import design_path
+
+DEFAULT_NAME = 'samples/trading-v1.json'
 PUBLIC_FIELDS = ('sampleId', 'revision', 'title', 'requestText', 'digest')
 
 
@@ -18,10 +20,10 @@ class SampleSource:
 
 
 class JsonSampleSource(SampleSource):
-    def __init__(self, path=DEFAULT_FILE, statuses=('REVIEWED',)):
+    def __init__(self, path=None, statuses=('REVIEWED',)):
         # Sample: Open trading-v1.json. Hold six REVIEWED samples. Refuse a record whose digest differs from its text. With statuses PROPOSED, serve a PROPOSED record.
         self.statuses = tuple(statuses)
-        data = json.loads(Path(path).read_text(encoding='utf-8'))
+        data = json.loads((Path(path) if path else design_path(DEFAULT_NAME)).read_text(encoding='utf-8'))
         self.domain = data['domain']
         self.records = {}
         for record in data['samples']:

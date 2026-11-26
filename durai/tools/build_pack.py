@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from durai.common import canonical, digest
+from durai.pack_data import read_design
 from durai.packs import generic_pack, make_record, validate_pack
 from durai.pack_signing import (
     TrustedKeyList,
@@ -40,8 +41,7 @@ def get_or_create_test_key():
 def build_starter_pack(private_key, key_id=KEY_ID):
     # Sample: Combine philosophy v15 and architecture defaults. Sign starter pack.
     base = generic_pack('15')
-    arch_path = ROOT / 'design/architecture-defaults-v1.json'
-    arch_data = json.loads(arch_path.read_text(encoding='utf-8'))
+    arch_data = read_design('architecture-defaults-v1.json')
 
     records = list(base['records'])
     for pattern in arch_data.get('patterns', []):
@@ -86,8 +86,7 @@ def build_starter_pack(private_key, key_id=KEY_ID):
 
 def build_paid_transaction_pack(private_key, key_id=KEY_ID):
     # Sample: Read transaction blueprints catalog. Build and sign paid pack.
-    bp_path = ROOT / 'design/transaction-blueprints-v1.json'
-    bp_data = json.loads(bp_path.read_text(encoding='utf-8'))
+    bp_data = read_design('transaction-blueprints-v1.json')
 
     records = []
     records.append(make_record(

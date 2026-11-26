@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from .common import Conflict, digest
 from .domain_profiles import PROFILES, string_list
+from .pack_data import read_design
 from .packs import make_record, validate_pack
 
 PREFERENCE_FORMAT = 'durai-owner-preference/v1'
@@ -39,7 +40,7 @@ def validate_preference(policy):
 def catalog_patterns(catalog=None):
     # Sample: Read storage and concurrency defaults. Return each preference and its separate correctness rule.
     from .ontology_patterns import AUDIENCES, validate_pattern
-    c = deepcopy(catalog) if catalog is not None else json.loads(CATALOG.read_text(encoding='utf-8'))
+    c = deepcopy(catalog) if catalog is not None else read_design('architecture-defaults-v1.json')
     if c.get('format') != 'durai-architecture-defaults/v1' or c.get('profiles') != list(PROFILES):
         raise Conflict('Architecture catalog identity or profiles differ')
     ids = [item['id'] for item in c['patterns']]

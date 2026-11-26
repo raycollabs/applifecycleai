@@ -15,7 +15,7 @@ def classify_error(exc_info):
     exc_type, exc, _ = exc_info
     name = exc_type.__name__
     text = str(exc)
-    if name in DATA_ERRORS and MISSING_DATA.search(text):
+    if (name in DATA_ERRORS or isinstance(exc, (FileNotFoundError, NotADirectoryError))) and MISSING_DATA.search(text):
         flat = text.replace('\\\\', '/').replace('\\', '/')
         return 'missing data: ' + flat.split('durai/')[-1].strip("'")[:80]
     if name in DB_ERRORS:

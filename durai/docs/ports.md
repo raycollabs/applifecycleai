@@ -126,3 +126,31 @@ One test function for each goal. Names are final.
 One file for each port and one folder for each adapter:
 `durai/ports/ontology_store.py`, `durai/ports/vector.py`, `durai/ports/analytics_sink.py`, `durai/ports/blob.py`, `durai/ports/events.py`, `durai/ports/packs.py`; `durai/adapters/<port>/<adapter>.py`; `tests/contract/test_<port>.py`.
 Each file is small so each change is one small commit.
+
+## 9. SandboxPort
+
+Status: v1 implemented 2026-11-26. Plan: <plans>\plan_durai_compare_enhancer_and_sandbox_2026-11-26.md (Part C).
+
+Purpose: run a program in isolation with bounded time, output and files.
+
+| Method | Input | Output | Error |
+|---|---|---|---|
+| `create(spec, key)` | limits: seconds, outputBytes, memoryMiB, cpus, pids | sandbox id | `InvalidSpec` |
+| `exec(id, argv, stdin, deadline)` | argv list, bytes, seconds | state SUCCEEDED or FAILED, exitCode, output, truncated, reason | `NotFound` |
+| `write_file(id, path, data)` | relative path, bytes | none | `InvalidPath`, `NotFound` |
+| `read_file(id, path)` | relative path | bytes | `NotFound`, `InvalidPath` |
+| `apply_policy(id, policy, key)` | policy dict | none | `Unsupported` |
+| `events(id)` | id | ordered events with sequence, kind, payload, digest | `NotFound` |
+| `destroy(id, key)` | id | none | `NotFound` for an unknown id |
+
+Rules:
+- Create with the same key gives the same id. A second destroy returns without error.
+- A deadline or an output overflow ends in FAILED with a reason. A missing process is never success.
+- A policy the adapter cannot enforce raises `Unsupported`. It is never ignored. Every adapter accepts `{"network": "none"}`.
+- A path that leaves the workspace raises `InvalidPath`.
+- Event kinds: CREATED, FILE_WRITTEN, EXEC_STARTED, EXEC_ENDED, DESTROYED.
+
+Adapters: `docker_runner` (container: no network, read-only root, no capabilities, user 65534, pinned image; implemented), `local_process` (tests only, no isolation; implemented), `openshell` (Part D), `e2b` (Part H).
+The existing `durai/sandbox.py` `DockerRunner` is unchanged. A later commit can move it behind this port.
+
+Sample: Create with key K-1. Run `python -I -c "print(200)"`. Get SUCCEEDED, exit 0 and output 200. Destroy twice. Both calls return.

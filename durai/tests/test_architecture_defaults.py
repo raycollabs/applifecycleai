@@ -2,7 +2,8 @@
 from copy import deepcopy
 import json
 import unittest
-from durai.architecture_defaults import CATALOG, architecture_defaults_pack, catalog_patterns
+from durai.architecture_defaults import architecture_defaults_pack, catalog_patterns
+from durai.pack_data import read_design
 from durai.architecture_choices import record_architecture_proposal
 from durai.common import Conflict, digest, uid
 from durai.context_store import ContextStore
@@ -60,7 +61,7 @@ class DefaultsCatalogTests(unittest.TestCase):
         base = generic_pack('10')
         one = architecture_defaults_pack(base)
         self.assertEqual(one, architecture_defaults_pack(base))
-        catalog = json.loads(CATALOG.read_text())
+        catalog = read_design('architecture-defaults-v1.json')
         catalog['patterns'][0]['rule'] += ' Check the declared recovery target.'
         changed = architecture_defaults_pack(base, catalog)
         self.assertNotEqual(one['version'], changed['version'])

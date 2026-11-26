@@ -6,6 +6,7 @@ from psycopg.types.json import Jsonb
 from .common import canonical, digest, Conflict, audit
 from .db import transaction
 from .files import export_package, import_package
+from .pack_data import default_policy_version, read_design
 
 LAYERS = ('DESIGN', 'ENTITY', 'DAO', 'SERVICE', 'UI', 'TEST')
 TYPES = ('KNOWLEDGE', 'MEMORY', 'PROCEDURE')
@@ -62,12 +63,12 @@ def make_record(identity, layer, kind, body):
     return {'id': identity, 'layer': layer, 'type': kind, 'body': body, 'digest': digest(body)}
 
 
-def generic_pack(version='7'):
-    # Sample: Read the approved engineering policy. Produce every layer/type cell.
-    root = Path(__file__).resolve().parents[1]
+def generic_pack(version=None, root=None):
+    # Sample: Read the approved engineering policy. Produce every layer/type cell. Version None gives 7, or 15 when the v7 file is not installed. An explicit version never changes.
+    version = version or default_policy_version(root)
     if version not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'):
         raise ValueError('Unsupported generic policy version')
-    policy = json.loads((root / ('design/engineering-philosophy-v' + version + '.json')).read_text(encoding='utf-8'))
+    policy = read_design('engineering-philosophy-v' + version + '.json', root)
     records = []
     for layer in LAYERS:
         for kind in TYPES:

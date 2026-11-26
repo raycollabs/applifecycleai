@@ -35,3 +35,19 @@ class SignatureInvalid(PortError):
 
 class LicenseInvalid(PortError):
     pass
+
+
+class InvalidSpec(PortError):
+    pass
+
+
+class Unsupported(PortError):
+    pass
+
+
+class TelemetryEnabled(PortError):
+    pass
+
+
+class ToolMissing(PortError):
+    pass

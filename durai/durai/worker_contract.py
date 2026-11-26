@@ -1,6 +1,7 @@
 """Sample: Resolve G-2 and trading rules. Seal one worker contract."""
 import copy
 from .common import digest, Conflict
+from .pack_data import PolicySource
 from .packs import PackStore, generic_pack
 from .generation import DEFAULT_SPEC as SPEC
 
@@ -43,7 +44,7 @@ def resolve_contract(binding_id, specification=None, database='durai_local', rev
                         raise Conflict('Application ontology contradicts the domain specification')
                 if record['id'] == 'sample.position-domain':
                     domain.append({'pack': reference, 'recordId': record['id'], 'recordDigest': record['digest'], 'body': body})
-    mandatory = next(p['rule'] for p in generic_pack()['records'][0]['body']['policies'] if p['id'] == 'sample-comments-only')
+    mandatory = next(p['rule'] for p in PolicySource().policies() if p['id'] == 'sample-comments-only')
     if seen.get('sample-comments-only') != mandatory or 'comment-purpose' in seen:
         raise Conflict('Upgrade the generic binding to the approved sample-only comment policy')
     from .ontology_delivery import agent_view
