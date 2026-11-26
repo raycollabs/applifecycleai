@@ -1,0 +1,38 @@
+schema_version = 1
+
+[llm_clients.reflection]
+format = "openai_chat"
+base_url = "https://api.reflection.ai/openai/v1"
+api_key_env = "REFLECTION_API_KEY"
+max_retries = 2
+timeout_ms = 600000
+
+[llm_clients.deepseek]
+format = "openai_chat"
+base_url = "https://api.deepseek.com"
+api_key_env = "DEEPSEEK_API_KEY"
+max_retries = 2
+timeout_ms = 600000
+
+[targets.reflection]
+id = "Beam-1.0-501B-A23B"
+llm_client = "reflection"
+
+[targets.deepseek]
+id = "deepseek-flash"
+llm_client = "deepseek"
+
+[routes.baseline]
+id = "durai-reflection-only"
+type = "passthrough"
+target = "reflection"
+
+[routes.primary]
+id = "durai-primary"
+type = "stage_router"
+capable_target = "deepseek"
+efficient_target = "reflection"
+picker = "efficient_first"
+confidence_threshold = 0.5
+recent_turn_window = 3
+capable_hold_turns = 2

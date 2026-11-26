@@ -41,6 +41,7 @@
     {"glob": "durai/design/samples/**", "class": "PAID_PACK", "reason": "Sample requests. Two starter samples may move to the free pack."},
     {"glob": "durai/design/manifests/**", "class": "OPEN", "reason": "Run manifests."},
     {"glob": "durai/design/open-core-boundary-*.json", "class": "OPEN", "reason": "This file."},
+    {"glob": "durai/design/gateway/*.toml", "class": "OPEN", "reason": "Example gateway config. Names key variables only."},
     {"glob": "durai/design/trusted-publishers-v1.json", "class": "OPEN", "reason": "Public keys only. Verifiers need them."},
     {"glob": "durai/design/**", "class": "PRIVATE", "reason": "Unreviewed design data. Review before any class change."},
 
