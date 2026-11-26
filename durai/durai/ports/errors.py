@@ -51,3 +51,7 @@ class TelemetryEnabled(PortError):
 
 class ToolMissing(PortError):
     pass
+
+
+class InvalidSignature(PortError):
+    pass

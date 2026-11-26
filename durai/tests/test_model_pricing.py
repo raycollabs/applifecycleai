@@ -16,6 +16,12 @@ class ModelPricingTests(unittest.TestCase):
         self.assertAlmostEqual(0.20 / 1e6, rate['input'], places=10)
         self.assertAlmostEqual(0.60 / 1e6, rate['output'], places=10)
 
+    def test_reflection_uses_deepseek_deepinfra_rate(self):
+        # Sample: Provider reflection with model Beam-1.0-501B-A23B costs 0.20 input and 0.60 output per 1M, the same as deepinfra-deepseek.
+        rate = resolve_list_rate('reflection', 'Beam-1.0-501B-A23B')
+        self.assertAlmostEqual(0.20 / 1e6, rate['input'], places=10)
+        self.assertAlmostEqual(0.60 / 1e6, rate['output'], places=10)
+
     def test_cost_calculation(self):
         # Sample: 1M input and 100k output tokens on deepseek direct. Enterprise = 3.0 USD, List = 0.168 USD.
         costs = estimate_costs('deepseek', 'deepseek-flash', 1_000_000, 100_000)

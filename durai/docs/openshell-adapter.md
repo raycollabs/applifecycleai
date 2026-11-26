@@ -39,3 +39,19 @@ Status: implemented 2026-11-26 (plan Part D, D1 to D4). Spike report: <plans>\re
 - `tools/run_worker_in_sandbox.py` builds `durai-worker-sandbox:1` (deepagents, langchain-openai, psycopg and the Durai package) and runs `coding_worker.repair_workspace` inside an OpenShell sandbox. The key stays a placeholder. The receipt is `receipts/worker-in-openshell.json`.
 - `tools/run_adversary.py openshell` asks DeepSeek for six escape programs, runs them in one sandbox and checks the scripted invariants after each run. The receipt is `receipts/sandbox-adversary-openshell.json`.
 - DeepInfra can answer 429 "Model busy". The tools retry with a wait.
+
+## MicroVM driver (not working on Ubuntu 20.04)
+
+`openshell-driver-vm` runs on a socket and the gateway accepts `compute_driver = "vm"` with `OPENSHELL_COMPUTE_DRIVER_SOCKET`. The VM launch fails on a host with glibc older than 2.32 because `libkrun.so` needs GLIBC_2.32. Use a newer distro or a container with `/dev/kvm`. The driver must stay in a live session (`run-driver-vm.sh`).
+
+## MicroVM runtime in a container (D5, works)
+
+The VM driver needs glibc 2.32 or newer. Ubuntu 20.04 has 2.31, so the driver and the gateway run in a container built from `ubuntu:24.04`.
+
+1. Windows: `nestedVirtualization=true` in `%USERPROFILE%\.wslconfig`, then `wsl --shutdown`.
+2. WSL, after every shutdown: `modprobe kvm_intel || modprobe kvm_amd` and `chmod 666 /dev/kvm` (as root).
+3. Docker Desktop passes `--device /dev/kvm` to a container. Build `tools/openshell_vm/Dockerfile` (it needs `openshell-driver-vm` and `openshell-gateway` next to it) as `durai-openshell-vm:1`.
+4. Run `tools/openshell_vm/run-vm-container.sh` in WSL. The CLI connects on 127.0.0.1:17670 with the same mTLS files. The script mounts the Docker socket so the driver can export the image.
+5. `--mem-mib 384` caps the VM memory. The default 2048 MiB lets the 512 MiB memory probe pass. The per-sandbox `--memory` flag does not shrink the VM.
+6. Result: contract tests 49 passed. Escape suite 7 of 7 with the 384 MiB cap. Receipt `receipts/sandbox-escape-openshell-vm.json`. The fork bomb reached 300 children, the same as the Docker driver of OpenShell.
+7. The container mounts the Docker socket. That gives it control of the Docker daemon. Use it on a development machine only.

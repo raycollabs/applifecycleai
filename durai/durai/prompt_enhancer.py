@@ -7,7 +7,7 @@ from pathlib import Path
 
 from psycopg.types.json import Jsonb
 
-from . import compare_intent
+from . import compare_intent, theme_intent
 from .db import ROOT, transaction
 from .plans_dir import plans_dir
 
@@ -435,12 +435,15 @@ class Enhancer:
         calls, cost = 0, 0.0
         if use_model and self.model is not None:
             text, calls, cost = self.rewrite(text, request)
+        theme = theme_intent.enhance(request) if kinds is None and self.kinds is None else None
+        if theme is not None:
+            text = text.rstrip() + '\n\n' + theme['text'][len(request):].strip() + '\n'
         added = text[len(request):] if text.startswith(request) else text
         for item in history['items']:
             added = added.replace(item['excerpt'], '')
         self.check_blind(added)
         row = {'requestDigest': digest_text(request), 'sessionRef': session_ref['conversationId'] if session_ref else None, 'kind': kind,
-               'templateDigests': [parts['templates'][stage]['digest'] for stage in STAGES if stage in parts['templates']],
+               'templateDigests': [parts['templates'][stage]['digest'] for stage in STAGES if stage in parts['templates']] + ([theme['catalogDigest']] if theme else []),
                'conceptKeys': [item['concept_key'] for item in parts['concepts']],
                'checklistKeys': [item['item_key'] for item in parts['questions'] + parts['offers']],
                'historyRefs': [{'id': item['id'], 'digest': item['digest']} for item in history['items']],

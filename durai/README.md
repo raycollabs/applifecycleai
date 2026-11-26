@@ -170,6 +170,8 @@ leaves the finding open. Actual provider/model behavior is pending configuration
 the original adapter test uses a scripted test model and no network model calls.
 The subsequent live ERNIE qualification is recorded in `receipts/runs/`.
 
+The prompt enhancer also adds a compare answer format and UI theme options. See docs/compare-enhancer.md and docs/themes.md.
+
 ## Module boundaries
 
 | Workflow | Owned module | Boundary |

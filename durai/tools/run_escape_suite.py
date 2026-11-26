@@ -13,11 +13,11 @@ def make(name):
     if name == 'docker':
         from durai.adapters.sandbox.docker_runner import DockerSandbox
         return DockerSandbox()
-    if name == 'openshell':
+    if name in ('openshell', 'openshell-vm'):
         import os
         from durai.adapters.sandbox.openshell import OpenShellSandbox
         return OpenShellSandbox(image=os.environ.get('DURAI_OPENSHELL_IMAGE', 'durai-spike-sandbox:2'))
-    raise ValueError('Adapter must be docker or openshell')
+    raise ValueError('Adapter must be docker, openshell or openshell-vm')
 
 
 def main(argv=None):

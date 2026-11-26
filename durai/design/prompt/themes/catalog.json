@@ -1,0 +1,274 @@
+{
+ "revision": 1,
+ "author": "durai",
+ "default": "enterprise-admin",
+ "rules": {
+  "buildVerbs": [
+   "build",
+   "create",
+   "make",
+   "design",
+   "redesign",
+   "implement",
+   "generate",
+   "develop",
+   "add",
+   "change",
+   "prototype",
+   "mock up",
+   "mockup",
+   "scaffold"
+  ],
+  "appNouns": [
+   "app",
+   "application",
+   "screen",
+   "page",
+   "dashboard",
+   "ui",
+   "ux",
+   "frontend",
+   "front end",
+   "website",
+   "portal",
+   "console",
+   "blotter",
+   "form",
+   "view"
+  ],
+  "choicePattern": "theme:\\s*([a-z-]+)"
+ },
+ "instructions": [
+  "Keep the user words above unchanged.",
+  "Offer the four themes. Mark the default.",
+  "Ask the user to reply with theme: <id> to choose another theme.",
+  "Use the token names as CSS custom properties.",
+  "Do not add features the request does not ask for."
+ ],
+ "themes": [
+  {
+   "id": "enterprise-admin",
+   "name": "Enterprise admin",
+   "whenWords": [
+    "admin",
+    "enterprise",
+    "users",
+    "roles",
+    "audit",
+    "settings",
+    "console",
+    "back office",
+    "permissions"
+   ],
+   "tokens": {
+    "color-bg": "#f5f6f8",
+    "color-surface": "#ffffff",
+    "color-text": "#1d2733",
+    "color-muted": "#5b6776",
+    "color-primary": "#1f4e8c",
+    "color-accent": "#0e7c86",
+    "color-success": "#1a7f4b",
+    "color-warning": "#b26a00",
+    "color-danger": "#b42318",
+    "color-border": "#d5dae1",
+    "font-family": "Inter, 'Segoe UI', system-ui, sans-serif",
+    "font-size-base": "14px",
+    "type-scale": "1.2",
+    "space-unit": "8px",
+    "density": "comfortable",
+    "radius": "6px"
+   },
+   "layout": [
+    "Left navigation with grouped sections",
+    "Breadcrumb above the page title",
+    "Forms in two columns with inline validation",
+    "Audit trail panel on every record page"
+   ],
+   "components": [
+    "sidebar",
+    "breadcrumb",
+    "data form",
+    "role badge",
+    "audit trail panel",
+    "confirmation dialog"
+   ],
+   "acceptance": [
+    "Every page shows who changed a record and when",
+    "Every destructive action asks for confirmation",
+    "Every form field has a visible label and an error message",
+    "Keyboard focus is visible on every control"
+   ]
+  },
+  {
+   "id": "transaction-heavy",
+   "name": "Transaction heavy",
+   "whenWords": [
+    "trade",
+    "trades",
+    "order",
+    "orders",
+    "payment",
+    "payments",
+    "transaction",
+    "transactions",
+    "blotter",
+    "booking",
+    "checkout",
+    "ledger",
+    "invoice"
+   ],
+   "tokens": {
+    "color-bg": "#f2f4f7",
+    "color-surface": "#ffffff",
+    "color-text": "#16202c",
+    "color-muted": "#566273",
+    "color-primary": "#0b5cab",
+    "color-accent": "#c2410c",
+    "color-success": "#1a7f4b",
+    "color-warning": "#b26a00",
+    "color-danger": "#b42318",
+    "color-border": "#cdd3db",
+    "font-family": "'IBM Plex Sans', Inter, 'Segoe UI', system-ui, sans-serif",
+    "font-size-base": "13px",
+    "type-scale": "1.2",
+    "space-unit": "4px",
+    "density": "compact",
+    "radius": "3px"
+   },
+   "layout": [
+    "Compact table is the main view",
+    "Sticky header and sticky totals row",
+    "Entry form docked beside the table",
+    "Status chip in the first column"
+   ],
+   "components": [
+    "compact table",
+    "status chip",
+    "sticky totals",
+    "keyboard shortcut help",
+    "reverse action",
+    "idempotency key label"
+   ],
+   "acceptance": [
+    "Each submit shows its idempotency key",
+    "A request sent twice counts once and the screen says so",
+    "Each row has a reverse or undo action with a reason",
+    "Totals stay visible while the table scrolls",
+    "Main actions have keyboard shortcuts"
+   ]
+  },
+  {
+   "id": "report-heavy",
+   "name": "Report heavy",
+   "whenWords": [
+    "report",
+    "reports",
+    "reporting",
+    "analytics",
+    "chart",
+    "charts",
+    "kpi",
+    "insight",
+    "insights",
+    "export",
+    "summary",
+    "dashboard"
+   ],
+   "tokens": {
+    "color-bg": "#f7f8fa",
+    "color-surface": "#ffffff",
+    "color-text": "#1b2430",
+    "color-muted": "#5d6877",
+    "color-primary": "#2b6cb0",
+    "color-accent": "#7c3aed",
+    "color-success": "#1a7f4b",
+    "color-warning": "#b26a00",
+    "color-danger": "#b42318",
+    "color-border": "#d9dee6",
+    "font-family": "Inter, 'Segoe UI', system-ui, sans-serif",
+    "font-size-base": "14px",
+    "type-scale": "1.2",
+    "space-unit": "8px",
+    "density": "comfortable",
+    "radius": "8px"
+   },
+   "layout": [
+    "Filter bar on top with date range presets",
+    "Chart and table pair for each metric",
+    "Saved views list on the left",
+    "Export and print actions in the page header"
+   ],
+   "components": [
+    "filter bar",
+    "date range presets",
+    "chart and table pair",
+    "saved view",
+    "export button",
+    "print layout"
+   ],
+   "acceptance": [
+    "Every chart has a table with the same numbers",
+    "Every filter state is in the page address",
+    "Export gives the same rows as the screen",
+    "Print layout hides navigation and fits A4"
+   ]
+  },
+  {
+   "id": "app-lifecycle-manager",
+   "name": "App lifecycle manager",
+   "whenWords": [
+    "lifecycle",
+    "pipeline",
+    "release",
+    "releases",
+    "deploy",
+    "deployment",
+    "rollback",
+    "environment",
+    "environments",
+    "approval",
+    "gate",
+    "ci"
+   ],
+   "tokens": {
+    "color-bg": "#f3f5f7",
+    "color-surface": "#ffffff",
+    "color-text": "#18222e",
+    "color-muted": "#566474",
+    "color-primary": "#1d4ed8",
+    "color-accent": "#0f766e",
+    "color-success": "#1a7f4b",
+    "color-warning": "#b26a00",
+    "color-danger": "#b42318",
+    "color-border": "#d0d7e0",
+    "font-family": "Inter, 'Segoe UI', system-ui, sans-serif",
+    "font-size-base": "14px",
+    "type-scale": "1.2",
+    "space-unit": "8px",
+    "density": "comfortable",
+    "radius": "6px"
+   },
+   "layout": [
+    "Pipeline stages across the top",
+    "One lane for each environment",
+    "Approval gate card between stages",
+    "Run history list below the pipeline"
+   ],
+   "components": [
+    "pipeline stage",
+    "environment lane",
+    "approval gate",
+    "release notes panel",
+    "rollback button",
+    "run history"
+   ],
+   "acceptance": [
+    "Each stage shows one of: queued, running, succeeded, failed, cancelled, lost",
+    "An approval gate shows who may approve and who did",
+    "Rollback needs a reason and shows the target version",
+    "Run history keeps every run with its result"
+   ]
+  }
+ ],
+ "digest": "a82a760f2e6ba1682ab56c277461dac5bfe7aaf7b330f630dc02710f6e1d8db1"
+}

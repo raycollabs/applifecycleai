@@ -8,6 +8,7 @@ LIST_RATES = {
     'deepseek': {'input': 0.14 / 1_000_000, 'output': 0.28 / 1_000_000},
     'deepinfra': {'input': 0.20 / 1_000_000, 'output': 0.60 / 1_000_000},
     'deepinfra-deepseek': {'input': 0.20 / 1_000_000, 'output': 0.60 / 1_000_000},
+    'reflection': {'input': 0.20 / 1_000_000, 'output': 0.60 / 1_000_000},
     'anthropic': {'input': 3.00 / 1_000_000, 'output': 15.00 / 1_000_000},
     'claude-sonnet': {'input': 3.00 / 1_000_000, 'output': 15.00 / 1_000_000},
     'claude-haiku': {'input': 0.80 / 1_000_000, 'output': 4.00 / 1_000_000},

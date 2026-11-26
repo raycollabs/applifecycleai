@@ -35,6 +35,7 @@
     {"glob": "durai/design/engineering-philosophy-v*.json", "class": "PAID_PACK", "reason": "Ontology revision history."},
     {"glob": "durai/design/transaction-blueprints-v1.json", "class": "PAID_PACK", "reason": "Blueprint catalog."},
     {"glob": "durai/design/prompt/compare/**", "class": "OPEN", "reason": "Compare-request template. Shell data, no paid content."},
+    {"glob": "durai/design/prompt/themes/**", "class": "OPEN", "reason": "UI theme catalog. Shell data, no paid content."},
     {"glob": "durai/design/prompt-lessons/**", "class": "PAID_FEED", "reason": "Lessons pass a human gate and update often."},
     {"glob": "durai/design/prompt/**", "class": "PAID_PACK", "reason": "Prompt catalog data."},
     {"glob": "durai/design/samples/**", "class": "PAID_PACK", "reason": "Sample requests. Two starter samples may move to the free pack."},
