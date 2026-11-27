@@ -1,0 +1,81 @@
+{
+  "label": "res-durai-v3",
+  "sampleId": "S-RES-CANCEL",
+  "revision": 1,
+  "digest": "4587f22c459d1660cb157c8a9625a25f03376e86916e20ece8073d825b9109e6",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "deepinfra-deepseek",
+  "fallbackUsed": true,
+  "startedAt": "2026-11-26T14:52:22.422831+00:00",
+  "finishedAt": "2026-11-26T14:58:07.967971+00:00",
+  "bare": false,
+  "calls": 14,
+  "inputTokens": 641586,
+  "outputTokens": 69850,
+  "estimatedEnterpriseCost": 1.981672,
+  "estimatedListCost": 0.10938,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "630989bc89b0afb8178447113e2d485a88b5a049052b577bdd1c176eebae8426"
+      ],
+      "at": "2026-11-26T14:54:50.080547+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "804a86443bdf9f8c3144d302a76e023589e9c8bdfbb0b3a5f41ea04d1c1cc0ba"
+      ],
+      "at": "2026-11-26T14:54:56.242027+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/seats.py",
+        "src/routes.py"
+      ],
+      "sha256s": [
+        "48fc5bb0798bee3c841c3e41bd0219e3749397a2fd75d48d40f4648cc8f128ae",
+        "93bf54bb55c7354107241db99466540aeea0ca5bcab3f4c5421be4f11e9ffc82"
+      ],
+      "at": "2026-11-26T14:57:59.150867+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_seats.py"
+      ],
+      "sha256s": [
+        "f0e192bf2cb191e6a397a0db70161919a080140e553a38838e3b40b1775d13c3"
+      ],
+      "at": "2026-11-26T14:58:03.977307+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 35,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 2,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v3-S-RES-CANCEL-b36ee5c1de7b665d801139fa5bd8b3063e2356c5bdf500b07efc2d8cc4fbb36a.json",
+  "traceDigest": "b36ee5c1de7b665d801139fa5bd8b3063e2356c5bdf500b07efc2d8cc4fbb36a",
+  "messageCount": 38,
+  "toolErrors": {}
+}

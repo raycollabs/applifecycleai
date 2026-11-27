@@ -1,0 +1,107 @@
+{
+  "label": "chk-durai-v3",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 181,
+  "bare": false,
+  "inputTokens": 5023018,
+  "outputTokens": 258346,
+  "estimatedEnterpriseCost": 12.629496,
+  "estimatedListCost": 0.775559,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-INVENTORY",
+      "stopReason": "FINISHED",
+      "calls": 26,
+      "lastRunTests": {
+        "passed": 15,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-INTENT",
+      "stopReason": "FINISHED",
+      "calls": 27,
+      "lastRunTests": {
+        "passed": 24,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-FUNDS",
+      "stopReason": "FINISHED",
+      "calls": 19,
+      "lastRunTests": {
+        "passed": 44,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-LEDGER",
+      "stopReason": "FINISHED",
+      "calls": 27,
+      "lastRunTests": {
+        "passed": 59,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-ACCESS",
+      "stopReason": "FINISHED",
+      "calls": 41,
+      "lastRunTests": {
+        "passed": 66,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-SCREENS",
+      "stopReason": "STOP_IDLE",
+      "calls": 41,
+      "lastRunTests": {
+        "passed": 81,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

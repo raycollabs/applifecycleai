@@ -1,0 +1,107 @@
+{
+  "label": "chk-reflection-v1",
+  "provider": "reflection",
+  "model": "Beam-1.0-501B-A23B",
+  "calls": 325,
+  "bare": false,
+  "inputTokens": 10094330,
+  "outputTokens": 156517,
+  "estimatedEnterpriseCost": 21.75383,
+  "estimatedListCost": 2.112776,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-INVENTORY",
+      "stopReason": "FINISHED",
+      "calls": 58,
+      "lastRunTests": {
+        "passed": 13,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-INTENT",
+      "stopReason": "FINISHED",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 21,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-FUNDS",
+      "stopReason": "FINISHED",
+      "calls": 47,
+      "lastRunTests": {
+        "passed": 29,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-LEDGER",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 37,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-ACCESS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 42,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-CHK-SCREENS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 42,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    }
+  ]
+}

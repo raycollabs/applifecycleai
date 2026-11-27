@@ -1,0 +1,35 @@
+{
+  "label": "res-durai-v3-s6",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 28,
+  "bare": false,
+  "inputTokens": 1430919,
+  "outputTokens": 69860,
+  "estimatedEnterpriseCost": 3.560438,
+  "estimatedListCost": 0.219889,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SCREENS",
+      "stopReason": "FINISHED",
+      "calls": 28,
+      "lastRunTests": {
+        "passed": 53,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS",
+        "DEPLOYED"
+      ]
+    }
+  ]
+}

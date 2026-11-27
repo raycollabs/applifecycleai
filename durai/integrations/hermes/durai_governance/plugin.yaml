@@ -1,0 +1,19 @@
+name: durai_governance
+version: 0.1.0
+kind: general
+description: Check each tool call against the Durai egress list and operator boundary. Block denied calls. Write digest-only receipts.
+license: Apache-2.0
+requires_hermes: ">=0"
+capabilities:
+  tools: []
+  middleware: []
+  hooks:
+    - pre_tool_call
+    - post_tool_call
+  env_vars:
+    - DURAI_GOVERNANCE
+    - DURAI_EGRESS_TIER
+    - DURAI_EGRESS_BOUNDARY
+    - DURAI_GOVERNANCE_DB
+    - DURAI_PROVER_CLI
+    - DURAI_RECEIPT_FILE

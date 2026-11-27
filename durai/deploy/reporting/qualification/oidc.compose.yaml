@@ -1,0 +1,14 @@
+services:
+  superset:
+    image: ${DURAI_REPORTING_OIDC_IMAGE:?Set the reporting OIDC image}
+    env_file:
+      - ${DURAI_REPORTING_OIDC_ENV:?Set the path to the reporting OIDC environment file}
+    volumes:
+      - ${DURAI_REPORTING_OIDC_MODULE:?Set the local OIDC module}:${DURAI_REPORTING_CONFIG_DIR:?Set the Superset config directory}/reporting_oidc.py:ro
+    networks:
+      - default
+      - oidc
+networks:
+  oidc:
+    external: true
+    name: durai-reporting-qual-oidc

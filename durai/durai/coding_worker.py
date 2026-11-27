@@ -37,11 +37,9 @@ def configured_model(model_id=None, *, profile=None):
         args['stream_usage'] = True
     if limits.get('reasoningEffort'):
         args['reasoning_effort'] = limits['reasoningEffort']
-    if limits['thinking']:
-        args['extra_body'] = {'thinking': {'type': 'enabled'}}
-    else:
-        args['temperature'] = 0
-    return ChatOpenAI(**args)
+    args.update({'extra_body': {'thinking': {'type': 'enabled'}}} if limits['thinking'] else {'temperature': 0})
+    from .provider_config import openai_chat_class
+    return openai_chat_class(profile.get('id'), profile.get('baseUrl'))(**args)
 
 
 def anthropic_model(model_id, api_key):

@@ -1,0 +1,71 @@
+name: durai-reporting-pg
+services:
+  reporting:
+    image: postgres:17-alpine
+    command: [postgres, -c, compute_query_id=on]
+    environment:
+      POSTGRES_DB: reporting
+      POSTGRES_PASSWORD: ${REPORTING_ADMIN_PASSWORD:?}
+      REPORTING_PUBLISHER_PASSWORD: ${REPORTING_PUBLISHER_PASSWORD:?}
+      REPORTING_OIL_PASSWORD: ${REPORTING_OIL_PASSWORD:?}
+      REPORTING_GAS_PASSWORD: ${REPORTING_GAS_PASSWORD:?}
+      REPORTING_UNASSIGNED_PASSWORD: ${REPORTING_UNASSIGNED_PASSWORD:?}
+    ports:
+      - '127.0.0.1:${REPORTING_PORT:-55451}:5432'
+    volumes:
+      - report_data:/var/lib/postgresql/data
+      - ./001_reporting.sql:/docker-entrypoint-initdb.d/001_reporting.sql:ro
+      - ./002_reporting_roles.sql:/docker-entrypoint-initdb.d/002_reporting_roles.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U postgres -d reporting']
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  metadata:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: metadata
+      POSTGRES_PASSWORD: ${SUPERSET_METADATA_ADMIN_PASSWORD:?}
+      SUPERSET_METADATA_PASSWORD: ${SUPERSET_METADATA_PASSWORD:?}
+    volumes:
+      - meta_data:/var/lib/postgresql/data
+      - ./metadata.sql:/docker-entrypoint-initdb.d/001_metadata.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U postgres -d metadata']
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  superset:
+    build: .
+    image: durai-reporting-superset-pg:6.1.0
+    depends_on:
+      reporting:
+        condition: service_healthy
+      metadata:
+        condition: service_healthy
+    environment:
+      PYTHONPATH: /app/durai-reporting:/app/pythonpath
+      SUPERSET_CONFIG_PATH: /app/durai-reporting/superset_config.py
+      SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:?}
+      SUPERSET_METADATA_PASSWORD: ${SUPERSET_METADATA_PASSWORD:?}
+      SUPERSET_ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD:?}
+      SUPERSET_TEST_PASSWORD: ${SUPERSET_TEST_PASSWORD:?}
+      REPORTING_OIL_PASSWORD: ${REPORTING_OIL_PASSWORD:?}
+      REPORTING_GAS_PASSWORD: ${REPORTING_GAS_PASSWORD:?}
+    command: [sh, /app/durai-reporting/start_superset.sh]
+    ports:
+      - '127.0.0.1:${SUPERSET_PORT:-55452}:8088'
+    volumes:
+      - ./superset_config.py:/app/durai-reporting/superset_config.py:ro
+      - ./superset_policy.py:/app/durai-reporting/superset_policy.py:ro
+      - ./dashboard_bundle.py:/app/durai-reporting/dashboard_bundle.py:ro
+      - ./configure_superset.py:/app/durai-reporting/configure_superset.py:ro
+      - ./start_superset.sh:/app/durai-reporting/start_superset.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, 'curl -fsS http://localhost:8088/health']
+      interval: 10s
+      timeout: 5s
+      retries: 30
+volumes:
+  report_data:
+  meta_data:

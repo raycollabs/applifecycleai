@@ -78,6 +78,24 @@ class ProviderConfigTests(unittest.TestCase):
         self.assertEqual(type(provider_config.chat_model('zai', 'planning')).__name__, 'ChatOpenAI')
         self.assertFalse(provider_config.is_gemini('zai', 'openai-compatible', 'https://api.openai.com/v1'))
 
+    def test_reflection_preserves_reasoning_content(self):
+        # Sample: Provider reflection captures reasoning_content from streamed chunks and re-emits it on assistant payloads.
+        from langchain_core.messages import AIMessage, AIMessageChunk, HumanMessage
+        write_provider(self.temp.name, 'reflection', base_url='https://api.reflection.ai/openai/v1',
+                       models={'execution': 'Beam-1.0-501B-A23B'})
+        model = provider_config.chat_model('reflection', 'execution')
+        self.assertEqual(type(model).__name__, 'ReasoningChatOpenAI')
+        chunk = model._convert_chunk_to_generation_chunk(
+            {'choices': [{'delta': {'role': 'assistant', 'content': 'ok', 'reasoning_content': 'step 1'}}]},
+            AIMessageChunk, None)
+        self.assertEqual(chunk.message.additional_kwargs.get('reasoning_content'), 'step 1')
+        payload = model._get_request_payload([
+            HumanMessage(content='hi'),
+            AIMessage(content='ok', additional_kwargs={'reasoning_content': 'step 1'}),
+            HumanMessage(content='next'),
+        ])
+        self.assertEqual(payload['messages'][1]['reasoning_content'], 'step 1')
+
 
 if __name__ == '__main__':
     unittest.main()

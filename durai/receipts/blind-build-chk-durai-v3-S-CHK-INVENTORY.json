@@ -1,0 +1,89 @@
+{
+  "label": "chk-durai-v3",
+  "sampleId": "S-CHK-INVENTORY",
+  "revision": 1,
+  "digest": "034133c9e0de7740ee90bb8b5d8247de18a44578cfcb2310a6c8b0c578fa384e",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "relace",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:20:02.031164+00:00",
+  "finishedAt": "2026-11-26T14:22:23.856135+00:00",
+  "bare": false,
+  "calls": 26,
+  "inputTokens": 392283,
+  "outputTokens": 22159,
+  "estimatedEnterpriseCost": 1.006156,
+  "estimatedListCost": 0.061124,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "51aa52d38e75cad71c3e6001db3568e001d73ee552d8d9f082438e859e039edd"
+      ],
+      "at": "2026-11-26T14:20:13.631412+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "6561a9bb4ffb7b7bbfa7318c71a3f12124d7859834562e569053bf3a2c6da87c"
+      ],
+      "at": "2026-11-26T14:20:19.523631+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/__init__.py",
+        "src/inventory.py",
+        "src/routes.py",
+        "src/schema/001_inventory.sql"
+      ],
+      "sha256s": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "4a9073cf2c4f1abbc75e71ee3356a07077fab7ab80b6d557a9625c719ac8b796",
+        "5e0bfd2a91873306692f7f0027b480e623467a6668933c19ce8d4f12d957ea92",
+        "06d84d9e0ad43f54a7dc0fd1a6dcaeb8b87595ddac592be19bd9953cefbbed1c"
+      ],
+      "at": "2026-11-26T14:22:20.250072+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/__init__.py",
+        "tests/test_inventory.py"
+      ],
+      "sha256s": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "92aaeb07d4b52aeac46286a71427b7bbcb91191f303439399bc31fbffaf98f3e"
+      ],
+      "at": "2026-11-26T14:22:21.959274+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 15,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-durai-v3-S-CHK-INVENTORY-b91914a5813483c01c6cde796b4ceeeef717fbbf3e6b35e728757b8e2ab76c80.json",
+  "traceDigest": "b91914a5813483c01c6cde796b4ceeeef717fbbf3e6b35e728757b8e2ab76c80",
+  "messageCount": 62,
+  "toolErrors": {
+    "list_files": 3
+  }
+}

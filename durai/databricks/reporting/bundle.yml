@@ -1,0 +1,68 @@
+bundle:
+  name: durai-energy-futures-reporting
+  databricks_cli_version: '>= 0.287.0'
+resources:
+  jobs:
+    report_acceptance:
+      name: Durai energy futures report acceptance
+      max_concurrent_runs: 1
+      run_as:
+        __PUBLISHER_KEY__: __PUBLISHER_VALUE__
+      tasks:
+        - task_key: fixture_identity
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE__"
+            file:
+              path: ${workspace.file_path}/sql/fixture_identity.sql
+              source: WORKSPACE
+        - task_key: fixture_business_rules
+          depends_on:
+            - task_key: fixture_identity
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE__"
+            file:
+              path: ${workspace.file_path}/sql/fixture_business_rules.sql
+              source: WORKSPACE
+        - task_key: publish_revisions
+          depends_on:
+            - task_key: fixture_business_rules
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE__"
+            file:
+              path: ${workspace.file_path}/sql/publish.sql
+              source: WORKSPACE
+        - task_key: replay_revisions
+          depends_on:
+            - task_key: publish_revisions
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE__"
+            file:
+              path: ${workspace.file_path}/sql/publish.sql
+              source: WORKSPACE
+        - task_key: reconcile_revisions
+          depends_on:
+            - task_key: replay_revisions
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE__"
+            file:
+              path: ${workspace.file_path}/sql/reconcile.sql
+              source: WORKSPACE
+  dashboards:
+    end_of_day:
+      display_name: Durai energy futures end-of-day P&L
+      file_path: ./end_of_day.lvdash.json
+      warehouse_id: "__WAREHOUSE__"
+      embed_credentials: false
+      permissions:
+        - level: CAN_READ
+          group_name: __OIL_GROUP__
+        - level: CAN_READ
+          group_name: __GAS_GROUP__
+targets:
+  acceptance:
+    default: true

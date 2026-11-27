@@ -1,0 +1,49 @@
+{
+  "label": "res-durai-v1",
+  "sampleId": "S-RES-HOLD",
+  "revision": 1,
+  "digest": "a92f424142dac9dedde22e1973b181ea4e7113b42ce47fba45a7ba6a5d91a9e1",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:02:29.849115+00:00",
+  "finishedAt": "2026-11-26T14:04:47.361445+00:00",
+  "bare": false,
+  "calls": 37,
+  "inputTokens": 858107,
+  "outputTokens": 19526,
+  "estimatedEnterpriseCost": 1.911474,
+  "estimatedListCost": 0.125602,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "b7b612151dbbecfead2d46496954648f6cf450fda9c9095581567b17a0adc5b8"
+      ],
+      "at": "2026-11-26T14:04:29.207338+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 2,
+    "failed": 26
+  },
+  "stopReason": "STOP_COST",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v1-S-RES-HOLD-2c2bb8a9246a7e4dc7d7dbd6761fed61f1d694c2f0b054d3559ee6eb49a58876.json",
+  "traceDigest": "2c2bb8a9246a7e4dc7d7dbd6761fed61f1d694c2f0b054d3559ee6eb49a58876",
+  "messageCount": 92,
+  "toolErrors": {}
+}

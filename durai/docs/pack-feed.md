@@ -113,3 +113,17 @@ When the Durai shell queries the feed:
 - **Feed Downtime**: If the feed server is unreachable, the client logs a warning and continues executing with currently installed packs and user overlays. No builds or running applications are interrupted.
 - **License Expiry**: An expired license prevents downloading new updates for paid packs. It **never deletes** existing packs or user overlays, and does not alter previously generated receipts.
 - **Revocation**: If a security notice revokes a specific pack version, the feed marks that version `REVOKED`. The local registry updates the state to `REVOKED`, refusing new builds while preserving historical evidence.
+
+---
+
+## 5. Client (`durai/pack_feed_client.py`)
+
+`PackFeedClient(registry, source_folder)` implements the offline folder-based pull client:
+- `list_available()` reads `feed.json` and sorts entries monotonically by `(seq, pack_id, version)`.
+- `fetch(pack_id, version)` resolves and loads the candidate pack file inside `source_folder` (rejecting path traversal).
+- `sync()` processes entries in order:
+  - Revocation entries (`action: "REVOKE"`, `revoked: true`, or `state: "REVOKED"`) call `registry.revoke(pack_id, version)`.
+  - Entries older than an already installed version of the same `pack_id` are skipped.
+  - Matching `(pack_id, version, digest)` entries are reported as `replayed` without modifying store state.
+  - New packs are installed through `registry.install()`; tampered packs transition to `FAILED` and are reported in `summary["failed"]`.
+

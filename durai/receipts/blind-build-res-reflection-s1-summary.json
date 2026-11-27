@@ -1,0 +1,32 @@
+{
+  "label": "res-reflection-s1",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 20,
+  "bare": false,
+  "inputTokens": 587224,
+  "outputTokens": 112092,
+  "estimatedEnterpriseCost": 2.295368,
+  "estimatedListCost": 0.113597,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "STOP_IDLE",
+      "calls": 20,
+      "lastRunTests": {
+        "passed": 1,
+        "failed": 1
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

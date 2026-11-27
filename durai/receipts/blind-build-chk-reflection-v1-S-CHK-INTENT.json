@@ -1,0 +1,103 @@
+{
+  "label": "chk-reflection-v1",
+  "sampleId": "S-CHK-INTENT",
+  "revision": 1,
+  "digest": "de647c19d6f6cb0b64ffe86f0298f9e78d110d3daa7c93904abeb78385a16f8c",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T17:34:28.325815+00:00",
+  "finishedAt": "2026-11-26T17:39:45.267809+00:00",
+  "bare": false,
+  "calls": 40,
+  "inputTokens": 1086525,
+  "outputTokens": 24525,
+  "estimatedEnterpriseCost": 2.4183,
+  "estimatedListCost": 0.23202,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "41cca202f34c409e7c62bb4e46a2e0501bcc19615a68c34f80f86a03832d3c7f"
+      ],
+      "at": "2026-11-26T17:36:46.499645+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "06c7106fe6234cf3fba28b89c149da26c9f91954d2b02970a29780192add895f"
+      ],
+      "at": "2026-11-26T17:36:54.867367+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/payment_intent.py",
+        "src/payments.py",
+        "src/payment.py",
+        "src/intent.py",
+        "src/intents.py",
+        "src/payment_intents.py",
+        "src/checkout.py",
+        "src/checkout_payment.py",
+        "src/checkout_intent.py",
+        "src/payment_intent_service.py",
+        "src/routes.py",
+        "src/schema/002_payment_intent.sql"
+      ],
+      "sha256s": [
+        "9b51af35146471f8bd5d5a4aacfd38b5f632630ff14299df0181889185ef13d2",
+        "bb12b4cc58443c55986d4870c36df39eb032c678940448dbf8fa7e186221b862",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "3a50f1ce44df4ea5db5378aeb677c4ad2fa2a082e7957fc8402a032e6120d3cb",
+        "0e78796a207178cd12f2b82f138621a9c5e677b17bc4c593d7098c88f0797194",
+        "b736951d8cc8cdc846bb21c7164a2f33a67a5eae3f6f2c464896c798c21e3d0e"
+      ],
+      "at": "2026-11-26T17:39:07.319845+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_payment_intent.py"
+      ],
+      "sha256s": [
+        "f118db6f808bdbd96bb4d257b1f716f03d3c88cd3c6a60917a248a121b998d69"
+      ],
+      "at": "2026-11-26T17:39:08.420075+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 21,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-reflection-v1-S-CHK-INTENT-5b8577e81badb5f078a55e9cb99c52639acd4fa9dda9a235fed937fec4f52f8c.json",
+  "traceDigest": "5b8577e81badb5f078a55e9cb99c52639acd4fa9dda9a235fed937fec4f52f8c",
+  "messageCount": 113,
+  "toolErrors": {
+    "bash": 2
+  }
+}

@@ -38,11 +38,13 @@ class NodeRunnerTests(unittest.TestCase):
         self.addCleanup(self.folder.cleanup)
 
     def test_node_tests_count_pass_and_fail(self):
-        # Sample: One passing and one failing vitest test. Return passed 1, failed 1 and exitCode 1.
+        # Sample: One passing and one failing vitest test. Return passed 1, failed 1, exitCode 1, and failure text.
         root = write_workspace(Path(self.folder.name, 'ws'), with_fail=True)
         result = run_node_tests(root)
         self.assertEqual((result['passed'], result['failed']), (1, 1))
         self.assertEqual(result['exitCode'], 1)
+        self.assertIn('fails', result['output'])
+        self.assertIn('5', result['output'])
 
     def test_node_app_serves_status_200(self):
         # Sample: Next.js app with app/page.tsx showing Smoke. Return status 200 and a body that includes Smoke.

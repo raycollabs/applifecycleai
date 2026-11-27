@@ -1,0 +1,32 @@
+{
+  "label": "chk-durai-v3-s7",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 21,
+  "bare": false,
+  "inputTokens": 1347683,
+  "outputTokens": 102958,
+  "estimatedEnterpriseCost": 3.724946,
+  "estimatedListCost": 0.217504,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-SCREENS",
+      "stopReason": "STOP_IDLE",
+      "calls": 21,
+      "lastRunTests": {
+        "passed": 81,
+        "failed": 1
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

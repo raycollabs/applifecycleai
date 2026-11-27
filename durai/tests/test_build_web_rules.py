@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from durai.build_web_rules import check_web_rules, describe
+from durai.build_web_rules import check_sign_in, check_web_rules, describe
 
 SIGNOUT_GET = (
     'import { NextResponse } from "next/server";\n'
@@ -49,6 +49,25 @@ class WebRuleTests(unittest.TestCase):
         # Sample: Check an empty folder. Check no violation.
         with tempfile.TemporaryDirectory() as folder:
             self.assertEqual([], check_web_rules(folder))
+
+    def test_check_sign_in_discovers_non_trading_routes_when_paths_is_none(self):
+        # Sample: Sign in redirects to /inventory with links to /checkout and /ledger. With paths None check both discovered screens pass without /positions.
+        def fake_fetch(path, method='GET', headers=None, form=None):
+            if path == '/' and method == 'GET':
+                if (headers or {}).get('Cookie'):
+                    return {'status': 307, 'body': '', 'cookies': [], 'location': '/inventory'}
+                return {'status': 200, 'body': '<form method="post" action="/"><input name="trader"><input name="secret"></form>', 'cookies': []}
+            if path == '/' and method == 'POST':
+                return {'status': 303, 'body': '', 'cookies': ['durai_session=tok123; Path=/'], 'location': '/inventory'}
+            if path in ('/inventory', '/checkout', '/ledger') and method == 'GET':
+                if not (headers or {}).get('Cookie'):
+                    return {'status': 200, 'body': 'Signed out', 'cookies': []}
+                return {'status': 200, 'body': f'Trader {form or ""} TR-BEN <nav><a href="/inventory">Inventory</a><a href="/checkout">Checkout</a><a href="/ledger">Ledger</a></nav>', 'cookies': []}
+            return {'status': 404, 'body': 'Not found', 'cookies': []}
+
+        result = check_sign_in(fake_fetch, 'TR-BEN', 's', paths=None)
+        self.assertTrue(result['passed'], result)
+        self.assertEqual(['/inventory', '/checkout', '/ledger'], result['screens'])
 
 
 if __name__ == '__main__':

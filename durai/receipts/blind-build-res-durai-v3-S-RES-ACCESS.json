@@ -1,0 +1,81 @@
+{
+  "label": "res-durai-v3",
+  "sampleId": "S-RES-ACCESS",
+  "revision": 1,
+  "digest": "baa2bb9bb4326515fbf85814b85860b80a5ed151d3ce087c06e75b59582cb796",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "deepinfra-deepseek",
+  "fallbackUsed": true,
+  "startedAt": "2026-11-26T14:58:07.971084+00:00",
+  "finishedAt": "2026-11-26T14:59:09.567497+00:00",
+  "bare": false,
+  "calls": 17,
+  "inputTokens": 332443,
+  "outputTokens": 8294,
+  "estimatedEnterpriseCost": 0.747826,
+  "estimatedListCost": 0.048864,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "c62121c3ac8053823199fdd7e32935784ceb02b1b674df6ab8caca8e3e8b4fb7"
+      ],
+      "at": "2026-11-26T14:58:21.036247+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "6fe50678aafd0836306109e7c10a83b74fe4200711fcffd1915cad9e7aff685f"
+      ],
+      "at": "2026-11-26T14:58:26.969645+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/seats.py",
+        "src/routes.py"
+      ],
+      "sha256s": [
+        "5a01912ba3b617e98f07b64c8d5900b86d4af372395e0e81c575ff3f7db4962b",
+        "eafd04bba307ecbaabf758a11b7c7ea38301b0eceff405dae01790f3b7f3f6d4"
+      ],
+      "at": "2026-11-26T14:59:05.798445+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_seats.py"
+      ],
+      "sha256s": [
+        "4e535c88559fb1bb2335078f4d9a507184aa37822ce4944cf4a8c9e699752eeb"
+      ],
+      "at": "2026-11-26T14:59:07.794018+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 46,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v3-S-RES-ACCESS-9c7769282976ef2a966f562fe1b0e18e7b1f2af8834fa2619087f04437c2ff36.json",
+  "traceDigest": "9c7769282976ef2a966f562fe1b0e18e7b1f2af8834fa2619087f04437c2ff36",
+  "messageCount": 48,
+  "toolErrors": {}
+}

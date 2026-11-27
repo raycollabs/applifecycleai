@@ -70,6 +70,7 @@ TOPICS = {
         'Test the new row and conflict paths in PostgreSQL before submitting IMPLEMENTATION. '
         'Write domain audit and events in that transaction. Keep session handling, health and error responses in the shell. '
         'If the component asks for screens, add domain routes under app/ and use the shell menu and session functions. '
+        'Keep the shell menu and signed-in actor visible on every signed-in screen, including empty and error states. '
         'Read the API from server code. Show loading, empty, error and ok states. Keep secrets on the server. '
         'Use a POST action for sign-in and sign-out. A prefetched GET must leave the cookie alone. '
         'Keep redirects local. Call check_app to verify each signed-in screen and the prefetch check. '

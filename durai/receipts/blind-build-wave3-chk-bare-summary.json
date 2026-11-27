@@ -1,0 +1,26 @@
+{
+  "label": "wave3-chk-bare",
+  "provider": "deepinfra-deepseek",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "calls": 3,
+  "bare": true,
+  "inputTokens": 3193,
+  "outputTokens": 241,
+  "estimatedEnterpriseCost": 0.008796,
+  "estimatedListCost": 0.000783,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-INVENTORY",
+      "stopReason": "PROVIDER_ERROR",
+      "calls": 3,
+      "lastRunTests": null,
+      "stages": []
+    }
+  ]
+}

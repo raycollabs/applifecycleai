@@ -1,0 +1,38 @@
+{
+  "label": "chk-bare-v1",
+  "sampleId": "S-CHK-FUNDS",
+  "revision": 1,
+  "digest": "28db3b3f880444fccea2ae273a2387ced226491ec4fa4b03f179006c97890875",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:15:53.835405+00:00",
+  "finishedAt": "2026-11-26T14:16:36.387562+00:00",
+  "bare": true,
+  "calls": 14,
+  "inputTokens": 208335,
+  "outputTokens": 4236,
+  "estimatedEnterpriseCost": 0.45903,
+  "estimatedListCost": 0.030353,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": {
+    "passed": 6,
+    "failed": 1
+  },
+  "stopReason": "STOP_COST",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-bare-v1-S-CHK-FUNDS-1f8bfb29c13dfeec6cd3b81071102ed9d5d3c0c80ab141b38abbbd1c9b401f01.json",
+  "traceDigest": "1f8bfb29c13dfeec6cd3b81071102ed9d5d3c0c80ab141b38abbbd1c9b401f01",
+  "messageCount": 45,
+  "toolErrors": {}
+}

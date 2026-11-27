@@ -127,6 +127,47 @@ class DriverTests(unittest.TestCase):
         self.assertEqual([], receipt['stages'])
         self.assertTrue((self.root / 'ws/src/bare_code.py').is_file())
 
+    def test_provider_failover_switches_to_fallback_model(self):
+        # Sample: Primary model raises RateLimitError on all retries. Fail over to ScriptedModel and finish with fallbackUsed True.
+        class FailingModel:
+            def bind_tools(self, specs):
+                return self
+
+            def invoke(self, messages):
+                raise RuntimeError('429 Model busy')
+
+        tools = BuildTools(self.root / 'ws', runner=NO_TESTS, bare=True)
+        build = BlindBuild(
+            tools, FailingModel(), 'T-FB', 'deepinfra-deepseek', 'DeepSeek-V4.1-Flash',
+            self.root / 'receipts', sleep=lambda _: None, bare=True,
+            fallback_model=ScriptedModel([[('finish', {})]]), fallback_provider='deepseek', fallback_model_name='deepseek-flash',
+        )
+        receipt = build.run_component('S-TRADE-BOOK')
+        self.assertEqual('FINISHED', receipt['stopReason'])
+        self.assertTrue(receipt['fallbackUsed'])
+        self.assertEqual('deepseek', receipt['provider'])
+
+    def test_live_model_thinking_false_disables_thinking_on_deepseek(self):
+        # Sample: Build deepseek execution model with thinking False. Check extra_body disables thinking.
+        import os
+        from durai.build_driver import live_model
+        with tempfile.TemporaryDirectory() as pdir:
+            (Path(pdir) / 'deepseek.json').write_text(json.dumps({
+                'id': 'deepseek', 'kind': 'openai-compatible', 'baseUrl': 'https://api.deepseek.com',
+                'models': {'execution': 'deepseek-flash'}, 'defaults': {}, 'apiKey': 'test-key'
+            }), encoding='utf-8')
+            old = os.environ.get('DURAI_PROVIDER_DIR')
+            os.environ['DURAI_PROVIDER_DIR'] = pdir
+            try:
+                model, model_name = live_model('deepseek', thinking=False)
+                self.assertEqual('deepseek-flash', model_name)
+                self.assertEqual({'thinking': {'type': 'disabled'}}, model.extra_body)
+            finally:
+                if old is None:
+                    os.environ.pop('DURAI_PROVIDER_DIR', None)
+                else:
+                    os.environ['DURAI_PROVIDER_DIR'] = old
+
 
 class SmokeTests(unittest.TestCase):
     @unittest.skipUnless(docker_available(), 'Docker is not available')

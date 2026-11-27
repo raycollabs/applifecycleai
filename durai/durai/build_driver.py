@@ -90,7 +90,8 @@ def utc():
 class BlindBuild:
     def __init__(self, tools, model, label, provider, model_name, receipts, calls_per_component=CALLS_PER_COMPONENT,
                  calls_total=CALLS_TOTAL, cost_cap=COST_CAP, sleep=time.sleep, keep_recent=KEEP_RECENT,
-                 stall_nudge_limit=STALL_NUDGE_LIMIT, stall_stop_limit=STALL_STOP_LIMIT, bare=False):
+                 stall_nudge_limit=STALL_NUDGE_LIMIT, stall_stop_limit=STALL_STOP_LIMIT, bare=False,
+                 fallback_model=None, fallback_provider=None, fallback_model_name=None):
         # Sample: Bind tools, model, label L-1 and caps 80, 400 and 10 USD. Keep the last 10 messages whole. Nudge at 30 stall calls, stop at 50. With bare True disable Durai stages and gates.
         self.tools, self.model, self.label = tools, model, label
         self.keep_recent = int(keep_recent)
@@ -98,6 +99,9 @@ class BlindBuild:
         self.stall_stop_limit = int(stall_stop_limit)
         self.bare = bool(bare)
         self.provider, self.model_name, self.receipts = provider, model_name, Path(receipts)
+        self.primary_provider = provider
+        self.fallback_model, self.fallback_provider, self.fallback_model_name = fallback_model, fallback_provider, fallback_model_name
+        self.fallback_used = False
         self.per_component, self.total_cap, self.cost_cap, self.sleep = calls_per_component, calls_total, cost_cap, sleep
         self.calls = self.input_tokens = self.output_tokens = 0
         self.bound = None
@@ -134,6 +138,18 @@ class BlindBuild:
                 text = type(error).__name__ + ': ' + str(error)[:300]
                 if attempt < len(RETRY_WAITS):
                     self.sleep(RETRY_WAITS[attempt])
+        if self.fallback_model is not None:
+            self.model = self.fallback_model
+            self.bound = self.model.bind_tools(tool_specs(self.tools))
+            self.provider = self.fallback_provider or self.provider
+            self.model_name = self.fallback_model_name or self.model_name
+            self.fallback_model = None
+            self.fallback_used = True
+            try:
+                return self.bound.invoke(shrink(messages, self.keep_recent, manifest=manifest_msg)), errors, None
+            except Exception as error:
+                errors += 1
+                text = type(error).__name__ + ': ' + str(error)[:300]
         return None, errors, text
 
     def run_component(self, sample_id):
@@ -266,7 +282,8 @@ class BlindBuild:
         pricing = estimate_costs(self.provider, self.model_name, input_tokens, output_tokens)
         receipt = {
             'label': self.label, 'sampleId': sample_id, 'revision': sample['revision'], 'digest': sample['digest'],
-            'model': self.model_name, 'provider': self.provider, 'startedAt': started, 'finishedAt': utc(),
+            'model': self.model_name, 'provider': self.provider, 'primaryProvider': self.primary_provider,
+            'fallbackUsed': self.fallback_used, 'startedAt': started, 'finishedAt': utc(),
             'bare': self.bare,
             'calls': calls, 'inputTokens': input_tokens, 'outputTokens': output_tokens,
             'estimatedEnterpriseCost': pricing['enterprise'],
@@ -355,18 +372,21 @@ def smoke_script(messages):
     ]
 
 
-def live_model(provider, role='execution'):
-    # Sample: Build the DeepSeek execution model with 32768 output tokens, 600 s timeout, streaming and thinking.
+def live_model(provider, role='execution', thinking=None):
+    # Sample: Build the DeepSeek execution model with 32768 output tokens, 600 s timeout, streaming and thinking. Pass thinking False to disable thinking on failover.
     from .provider_config import chat_model, coding_limits, load
     config = load(provider)
     limits = coding_limits(provider, config['baseUrl'])
+    use_thinking = limits['thinking'] if thinking is None else bool(thinking)
     overrides = {'max_tokens': limits['maxTokens'], 'timeout': limits['timeoutSeconds'], 'streaming': bool(limits['streaming'])}
     if limits['streaming']:
         overrides['stream_usage'] = True
-    if limits.get('reasoningEffort'):
+    if limits.get('reasoningEffort') and use_thinking:
         overrides['reasoning_effort'] = limits['reasoningEffort']
-    if limits['thinking']:
+    if use_thinking:
         overrides['extra_body'] = {'thinking': {'type': 'enabled'}}
     else:
         overrides['temperature'] = 0
+        if limits['thinking']:
+            overrides['extra_body'] = {'thinking': {'type': 'disabled'}}
     return chat_model(provider, role, **overrides), config['models'][role]

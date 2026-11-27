@@ -1,0 +1,44 @@
+{
+  "label": "res-durai-v1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 77,
+  "bare": false,
+  "inputTokens": 2563030,
+  "outputTokens": 89400,
+  "estimatedEnterpriseCost": 6.02006,
+  "estimatedListCost": 0.383856,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 28,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-RES-HOLD",
+      "stopReason": "STOP_COST",
+      "calls": 37,
+      "lastRunTests": {
+        "passed": 2,
+        "failed": 26
+      },
+      "stages": [
+        "DESIGN"
+      ]
+    }
+  ]
+}

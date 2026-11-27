@@ -1,0 +1,42 @@
+{
+  "label": "res-bare-v1",
+  "sampleId": "S-RES-SEATS",
+  "revision": 1,
+  "digest": "d01baf09938fad03a18585f453d48099409b0217ab5a3d9e6e4045b1b005780d",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:04:50.928342+00:00",
+  "finishedAt": "2026-11-26T14:09:13.334571+00:00",
+  "bare": true,
+  "calls": 40,
+  "inputTokens": 917031,
+  "outputTokens": 45868,
+  "estimatedEnterpriseCost": 2.292742,
+  "estimatedListCost": 0.141227,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": {
+    "passed": 7,
+    "failed": 5
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-bare-v1-S-RES-SEATS-5526fd112b6e30112574355befedf32cb289ac3445ef3caa3a7f223e152086bc.json",
+  "traceDigest": "5526fd112b6e30112574355befedf32cb289ac3445ef3caa3a7f223e152086bc",
+  "messageCount": 97,
+  "toolErrors": {
+    "list_files": 2,
+    "read_file": 1,
+    "edit_file": 1
+  }
+}

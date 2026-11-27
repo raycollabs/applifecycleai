@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "durai-hermes-governance"
+version = "0.1.0"
+description = "Durai governance plugin for Hermes Agent: egress list, operator boundary, reviewer gates, digest-only receipts."
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.entry-points."hermes_agent.plugins"]
+durai_governance = "durai_governance"
+
+[tool.setuptools]
+packages = ["durai_governance"]
+
+[tool.setuptools.package-data]
+durai_governance = ["plugin.yaml"]

@@ -1,0 +1,54 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.8.25.37@sha256:9558b6aa8f01a3355e7295b7449d484047970ad35a766c30d3e600613abcfbf0
+    environment:
+      CLICKHOUSE_USER: reporting_admin
+      CLICKHOUSE_PASSWORD: ${DURAI_CH_ADMIN_PASSWORD:?Set DURAI_CH_ADMIN_PASSWORD}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    ports:
+      - "127.0.0.1:58123:8123"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+  metadata:
+    profiles: [dashboard]
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: metadata
+      POSTGRES_PASSWORD: ${DURAI_CH_METADATA_ADMIN_PASSWORD:-}
+      DURAI_CH_METADATA_PASSWORD: ${DURAI_CH_METADATA_PASSWORD:-}
+    volumes:
+      - metadata_data:/var/lib/postgresql/data
+      - ./metadata.sql:/docker-entrypoint-initdb.d/001_metadata.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U postgres -d metadata']
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  superset:
+    image: durai-reporting-ch-superset:6.1.0
+    profiles: [dashboard]
+    build:
+      context: .
+      dockerfile: superset.Dockerfile
+    environment:
+      SUPERSET_SECRET_KEY: ${DURAI_CH_SUPERSET_SECRET_KEY:-}
+      DURAI_CH_METADATA_PASSWORD: ${DURAI_CH_METADATA_PASSWORD:-}
+      SUPERSET_CONFIG_PATH: /app/durai-ch-config/superset_config.py
+      PYTHONPATH: /app:/app/durai-ch-config
+    ports:
+      - "127.0.0.1:58061:8088"
+    volumes:
+      - ./superset_config.py:/app/durai-ch-config/superset_config.py:ro
+      - ${DURAI_CH_POLICY_FILE:-../postgres/superset_policy.py}:/app/durai-ch-config/superset_policy.py:ro
+    depends_on:
+      clickhouse:
+        condition: service_started
+      metadata:
+        condition: service_healthy
+volumes:
+  clickhouse_data:
+  metadata_data:

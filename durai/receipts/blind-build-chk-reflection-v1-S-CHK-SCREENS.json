@@ -1,0 +1,98 @@
+{
+  "label": "chk-reflection-v1",
+  "sampleId": "S-CHK-SCREENS",
+  "revision": 1,
+  "digest": "4ec9ffbbae17086fe9806f50840418795ba6b134e5cafe83288db6d412f375b3",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T17:57:16.578749+00:00",
+  "finishedAt": "2026-11-26T18:03:01.047354+00:00",
+  "bare": false,
+  "calls": 60,
+  "inputTokens": 2157895,
+  "outputTokens": 18282,
+  "estimatedEnterpriseCost": 4.49861,
+  "estimatedListCost": 0.442548,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "58574bc7e09c341a1d0cc3919246091df6c38e1048fb45d846732ab6173f7512"
+      ],
+      "at": "2026-11-26T17:58:52.275028+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "3c59d293838b96403f0b129561ac064e32e9b70dc9858bb196fbd722860eb5fa"
+      ],
+      "at": "2026-11-26T17:58:54.333211+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/routes.py",
+        "app/lib.ts",
+        "app/inventory/page.tsx",
+        "app/checkout/page.tsx",
+        "app/payments/page.tsx",
+        "app/ledger/page.tsx",
+        "app/extra-actions.ts"
+      ],
+      "sha256s": [
+        "a97d1f9ef4b3d24458222b83922c83e7fd763db210dca8b83f3deef6e2cb1a7c",
+        "f421076d47f5204297b5b7d77304350a1c3445697276d8edc45e97ea06cf7ccc",
+        "50365150f824278961ea9fb5cceef425b964fe4414249733c8b1758547dc51f1",
+        "0ef2d65e381c4fc286cdf03194c35ce5969ac44ad38e2974ac3de7f67917ee7b",
+        "9b2919078b717aa864a95716ff618a64c29239521e7a7cb4acc9f1567138c398",
+        "1b7c33c3f113fbffc41ad35278e4ffd51d5f3efdb3ed87efdc5a93ac897839ef",
+        "99511d18edd8b546d80a9f54df02cb91876242ea0b9206e46945ac923578fdd2"
+      ],
+      "at": "2026-11-26T18:02:26.471032+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "app/smoke.test.ts",
+        "app/actions.test.ts"
+      ],
+      "sha256s": [
+        "7195b3666b374f5521ff5ece719099911d8a029788be62f38717e78e75423cc1",
+        "1a15752aa9ab1a2f087eff8188fcef0db337866affb2258000e5c23e45af7297"
+      ],
+      "at": "2026-11-26T18:02:29.317390+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-reflection-v1-S-CHK-SCREENS-e67a57ab5e3ff53efebe1e8a681c77a72be6777a94b8290880cf6929e69b47cd.json",
+  "traceDigest": "e67a57ab5e3ff53efebe1e8a681c77a72be6777a94b8290880cf6929e69b47cd",
+  "messageCount": 153,
+  "toolErrors": {
+    "list_files": 1,
+    "bash": 1,
+    "read_file": 2,
+    "grep": 1
+  }
+}

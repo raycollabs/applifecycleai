@@ -1,0 +1,88 @@
+-- Sample: Query rl_ticket_backlog, rl_episode_cost_trend, and rl_route_leaderboard over durai_improvement on a PostgreSQL read replica for Superset.
+
+CREATE OR REPLACE VIEW durai_improvement.rl_ticket_backlog AS
+SELECT
+    t.ticket_id,
+    t.fingerprint,
+    t.source_mode,
+    t.pack_id,
+    t.pack_version,
+    t.shell_version,
+    t.category,
+    t.severity,
+    CASE t.severity
+        WHEN 'CRITICAL' THEN 4
+        WHEN 'HIGH' THEN 3
+        WHEN 'MEDIUM' THEN 2
+        ELSE 1
+    END AS severity_rank,
+    t.status,
+    (t.status IN ('OPEN', 'TRIAGED', 'CANDIDATE_LINKED', 'FIXED_PENDING_EVAL')) AS is_open,
+    t.occurrence_count,
+    t.summary,
+    t.first_seen_at,
+    t.last_seen_at,
+    COALESCE(c.candidate_count, 0) AS candidate_count
+FROM durai_improvement.ticket AS t
+LEFT JOIN (
+    SELECT
+        cluster_fingerprint,
+        COUNT(*) AS candidate_count
+    FROM durai_improvement.policy_candidate
+    GROUP BY cluster_fingerprint
+) AS c
+    ON c.cluster_fingerprint = t.fingerprint;
+
+CREATE OR REPLACE VIEW durai_improvement.rl_episode_cost_trend AS
+SELECT
+    date_trunc('day', recorded_at) AS episode_day,
+    component_category,
+    shell_profile,
+    model_id,
+    provider,
+    COUNT(*) AS episodes_count,
+    SUM(CASE WHEN stop_reason = 'FINISHED' THEN 1 ELSE 0 END) AS finished_count,
+    ROUND(AVG(CASE WHEN stop_reason = 'FINISHED' THEN 1.0 ELSE 0.0 END), 4) AS finish_rate,
+    SUM(input_tokens) AS total_input_tokens,
+    SUM(output_tokens) AS total_output_tokens,
+    SUM(list_cost_usd) AS total_list_cost_usd,
+    SUM(enterprise_cost_usd) AS total_enterprise_cost_usd,
+    ROUND(AVG(list_cost_usd), 6) AS avg_list_cost_usd,
+    ROUND(AVG(calls_used), 2) AS avg_calls_used,
+    ROUND(AVG(reward_score), 4) AS mean_reward,
+    SUM(passed_checks) AS total_passed_checks,
+    SUM(failed_checks) AS total_failed_checks,
+    SUM(tool_error_count) AS total_tool_errors
+FROM durai_improvement.execution_episode
+GROUP BY
+    date_trunc('day', recorded_at),
+    component_category,
+    shell_profile,
+    model_id,
+    provider;
+
+CREATE OR REPLACE VIEW durai_improvement.rl_route_leaderboard AS
+SELECT
+    component_category,
+    shell_profile,
+    model_id,
+    provider,
+    pack_version,
+    episodes_count,
+    finish_rate,
+    avg_calls,
+    avg_list_cost_usd,
+    mean_reward,
+    ROUND(
+        CASE
+            WHEN avg_list_cost_usd > 0 THEN mean_reward / avg_list_cost_usd
+            ELSE mean_reward
+        END,
+        4
+    ) AS reward_per_usd,
+    ROW_NUMBER() OVER (
+        PARTITION BY component_category, shell_profile
+        ORDER BY mean_reward DESC, avg_list_cost_usd ASC, finish_rate DESC, model_id ASC, provider ASC
+    ) AS route_rank,
+    updated_at
+FROM durai_improvement.model_route_stats;

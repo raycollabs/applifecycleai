@@ -1,0 +1,136 @@
+{
+  "label": "res-durai-v3-s6",
+  "sampleId": "S-RES-SCREENS",
+  "revision": 1,
+  "digest": "842e57555f52d52528ab2a016a9b9aff6e7fcdf81142b1de01aeb68915de24d4",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "relace",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T15:41:31.350050+00:00",
+  "finishedAt": "2026-11-26T15:49:11.984430+00:00",
+  "bare": false,
+  "calls": 28,
+  "inputTokens": 1430919,
+  "outputTokens": 69860,
+  "estimatedEnterpriseCost": 3.560438,
+  "estimatedListCost": 0.219889,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "d0cdf7ae6b00f53827d9c6809016cfa622d1abf3ca97b0515dce76cfb5598950"
+      ],
+      "at": "2026-11-26T15:45:25.288298+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "79de17d7fdd8c29e443f0fe09f5ec4af4e79531cc8322dc09d58b5738c002845"
+      ],
+      "at": "2026-11-26T15:45:29.940264+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "app/[screen]/page.tsx",
+        "app/actions.ts",
+        "app/HoldSeat.tsx",
+        "app/Menu.tsx",
+        "app/SignIn.tsx",
+        "app/lib.ts",
+        "app/layout.tsx",
+        "app/loading.tsx",
+        "app/error.tsx",
+        "app/page.tsx",
+        "app/shell.css"
+      ],
+      "sha256s": [
+        "3c50d8c158cdf59a377662b8ec5752b06a206ec60373a86ab4bd312a54fd0fff",
+        "9c81b3aa81b34fb2172dcc06278b365096c2bb4bf212f5cadb747b72f0c32965",
+        "878a8dde725aba9d03e7a79e8da7160e9301b95d1f1c6b6fcd914ca40a9a97e5",
+        "43516e65d9e5ef2d7a90367acffc16b49a1de4cc6acb6e1e42cf0ac9ea45cd45",
+        "18c937909d49f00a97154a877d692593d1a794b9a541c19d1be1a0c10f3f02fe",
+        "6b68af7def85b4cad3df5c2e2195b21c04e3ceec85161aa168cac654dd30f12c",
+        "4c493d780dbbf0a1b6a2ec171572b2c2439f5f15fccab20823ac2f9c77671d2e",
+        "58fe2565b11aa4e1b610ae0e4f5d73e03d21f6b7040bec9fb7cb452d8a7ee9ef",
+        "1b26edb206613b8161abe53d86760fc14845f2a00b5cfaf2ae3ec7a752edf593",
+        "30eab2953c1d394df0eb305ea7c307d4b0858f5027ab65cbdf20258c977d7014",
+        "4c692ae85c71838a43433366b3cc1c89442b10062bbc1877834b6cc846975c17"
+      ],
+      "at": "2026-11-26T15:48:39.563984+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "app/actions.test.ts",
+        "app/lib.test.ts"
+      ],
+      "sha256s": [
+        "98c2e7a1839790b41e6527def0190aeaa4229b80f52cd4a98fb0f14a82394334",
+        "8374259067fcb282b663755e37f89cd2a87bf39a4eaa214ab9b388618b7fe8e1"
+      ],
+      "at": "2026-11-26T15:48:43.845056+00:00"
+    },
+    {
+      "stage": "DEPLOYED",
+      "paths": [
+        "app/[screen]/page.tsx",
+        "app/actions.ts",
+        "app/HoldSeat.tsx",
+        "app/Menu.tsx",
+        "app/SignIn.tsx",
+        "app/lib.ts",
+        "app/layout.tsx",
+        "app/loading.tsx",
+        "app/error.tsx",
+        "app/page.tsx",
+        "app/shell.css"
+      ],
+      "sha256s": [
+        "3c50d8c158cdf59a377662b8ec5752b06a206ec60373a86ab4bd312a54fd0fff",
+        "9c81b3aa81b34fb2172dcc06278b365096c2bb4bf212f5cadb747b72f0c32965",
+        "878a8dde725aba9d03e7a79e8da7160e9301b95d1f1c6b6fcd914ca40a9a97e5",
+        "43516e65d9e5ef2d7a90367acffc16b49a1de4cc6acb6e1e42cf0ac9ea45cd45",
+        "18c937909d49f00a97154a877d692593d1a794b9a541c19d1be1a0c10f3f02fe",
+        "6b68af7def85b4cad3df5c2e2195b21c04e3ceec85161aa168cac654dd30f12c",
+        "4c493d780dbbf0a1b6a2ec171572b2c2439f5f15fccab20823ac2f9c77671d2e",
+        "58fe2565b11aa4e1b610ae0e4f5d73e03d21f6b7040bec9fb7cb452d8a7ee9ef",
+        "1b26edb206613b8161abe53d86760fc14845f2a00b5cfaf2ae3ec7a752edf593",
+        "30eab2953c1d394df0eb305ea7c307d4b0858f5027ab65cbdf20258c977d7014",
+        "4c692ae85c71838a43433366b3cc1c89442b10062bbc1877834b6cc846975c17"
+      ],
+      "at": "2026-11-26T15:49:07.292257+00:00",
+      "checkApp": {
+        "status": 200,
+        "signIn": null,
+        "digest": "b35d1d33a3c8e5cc7617e36d6e98888395f51e2129ec0e3971b6edad03205e52"
+      }
+    }
+  ],
+  "lastRunTests": {
+    "passed": 53,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 2,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v3-s6-S-RES-SCREENS-b68e57a3f03a7129dea04366f56580d446116b49128561879e52c15f9dd59b02.json",
+  "traceDigest": "b68e57a3f03a7129dea04366f56580d446116b49128561879e52c15f9dd59b02",
+  "messageCount": 84,
+  "toolErrors": {}
+}

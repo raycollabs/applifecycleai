@@ -1,0 +1,41 @@
+{
+  "label": "chk-bare-v1",
+  "sampleId": "S-CHK-INVENTORY",
+  "revision": 1,
+  "digest": "034133c9e0de7740ee90bb8b5d8247de18a44578cfcb2310a6c8b0c578fa384e",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:06:59.708921+00:00",
+  "finishedAt": "2026-11-26T14:13:03.632032+00:00",
+  "bare": true,
+  "calls": 40,
+  "inputTokens": 1662687,
+  "outputTokens": 55357,
+  "estimatedEnterpriseCost": 3.878944,
+  "estimatedListCost": 0.248276,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": {
+    "passed": 1,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-bare-v1-S-CHK-INVENTORY-2c727d4884010b5843d5bbacab4d689f52f5fd4521d29797657dc232fd813157.json",
+  "traceDigest": "2c727d4884010b5843d5bbacab4d689f52f5fd4521d29797657dc232fd813157",
+  "messageCount": 101,
+  "toolErrors": {
+    "list_files": 3,
+    "read_file": 1
+  }
+}

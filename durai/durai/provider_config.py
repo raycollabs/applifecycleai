@@ -85,9 +85,67 @@ def gemini_model(model, api_key, **options):
 
 def refuse_openai_gemini(model, provider_id=None, kind=None, base_url=None):
     # Sample: Gemini route built on ChatOpenAI. Check ValueError. Gemini route on ChatGoogleGenerativeAI. Check same model returned.
-    if is_gemini(provider_id, kind, base_url) and type(model).__name__ == 'ChatOpenAI':
+    if is_gemini(provider_id, kind, base_url) and 'ChatOpenAI' in type(model).__name__:
         raise ValueError('Gemini routes require the native Google client; ChatOpenAI drops the thought signature')
     return model
+
+
+def _build_reasoning_chat_openai():
+    # Sample: Build ChatOpenAI subclass that preserves reasoning_content across streaming chunks and request payloads.
+    from langchain_openai import ChatOpenAI
+
+    class ReasoningChatOpenAI(ChatOpenAI):
+        def _convert_chunk_to_generation_chunk(self, chunk, default_chunk_class, base_generation_info):
+            gen_chunk = super()._convert_chunk_to_generation_chunk(chunk, default_chunk_class, base_generation_info)
+            if gen_chunk is not None:
+                choices = chunk.get('choices', []) or chunk.get('chunk', {}).get('choices', [])
+                if choices:
+                    delta = choices[0].get('delta') or {}
+                    rc = delta.get('reasoning_content')
+                    if rc is not None:
+                        gen_chunk.message.additional_kwargs['reasoning_content'] = rc
+            return gen_chunk
+
+        def _create_chat_result(self, response, generation_info=None):
+            result = super()._create_chat_result(response, generation_info)
+            choices = response.get('choices') or [] if isinstance(response, dict) else getattr(response, 'choices', None) or []
+            for idx, gen in enumerate(result.generations):
+                if idx < len(choices):
+                    msg = choices[idx].get('message', {}) if isinstance(choices[idx], dict) else getattr(choices[idx], 'message', None)
+                    rc = msg.get('reasoning_content') if isinstance(msg, dict) else getattr(msg, 'reasoning_content', None)
+                    if rc is not None:
+                        gen.message.additional_kwargs['reasoning_content'] = rc
+            return result
+
+        def _get_request_payload(self, input_, *, stop=None, **kwargs):
+            payload = super()._get_request_payload(input_, stop=stop, **kwargs)
+            lc_msgs = input_.to_messages() if hasattr(input_, 'to_messages') else list(input_)
+            ai_lc = [m for m in lc_msgs if getattr(m, 'type', None) == 'ai']
+            ai_pay = [m for m in payload.get('messages', []) if m.get('role') == 'assistant']
+            need_default = 'reflection' in str(getattr(self, 'openai_api_base', '') or '').lower()
+            for lc_msg, pay_msg in zip(ai_lc, ai_pay):
+                rc = (getattr(lc_msg, 'additional_kwargs', None) or {}).get('reasoning_content')
+                if rc is not None:
+                    pay_msg['reasoning_content'] = rc
+                elif need_default:
+                    pay_msg['reasoning_content'] = ''
+            return payload
+
+    return ReasoningChatOpenAI
+
+
+def is_reflection(provider_id=None, base_url=None):
+    # Sample: Route id reflection or host api.reflection.ai. Check True.
+    from urllib.parse import urlsplit
+    return provider_id == 'reflection' or urlsplit(base_url or '').hostname == 'api.reflection.ai'
+
+
+def openai_chat_class(provider_id=None, base_url=None):
+    # Sample: Return ReasoningChatOpenAI for reflection and deepseek routes, and standard ChatOpenAI otherwise.
+    if is_reflection(provider_id, base_url) or is_deepseek(provider_id, base_url):
+        return _build_reasoning_chat_openai()
+    from langchain_openai import ChatOpenAI
+    return ChatOpenAI
 
 
 def chat_model(provider_id, role, **overrides):
@@ -114,5 +172,5 @@ def chat_model(provider_id, role, **overrides):
     if defaults.get('maxTokens'):
         args['max_tokens'] = defaults['maxTokens']
     args.update(overrides)
-    from langchain_openai import ChatOpenAI
-    return ChatOpenAI(**args)
+    cls = openai_chat_class(provider_id, config['baseUrl'])
+    return cls(**args)

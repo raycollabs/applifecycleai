@@ -1,0 +1,102 @@
+{
+  "label": "res-reflection-v1",
+  "sampleId": "S-RES-SCREENS",
+  "revision": 1,
+  "digest": "842e57555f52d52528ab2a016a9b9aff6e7fcdf81142b1de01aeb68915de24d4",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T18:32:41.150415+00:00",
+  "finishedAt": "2026-11-26T18:37:45.556747+00:00",
+  "bare": false,
+  "calls": 60,
+  "inputTokens": 1839002,
+  "outputTokens": 16141,
+  "estimatedEnterpriseCost": 3.839414,
+  "estimatedListCost": 0.377485,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "52f1284cb6d844ec55d0bef8bcf489bce15922423fc1e1b7610d2ca5ab556545"
+      ],
+      "at": "2026-11-26T18:34:55.439724+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "a752c6e7294d4a9e5d672bc530e9c35296f45443efff5da244e01b1d723fa1ac"
+      ],
+      "at": "2026-11-26T18:35:01.933222+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/seats.py",
+        "src/routes.py",
+        "app/lib.ts",
+        "app/Menu.tsx",
+        "app/events/page.tsx",
+        "app/hold/page.tsx",
+        "app/HoldForm.tsx",
+        "app/reservations/page.tsx",
+        "app/audit/page.tsx",
+        "app/actions.ts"
+      ],
+      "sha256s": [
+        "6365889515cc9c6bee052ebff24c0908d350283532692cdd77620221bef1bebc",
+        "4c4d0f249d623f22c2b46821a685e1fd74fb1c6ea8b82ed76859f9877e3fee97",
+        "96a7760570cfd10469a894eae9abe646206a878c2662f41f3fe28ed74380192b",
+        "43516e65d9e5ef2d7a90367acffc16b49a1de4cc6acb6e1e42cf0ac9ea45cd45",
+        "2278bfd68359ef5cd21c66ab07b10c8e4463f0af959c70230d3b070b72d02463",
+        "d8674af0f7e858c49c9fac023423b90c3ed18235f9a1cb91bba513835a2f7f1b",
+        "fd60cf7a74017ebdcb06ea1ade67ad84045d6a5816a3d9065e90b3b2eefa864f",
+        "fc2288a3e492c0033a941cd35b601315de3fb620b5be89e46f2bb664ac541ed0",
+        "b1d5e110de88fcbe4af891d7312acbb4e6f3411ac2d991c8cdb176cb5c95012f",
+        "27088d26cad48777bddfedfafaf6ba18053c223953c06b1393854eba249e65e3"
+      ],
+      "at": "2026-11-26T18:37:17.817985+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_screens_api.py"
+      ],
+      "sha256s": [
+        "8ec654e2a3f943349da5a5259ace118e45a08e10e09a8a377dbc49eb4d524ad3"
+      ],
+      "at": "2026-11-26T18:37:19.894738+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-reflection-v1-S-RES-SCREENS-7866c7d8229bbed223e96a1535b6279b3438f3967c129350d976a5e17f4f04ab.json",
+  "traceDigest": "7866c7d8229bbed223e96a1535b6279b3438f3967c129350d976a5e17f4f04ab",
+  "messageCount": 162,
+  "toolErrors": {
+    "list_files": 1,
+    "bash": 2,
+    "read_file": 1,
+    "grep_files": 1
+  }
+}

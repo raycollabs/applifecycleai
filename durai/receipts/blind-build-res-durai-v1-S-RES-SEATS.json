@@ -1,0 +1,59 @@
+{
+  "label": "res-durai-v1",
+  "sampleId": "S-RES-SEATS",
+  "revision": 1,
+  "digest": "d01baf09938fad03a18585f453d48099409b0217ab5a3d9e6e4045b1b005780d",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T13:56:58.787195+00:00",
+  "finishedAt": "2026-11-26T14:02:29.845954+00:00",
+  "bare": false,
+  "calls": 40,
+  "inputTokens": 1704923,
+  "outputTokens": 69874,
+  "estimatedEnterpriseCost": 4.108586,
+  "estimatedListCost": 0.258254,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "19724ac5d3e1a3fd2e1e5d639f55834f73bd78e5763eee2c21755e534e259d29"
+      ],
+      "at": "2026-11-26T13:58:20.477350+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "bff4177446b98691b2287216ca261f0840d44cb463aa138241e7eac15af8842a"
+      ],
+      "at": "2026-11-26T13:58:30.621793+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 28,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v1-S-RES-SEATS-5a35ccf39f9f6d6f01304af77fcadd4106efd605794bfb69698e284f9b2329d5.json",
+  "traceDigest": "5a35ccf39f9f6d6f01304af77fcadd4106efd605794bfb69698e284f9b2329d5",
+  "messageCount": 108,
+  "toolErrors": {}
+}

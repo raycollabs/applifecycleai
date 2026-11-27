@@ -1,0 +1,56 @@
+{
+  "label": "res-durai-v2",
+  "sampleId": "S-RES-SEATS",
+  "revision": 1,
+  "digest": "d01baf09938fad03a18585f453d48099409b0217ab5a3d9e6e4045b1b005780d",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:14:52.070016+00:00",
+  "finishedAt": "2026-11-26T14:19:16.405949+00:00",
+  "bare": false,
+  "calls": 19,
+  "inputTokens": 632093,
+  "outputTokens": 49158,
+  "estimatedEnterpriseCost": 1.755766,
+  "estimatedListCost": 0.102257,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "92083ccd8c2ea9ce21b22e5ce8a63d326dc5ec0fd1e6e03d5a5251dfca6ba810"
+      ],
+      "at": "2026-11-26T14:17:20.547126+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "b4d452132a11f0042bf9ded397acad215fbc092c7a93f90d547d2602e2d3ab2a"
+      ],
+      "at": "2026-11-26T14:17:31.915182+00:00"
+    }
+  ],
+  "lastRunTests": null,
+  "stopReason": "PROVIDER_ERROR",
+  "stopDetail": "APIStatusError: Error code: 402 - Insufficient Balance (request_id: 4ada10ef-394d-4ec0-b22f-673695de0e72)",
+  "providerErrors": 3,
+  "nudges": 0,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v2-S-RES-SEATS-9691982efd2ac8d560f3d2b6c660167194e0f2b45a4e74b4c22b481487f8f458.json",
+  "traceDigest": "9691982efd2ac8d560f3d2b6c660167194e0f2b45a4e74b4c22b481487f8f458",
+  "messageCount": 48,
+  "toolErrors": {}
+}

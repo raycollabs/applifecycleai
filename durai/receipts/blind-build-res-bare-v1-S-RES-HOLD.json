@@ -1,0 +1,38 @@
+{
+  "label": "res-bare-v1",
+  "sampleId": "S-RES-HOLD",
+  "revision": 1,
+  "digest": "a92f424142dac9dedde22e1973b181ea4e7113b42ce47fba45a7ba6a5d91a9e1",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:09:13.336575+00:00",
+  "finishedAt": "2026-11-26T14:12:09.841786+00:00",
+  "bare": true,
+  "calls": 40,
+  "inputTokens": 669703,
+  "outputTokens": 6231,
+  "estimatedEnterpriseCost": 1.401716,
+  "estimatedListCost": 0.095503,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": {
+    "passed": 7,
+    "failed": 6
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-bare-v1-S-RES-HOLD-c4a4bb0b4563c0c9d9270b3fbfdf5404a183011853c769cb57c3e7ba04b7f70e.json",
+  "traceDigest": "c4a4bb0b4563c0c9d9270b3fbfdf5404a183011853c769cb57c3e7ba04b7f70e",
+  "messageCount": 99,
+  "toolErrors": {}
+}

@@ -25,7 +25,7 @@ def probe_http(url, timeout=5):
 
 
 def review_product(app_url, criteria, project='durai-app-default', evidence_folder=EVIDENCE_FOLDER,
-                   receipts_folder=RECEIPTS_FOLDER, browser_runner=None):
+                   receipts_folder=RECEIPTS_FOLDER, browser_runner=None, rl_store=None):
     # Sample: Review app on 127.0.0.1:54360 with 2 criteria. Return receipt with 2 PASS verdicts, UI score 3, and screenshot digests.
     evidence_dir = Path(evidence_folder) / project
     evidence_dir.mkdir(parents=True, exist_ok=True)
@@ -99,6 +99,21 @@ def review_product(app_url, criteria, project='durai-app-default', evidence_fold
 
     receipt_path = receipts_dir / f"product-review-{project}.json"
     receipt_path.write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
+    if rl_store is not None:
+        from durai.ticket_collector import collect_run_feedback
+        passed_n = sum(1 for c in checks if c['verdict'] == 'PASS')
+        failed_n = len(checks) - passed_n
+        rl_receipt = {
+            'runId': f'prev-{project}',
+            'sampleId': project,
+            'stopReason': 'FINISHED' if status_code == 200 and failed_n == 0 else 'CHECK_APP_FAIL',
+            'calls': 1,
+            'lastRunTests': {'passed': passed_n, 'failed': failed_n},
+            'model': 'p-rev-probe',
+            'provider': 'local',
+        }
+        web_violations = [{'rule': 'UI_RUNTIME_ERROR'}] if (status_code != 200 or failed_n > 0) else None
+        collect_run_feedback(rl_store, rl_receipt, web_rules=web_violations, component_category='ui')
     return receipt
 
 

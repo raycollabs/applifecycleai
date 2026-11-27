@@ -1,0 +1,87 @@
+{
+  "label": "res-reflection-v1",
+  "sampleId": "S-RES-CONFIRM",
+  "revision": 1,
+  "digest": "0825585975bf1804fb3fe8f1069a5e59620f6d6fc784d7f1baf39cb627c12c52",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T18:17:35.080342+00:00",
+  "finishedAt": "2026-11-26T18:22:13.355835+00:00",
+  "bare": false,
+  "calls": 45,
+  "inputTokens": 1143408,
+  "outputTokens": 18489,
+  "estimatedEnterpriseCost": 2.471706,
+  "estimatedListCost": 0.239775,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "23b5205de6932b28e43524ecb5e6984e34a11d510f920ee0be48baa2dd8acf11"
+      ],
+      "at": "2026-11-26T18:19:47.272182+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "abce33adf3e79373fd7fac2358f60c6123875b5e2e7a9d2da5a25e9e93caf3fc"
+      ],
+      "at": "2026-11-26T18:19:52.309142+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/seats.py",
+        "src/routes.py",
+        "src/schema/003_confirm.sql"
+      ],
+      "sha256s": [
+        "634988493d845660637fa97a3e2386fe7022016019d2d73d8fa1574143e56fb7",
+        "b21e93e177d4bbedd7b99d052eb94fce9a61174bcf326e2e9b65ff9aa53409d7",
+        "ab22c059361a308ad5a77a18435cecae06d07ef49b1c6d0f80fc1c9fda55ba55"
+      ],
+      "at": "2026-11-26T18:22:11.607022+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_confirm_hold.py"
+      ],
+      "sha256s": [
+        "cc07d47671dde881c7eea00a4b08491499fc0098eb0680444f4b069f705ed414"
+      ],
+      "at": "2026-11-26T18:22:12.496749+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 29,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-reflection-v1-S-RES-CONFIRM-b4f6009b4adc9b1538ad4ba052c5c549288a6e73df9ea0a7adcddfce0dd95178.json",
+  "traceDigest": "b4f6009b4adc9b1538ad4ba052c5c549288a6e73df9ea0a7adcddfce0dd95178",
+  "messageCount": 117,
+  "toolErrors": {
+    "read_file": 1,
+    "grep_search": 1,
+    "write_file": 2
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "label": "chk-reflection-v1",
+  "sampleId": "S-CHK-LEDGER",
+  "revision": 1,
+  "digest": "7c7bab4e69525a6fa6627963209bb61fba2b9bbdacb47f17182d2a3a8c75b900",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T17:44:22.106271+00:00",
+  "finishedAt": "2026-11-26T17:51:51.431587+00:00",
+  "bare": false,
+  "calls": 60,
+  "inputTokens": 1909075,
+  "outputTokens": 33963,
+  "estimatedEnterpriseCost": 4.15778,
+  "estimatedListCost": 0.402193,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "4709ffad64ace24e0cb0c2d7882d99c210584c3f32e090da306677673f6b87c4"
+      ],
+      "at": "2026-11-26T17:46:46.884418+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "f4293372ab5757b6f0c97aefd35d86f51521c8f8ca43aecec6e35974e91faed7"
+      ],
+      "at": "2026-11-26T17:46:51.655106+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/ledger.py",
+        "src/journal.py",
+        "src/accounting.py",
+        "src/double_entry.py",
+        "src/bookkeeping.py",
+        "src/ledger_journal.py",
+        "src/journal_entry.py",
+        "src/journal_transaction.py",
+        "src/posting.py",
+        "src/entry.py",
+        "src/transaction.py",
+        "src/schema/004_ledger.sql",
+        "src/payment_intent.py"
+      ],
+      "sha256s": [
+        "80816d5fbdb7031fa7172bc37a207f17411f879111402c79591a5c462f9f47d0",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "2efc6e5f8f5dd650fe94b9342b5e2b40abfba6fbed2560da0656a6dde74a7c1a",
+        "497a5efa8469b594e39ad3bfa832479d59a01101a7fc92164da15a368ad96374",
+        "e3361b62b2f3e9e96dc2ae2045f288ce264e6881adb6b448bcd9fcf382fc782d"
+      ],
+      "at": "2026-11-26T17:51:24.961327+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_ledger.py"
+      ],
+      "sha256s": [
+        "00079d253e3f18163a2d8f198edfe5d4809e887c783cadcce9038833249c0c51"
+      ],
+      "at": "2026-11-26T17:51:29.944295+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 37,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-reflection-v1-S-CHK-LEDGER-e380d5b89cdfad6ffb95f4abe0ed52128d8d258968db07516b86e0cae4b6884a.json",
+  "traceDigest": "e380d5b89cdfad6ffb95f4abe0ed52128d8d258968db07516b86e0cae4b6884a",
+  "messageCount": 158,
+  "toolErrors": {
+    "read_file": 1,
+    "write_file": 1,
+    "grep": 1,
+    "edit_file": 3
+  }
+}

@@ -1,0 +1,27 @@
+:root { font-family: system-ui, -apple-system, sans-serif; color: #0f172a; background: #f8fafc; }
+body { margin: 0; }
+.res-main { max-width: 1020px; margin: 0 auto; padding: 24px 16px; }
+.res-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 20px; }
+.res-brand { font-weight: 700; font-size: 1rem; }
+.res-nav { display: flex; gap: 12px; }
+.res-link { color: #334155; text-decoration: none; padding: 6px 10px; border-radius: 6px; }
+.res-link.active { background: #0f172a; color: #fff; }
+.res-actor { display: flex; align-items: center; gap: 10px; }
+.res-badge { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; }
+.res-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.res-kpi { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.res-kpi-label { font-size: 0.8rem; color: #475569; font-weight: 600; }
+.res-kpi strong { font-size: 1.4rem; }
+.res-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+.res-auth { max-width: 420px; margin: 48px auto; }
+.res-form { display: grid; gap: 10px; max-width: 420px; }
+.res-form input, .res-form select { padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; }
+.res-btn-primary { background: #0f172a; color: #fff; border: 0; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.res-btn-ghost { background: transparent; border: 1px solid #cbd5e1; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.res-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.res-table th, .res-table td { text-align: left; padding: 10px; border-bottom: 1px solid #e2e8f0; }
+.res-pill { background: #e2e8f0; color: #1e293b; padding: 3px 8px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.res-pill-held { background: #fef3c7; color: #92400e; }
+.res-pill-confirmed { background: #dcfce7; color: #166534; }
+.res-pill-cancelled, .res-pill-expired { background: #fee2e2; color: #991b1b; }
+.res-error { color: #b91c1c; font-weight: 600; }

@@ -1,0 +1,46 @@
+{
+  "label": "chk-durai-v2",
+  "sampleId": "S-CHK-INVENTORY",
+  "revision": 1,
+  "digest": "034133c9e0de7740ee90bb8b5d8247de18a44578cfcb2310a6c8b0c578fa384e",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:16:47.633606+00:00",
+  "finishedAt": "2026-11-26T14:19:06.227500+00:00",
+  "bare": false,
+  "calls": 5,
+  "inputTokens": 44460,
+  "outputTokens": 20833,
+  "estimatedEnterpriseCost": 0.29725,
+  "estimatedListCost": 0.012058,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "1c18bd23b30eb299daee1b161dc640dc009678d355de5b2cbb9b9d3fbfdb9a77"
+      ],
+      "at": "2026-11-26T14:18:23.761494+00:00"
+    }
+  ],
+  "lastRunTests": null,
+  "stopReason": "PROVIDER_ERROR",
+  "stopDetail": "APIStatusError: Error code: 402 - Insufficient Balance (request_id: c7de7f1e-6152-4da3-8d43-59fca7677501)",
+  "providerErrors": 3,
+  "nudges": 0,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-durai-v2-S-CHK-INVENTORY-73f420fba0a83246dbd7d8beaa4f1442ce69bbc3fd9c20b4caaef1d713b56479.json",
+  "traceDigest": "73f420fba0a83246dbd7d8beaa4f1442ce69bbc3fd9c20b4caaef1d713b56479",
+  "messageCount": 17,
+  "toolErrors": {}
+}

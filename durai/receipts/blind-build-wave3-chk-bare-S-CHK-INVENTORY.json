@@ -1,0 +1,33 @@
+{
+  "label": "wave3-chk-bare",
+  "sampleId": "S-CHK-INVENTORY",
+  "revision": 1,
+  "digest": "034133c9e0de7740ee90bb8b5d8247de18a44578cfcb2310a6c8b0c578fa384e",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "provider": "deepinfra-deepseek",
+  "startedAt": "2026-11-26T11:48:33.845745+00:00",
+  "finishedAt": "2026-11-26T11:51:19.913252+00:00",
+  "bare": true,
+  "calls": 3,
+  "inputTokens": 3193,
+  "outputTokens": 241,
+  "estimatedEnterpriseCost": 0.008796,
+  "estimatedListCost": 0.000783,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [],
+  "lastRunTests": null,
+  "stopReason": "PROVIDER_ERROR",
+  "stopDetail": "OpenAIRateLimitError: Error code: 429 - Model busy, retry later",
+  "providerErrors": 4,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-wave3-chk-bare-S-CHK-INVENTORY-33b68e309d1309600991d0bd145fbd54fcc21c2b9286039ee04257d33b5686d5.json",
+  "traceDigest": "33b68e309d1309600991d0bd145fbd54fcc21c2b9286039ee04257d33b5686d5",
+  "messageCount": 12,
+  "toolErrors": {}
+}

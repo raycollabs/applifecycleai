@@ -1,0 +1,32 @@
+{
+  "label": "chk-reflection-s6",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 20,
+  "bare": false,
+  "inputTokens": 1001920,
+  "outputTokens": 103076,
+  "estimatedEnterpriseCost": 3.0346,
+  "estimatedListCost": 0.16913,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-SCREENS",
+      "stopReason": "STOP_IDLE",
+      "calls": 20,
+      "lastRunTests": {
+        "passed": 82,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

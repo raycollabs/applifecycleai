@@ -47,3 +47,26 @@ The server publishes a versioned Delta table, verifies the rows, and passes
 the data to the trade book. Use the same request again to verify replay.
 This reference path uses Databricks SQL. Connect the DataLab runtime when
 its runnable component is available.
+
+To check the historical WTI spot benchmark, send this request:
+
+> Check the installed FRED WTI spot reference. Show me its date range, latest price, and whether the data is stale.
+
+The read-only tool reports dates, counts, the latest available price, and
+age in calendar days. It marks a price older than seven days as stale.
+Use contract prices for futures settlement.
+
+## Close one futures book
+
+Run the close command with the book, business date, prior business date,
+and cutoff with a time zone. Read the exit code and the receipt.
+
+```powershell
+python tools/run_trading_close.py --project durai-app-deepseek-r3 --book SYN-OIL --business-date 2026-11-03 --prior-business-date 2026-11-02 --known-at 2026-11-25T23:59:00Z --receipt-directory ./private/close
+```
+
+The command reads one PostgreSQL snapshot. It uses USD futures trades and
+contract marks from the settlement table. It reports fees and settlement
+cash in separate fields. An incomplete close returns exit code 2. The
+receipt lists the missing inputs. Run the command with the same cutoff
+and inputs to get the same receipt.

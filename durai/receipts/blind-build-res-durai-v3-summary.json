@@ -1,0 +1,107 @@
+{
+  "label": "res-durai-v3",
+  "provider": "relace",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "calls": 170,
+  "bare": false,
+  "inputTokens": 5774408,
+  "outputTokens": 399310,
+  "estimatedEnterpriseCost": 15.541916,
+  "estimatedListCost": 0.920224,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "FINISHED",
+      "calls": 50,
+      "lastRunTests": {
+        "passed": 14,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-HOLD",
+      "stopReason": "FINISHED",
+      "calls": 28,
+      "lastRunTests": {
+        "passed": 21,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-CONFIRM",
+      "stopReason": "FINISHED",
+      "calls": 31,
+      "lastRunTests": {
+        "passed": 30,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-CANCEL",
+      "stopReason": "FINISHED",
+      "calls": 14,
+      "lastRunTests": {
+        "passed": 35,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-ACCESS",
+      "stopReason": "FINISHED",
+      "calls": 17,
+      "lastRunTests": {
+        "passed": 46,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-SCREENS",
+      "stopReason": "STOP_IDLE",
+      "calls": 30,
+      "lastRunTests": {
+        "passed": 51,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

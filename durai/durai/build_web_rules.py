@@ -112,7 +112,7 @@ def writes_session(response, name):
     return any(header.split('=', 1)[0].strip() == name for header in response.get('cookies', ()))
 
 def check_sign_in(fetch, trader, secret='', paths=('/positions', '/book', '/prices', '/cash')):
-    # Sample: Sign in as TR-BEN. Read four screens and prefetch the sign-out path. Keep the cookie.
+    # Sample: Sign in as TR-BEN. Read four screens and prefetch the sign-out path. Keep the cookie. With paths None start from the post-sign-in redirect path.
     landing = fetch('/', method='GET')
     login = next((form for form in Page(landing['body']).forms
                   if {'code', 'trader'} & form['fields'].keys()), None)
@@ -133,13 +133,19 @@ def check_sign_in(fetch, trader, secret='', paths=('/positions', '/book', '/pric
     snapshot = cookies[session]
     headers = {'Cookie': f'{session}={snapshot}'}
     visited = []
-    pending = list(paths)
+    pending = list(paths) if paths is not None else [location if location and local_path(location) else '/']
     prefetch = {'/signout', '/sign-out', '/session/sign-out'}
     while pending and len(visited) < 32:
         path = pending.pop(0)
         if path in visited or not local_path(path):
             continue
         response = fetch(path, method='GET', headers=headers)
+        if (paths is None and response['status'] in (301, 302, 303, 307, 308)
+                and not writes_session(response, session)):
+            next_path = response.get('location') or ''
+            if local_path(next_path) and next_path not in visited and next_path not in pending:
+                pending.insert(0, next_path)
+                continue
         page = Page(response['body'])
         text = ' '.join(page.text)
         if (response['status'] != 200 or re.search(r'\bsigned\s+out\b', text, re.IGNORECASE)

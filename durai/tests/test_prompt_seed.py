@@ -49,7 +49,7 @@ class SeedTests(unittest.TestCase):
     def test_seed_counts_per_kind(self):
         # Sample: Count per kind. Check 6 to 12 concepts, 4 templates, 3 samples (4 for web-screens), 6 to 12 items and one OFFER item and 4 skills for each of 9 kinds.
         seed = read_seed()
-        self.assertEqual(9, len(seed['kinds']))
+        self.assertEqual(11, len(seed['kinds']))
         for kind in (row['kind_key'] for row in seed['kinds']):
             self.assertTrue(6 <= sum(kind in row['kind_keys'] for row in seed['concepts']) <= 12, kind)
             self.assertEqual(4, sum(row['kind_key'] == kind for row in seed['templates']))
@@ -75,6 +75,26 @@ class ScreenDesignSeedTests(unittest.TestCase):
         self.assertEqual({'ASK', 'OFFER'}, set(kinds))
 
 
+class TradingWorkflowSeedTests(unittest.TestCase):
+    def test_sample_data_prompt_delivers_load_rules(self):
+        # Sample: Ask for sample data for the order app. Check the test target and replay rules.
+        enhancer = Enhancer.offline(manifests=())
+        result = enhancer.enhance('Generate synthetic sample data and populate the test app with a fixed fixture seed.')
+        text = result['text']
+        self.assertIn('kind: synthetic-test-data', text)
+        for rule in ('isolated test deployment', 'schema revision', 'dataset key', 'zero new rows'):
+            self.assertIn(rule, text)
+
+    def test_close_report_prompt_delivers_valuation_rules(self):
+        # Sample: Ask for an end-of-day PnL report by book. Check the cutoff and settlement rules.
+        enhancer = Enhancer.offline(manifests=())
+        result = enhancer.enhance('Build end-of-day risk and PnL reports by book, portfolio and trader.')
+        text = result['text']
+        self.assertIn('kind: trading-close-report', text)
+        for rule in ('known-at cutoff', 'same-day fill', 'variation cash separately', 'new revisions'):
+            self.assertIn(rule, text)
+
+
 class SeedLoadTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -91,7 +111,8 @@ class SeedLoadTests(unittest.TestCase):
     def test_loader_loads_draft_then_review_and_classifies_samples(self):
         # Sample: Load the seed as DRAFT. Check the builder view is empty for its kinds. Load as REVIEWED. Check 27 samples classify to their kind.
         first = load_seed(SEED_DIRECTORY, DATABASE, 'DRAFT')
-        self.assertEqual(9, first.get('kind:loaded', 0) + first.get('kind:unchanged', 0) + first.get('kind:updated', 0))
+        self.assertEqual(len(read_seed()['kinds']),
+                         first.get('kind:loaded', 0) + first.get('kind:unchanged', 0) + first.get('kind:updated', 0))
         with connect('postgres', DATABASE) as db:
             statuses = {row['status'] for row in db.execute("SELECT status FROM durai_prompt.component_kind WHERE kind_key='idempotent-command'").fetchall()}
         if statuses == {'DRAFT'}:

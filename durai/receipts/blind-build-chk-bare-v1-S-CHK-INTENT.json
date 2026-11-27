@@ -1,0 +1,38 @@
+{
+  "label": "chk-bare-v1",
+  "sampleId": "S-CHK-INTENT",
+  "revision": 1,
+  "digest": "de647c19d6f6cb0b64ffe86f0298f9e78d110d3daa7c93904abeb78385a16f8c",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepseek",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:13:03.634625+00:00",
+  "finishedAt": "2026-11-26T14:15:53.832848+00:00",
+  "bare": true,
+  "calls": 40,
+  "inputTokens": 787318,
+  "outputTokens": 11191,
+  "estimatedEnterpriseCost": 1.686546,
+  "estimatedListCost": 0.113358,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": {
+    "passed": 6,
+    "failed": 1
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-bare-v1-S-CHK-INTENT-52436995767fac5260ac115c5c8d488cb782a71dcbf138f2d84c6e83fc89f9eb.json",
+  "traceDigest": "52436995767fac5260ac115c5c8d488cb782a71dcbf138f2d84c6e83fc89f9eb",
+  "messageCount": 96,
+  "toolErrors": {}
+}

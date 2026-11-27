@@ -1,0 +1,63 @@
+{
+  "label": "res-reflection-v1",
+  "sampleId": "S-RES-ACCESS",
+  "revision": 1,
+  "digest": "baa2bb9bb4326515fbf85814b85860b80a5ed151d3ce087c06e75b59582cb796",
+  "model": "Beam-1.0-501B-A23B",
+  "provider": "reflection",
+  "primaryProvider": "reflection",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T18:27:45.365687+00:00",
+  "finishedAt": "2026-11-26T18:32:41.148415+00:00",
+  "bare": false,
+  "calls": 60,
+  "inputTokens": 1930016,
+  "outputTokens": 20288,
+  "estimatedEnterpriseCost": 4.062912,
+  "estimatedListCost": 0.398176,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "5777297f9c80cf7e9ba86a53d653e83ddeded4adde22d88644481deec2efa4ad"
+      ],
+      "at": "2026-11-26T18:30:32.619743+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "6e5a7508293c25766421b2c76b3c64f3e74653b0edffd87ac893950af2b0fbe4"
+      ],
+      "at": "2026-11-26T18:30:37.643252+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "stopReason": "STOP_BUDGET",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 40,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-reflection-v1-S-RES-ACCESS-ad7006638ffa463401c2ef82902c487a6caef666e952252804020c81edc149ac.json",
+  "traceDigest": "ad7006638ffa463401c2ef82902c487a6caef666e952252804020c81edc149ac",
+  "messageCount": 150,
+  "toolErrors": {
+    "bash": 1,
+    "grep_files": 1,
+    "edit_file": 3
+  }
+}

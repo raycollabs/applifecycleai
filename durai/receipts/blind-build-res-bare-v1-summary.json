@@ -1,0 +1,49 @@
+{
+  "label": "res-bare-v1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 116,
+  "bare": true,
+  "inputTokens": 2652078,
+  "outputTokens": 77175,
+  "estimatedEnterpriseCost": 6.075906,
+  "estimatedListCost": 0.3929,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 7,
+        "failed": 5
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-RES-HOLD",
+      "stopReason": "STOP_BUDGET",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 7,
+        "failed": 6
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-RES-CONFIRM",
+      "stopReason": "STOP_COST",
+      "calls": 36,
+      "lastRunTests": {
+        "passed": 7,
+        "failed": 6
+      },
+      "stages": []
+    }
+  ]
+}

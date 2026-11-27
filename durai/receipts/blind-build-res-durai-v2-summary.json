@@ -1,0 +1,29 @@
+{
+  "label": "res-durai-v2",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 19,
+  "bare": false,
+  "inputTokens": 632093,
+  "outputTokens": 49158,
+  "estimatedEnterpriseCost": 1.755766,
+  "estimatedListCost": 0.102257,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "PROVIDER_ERROR",
+      "calls": 19,
+      "lastRunTests": null,
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    }
+  ]
+}

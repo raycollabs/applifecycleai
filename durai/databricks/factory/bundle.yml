@@ -1,0 +1,30 @@
+bundle:
+  name: durai-energy-futures-acceptance
+  databricks_cli_version: '>= 0.287.0'
+resources:
+  jobs:
+    acceptance:
+      name: Durai energy futures acceptance
+      max_concurrent_runs: 1
+      tags:
+        application: energy-futures
+      tasks:
+        - task_key: fixture_identity
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE_ID__"
+            file:
+              path: ${workspace.file_path}/sql/fixture_identity.sql
+              source: WORKSPACE
+        - task_key: fixture_business_rules
+          depends_on:
+            - task_key: fixture_identity
+          timeout_seconds: 300
+          sql_task:
+            warehouse_id: "__WAREHOUSE_ID__"
+            file:
+              path: ${workspace.file_path}/sql/fixture_business_rules.sql
+              source: WORKSPACE
+targets:
+  acceptance:
+    default: true

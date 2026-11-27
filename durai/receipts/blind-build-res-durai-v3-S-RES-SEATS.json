@@ -1,0 +1,88 @@
+{
+  "label": "res-durai-v3",
+  "sampleId": "S-RES-SEATS",
+  "revision": 1,
+  "digest": "d01baf09938fad03a18585f453d48099409b0217ab5a3d9e6e4045b1b005780d",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "deepinfra-deepseek",
+  "fallbackUsed": true,
+  "startedAt": "2026-11-26T14:19:56.088580+00:00",
+  "finishedAt": "2026-11-26T14:37:25.448658+00:00",
+  "bare": false,
+  "calls": 50,
+  "inputTokens": 1259342,
+  "outputTokens": 85369,
+  "estimatedEnterpriseCost": 3.372374,
+  "estimatedListCost": 0.200211,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "ebe53c63a2ec20cdb106c6b47fca3b8cf007d4dce8b60589e3e04cde00e49f05"
+      ],
+      "at": "2026-11-26T14:27:14.376042+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "a0e0014962a37cfacb51ce3e1c95c95f63e57341b48f13b699d681cca78950cc"
+      ],
+      "at": "2026-11-26T14:28:33.207288+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/001_seats.sql",
+        "src/migrate.py",
+        "src/seats.py",
+        "src/routes.py"
+      ],
+      "sha256s": [
+        "11853745a93dceab0d6eb62606f97b1a7b511255d9b4c382ce5f9c84e3d8636b",
+        "c4fbc61531465015e48948629e70f9062e75aec902ce22091a7f02a48505971c",
+        "98130a195c10c29348b0ef36065bede2aef4aff31abb6565344392232e68bf9d",
+        "57a337061dea9df997bf4c00e47b2e5edb11fd317f9fd911b4cc5534fc5a615b"
+      ],
+      "at": "2026-11-26T14:37:14.009419+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_seats.py"
+      ],
+      "sha256s": [
+        "2928fd3d07648d2443497024eccdaa1c8f0883f17bd07a5323f0116b7e17dbec"
+      ],
+      "at": "2026-11-26T14:37:19.463237+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 14,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 6,
+  "nudges": 2,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v3-S-RES-SEATS-a8b40515017455705d951483af4b2e509499f30f33912ac8cec7b1af73e8413d.json",
+  "traceDigest": "a8b40515017455705d951483af4b2e509499f30f33912ac8cec7b1af73e8413d",
+  "messageCount": 115,
+  "toolErrors": {
+    "list_files": 1,
+    "edit_file": 1
+  }
+}

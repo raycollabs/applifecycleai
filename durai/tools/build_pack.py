@@ -38,8 +38,8 @@ def get_or_create_test_key():
     return priv, pub
 
 
-def build_starter_pack(private_key, key_id=KEY_ID):
-    # Sample: Combine philosophy v15 and architecture defaults. Sign starter pack.
+def build_starter_pack(private_key, key_id=KEY_ID, approved_lessons=None, version='1.0.0'):
+    # Sample: Combine philosophy v15, architecture defaults, and approved lessons. Sign starter pack.
     base = generic_pack('15')
     arch_data = read_design('architecture-defaults-v1.json')
 
@@ -47,6 +47,23 @@ def build_starter_pack(private_key, key_id=KEY_ID):
     for pattern in arch_data.get('patterns', []):
         body = dict(pattern)
         records.append(make_record(f"pattern.architecture.{pattern['id']}", 'DESIGN', 'KNOWLEDGE', body))
+
+    for lesson in (approved_lessons or ()):
+        if lesson.get('status') != 'APPROVED':
+            continue
+        cid = lesson['candidate_id']
+        records.append(make_record(
+            f'lesson.{cid}',
+            'DESIGN',
+            'PROCEDURE',
+            {
+                'candidate_id': cid,
+                'target_kind': lesson.get('target_kind'),
+                'target_ref': lesson.get('target_ref'),
+                'patch': lesson.get('proposed_patch'),
+                'approved_by': lesson.get('approved_by'),
+            },
+        ))
 
     records.append(make_record(
         'architecture.defaults.catalog',
@@ -64,7 +81,7 @@ def build_starter_pack(private_key, key_id=KEY_ID):
     document = {
         'format': 'durai-ontology-pack/v2',
         'id': 'durai.starter',
-        'version': '1.0.0',
+        'version': version,
         'kind': 'GENERIC',
         'publisher': 'durai.io',
         'tier': 'FREE',
@@ -155,7 +172,9 @@ def main(argv=None):
     # Sample: Build packs to directory packs. Print status JSON with pack digests.
     parser = argparse.ArgumentParser()
     parser.add_argument('--output-dir', type=Path, default=PACKS_DIR)
+    parser.add_argument('--approved-lessons', type=Path)
     args = parser.parse_args(argv)
+    approved = json.loads(args.approved_lessons.read_text(encoding='utf-8')) if args.approved_lessons else None
 
     output_dir = args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -167,7 +186,7 @@ def main(argv=None):
     pub_key_path = output_dir / 'test_public_key.hex'
     pub_key_path.write_text(export_public_key_hex(pub), encoding='utf-8')
 
-    starter = build_starter_pack(priv, key_id=KEY_ID)
+    starter = build_starter_pack(priv, key_id=KEY_ID, approved_lessons=approved)
     v_starter = verify_pack(starter, trusted)
     if not v_starter.valid:
         raise ValueError(f"Starter pack verification failed: {v_starter.error}")

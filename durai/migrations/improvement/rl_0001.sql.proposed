@@ -1,0 +1,111 @@
+-- Sample: Record episode EP-1 on S-CHK-SCREENS with 18 passed checks, open ticket T-1, link candidate C-1, and block agent self-approval.
+CREATE SCHEMA IF NOT EXISTS durai_improvement;
+
+CREATE TABLE IF NOT EXISTS durai_improvement.execution_episode (
+    episode_id text PRIMARY KEY,
+    run_id text NOT NULL,
+    sample_id text NOT NULL,
+    component_category text NOT NULL,
+    shell_profile text NOT NULL DEFAULT 'py-fastapi-next',
+    model_id text NOT NULL,
+    provider text NOT NULL,
+    effective_view_digest text NOT NULL,
+    stop_reason text NOT NULL,
+    calls_used integer NOT NULL CHECK (calls_used >= 0),
+    input_tokens bigint NOT NULL DEFAULT 0 CHECK (input_tokens >= 0),
+    output_tokens bigint NOT NULL DEFAULT 0 CHECK (output_tokens >= 0),
+    list_cost_usd numeric(12,6) NOT NULL DEFAULT 0,
+    enterprise_cost_usd numeric(12,6) NOT NULL DEFAULT 0,
+    passed_checks integer NOT NULL DEFAULT 0 CHECK (passed_checks >= 0),
+    failed_checks integer NOT NULL DEFAULT 0 CHECK (failed_checks >= 0),
+    tool_error_count integer NOT NULL DEFAULT 0 CHECK (tool_error_count >= 0),
+    stall_nudges integer NOT NULL DEFAULT 0 CHECK (stall_nudges >= 0),
+    smell_high integer NOT NULL DEFAULT 0 CHECK (smell_high >= 0),
+    smell_low integer NOT NULL DEFAULT 0 CHECK (smell_low >= 0),
+    reward_score numeric(8,4) NOT NULL,
+    recorded_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+    CHECK ((passed_checks + failed_checks) > 0 OR reward_score <= 0)
+);
+
+CREATE TABLE IF NOT EXISTS durai_improvement.episode_signal (
+    signal_id bigserial PRIMARY KEY,
+    episode_id text NOT NULL REFERENCES durai_improvement.execution_episode(episode_id) ON DELETE CASCADE,
+    step_index integer NOT NULL CHECK (step_index >= 0),
+    signal_kind text NOT NULL CHECK (signal_kind IN (
+        'EDIT_MISMATCH', 'PLAN_GATE_REFUSAL', 'GET_CHANGES_COOKIE',
+        'STALL_NUDGE', 'CHECK_APP_FAIL', 'SMELL_HIGH', 'UI_RUNTIME_ERROR'
+    )),
+    tool_name text,
+    rule_id text,
+    detail_digest text NOT NULL,
+    recorded_at timestamptz NOT NULL DEFAULT clock_timestamp()
+);
+
+CREATE TABLE IF NOT EXISTS durai_improvement.ticket (
+    ticket_id text PRIMARY KEY,
+    fingerprint text NOT NULL UNIQUE,
+    source_mode text NOT NULL CHECK (source_mode IN ('LOCAL_DURAI', 'PUBLIC_SHELL')),
+    client_instance_hash text,
+    pack_id text NOT NULL,
+    pack_version text NOT NULL,
+    shell_version text NOT NULL DEFAULT '1.0.0',
+    category text NOT NULL CHECK (category IN (
+        'TOOL_FRICTION', 'WEB_RULE_GAP', 'SQL_BLUEPRINT_GAP',
+        'UI_UX_DEFECT', 'PROMPT_AMBIGUITY', 'ROUTING'
+    )),
+    severity text NOT NULL CHECK (severity IN ('LOW', 'MEDIUM', 'HIGH', 'CRITICAL')),
+    summary text NOT NULL,
+    sanitized_payload jsonb NOT NULL DEFAULT '{}'::jsonb,
+    occurrence_count integer NOT NULL DEFAULT 1 CHECK (occurrence_count >= 1),
+    status text NOT NULL DEFAULT 'OPEN' CHECK (status IN (
+        'OPEN', 'TRIAGED', 'CANDIDATE_LINKED', 'FIXED_PENDING_EVAL', 'RELEASED', 'WONT_FIX'
+    )),
+    first_seen_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+    last_seen_at timestamptz NOT NULL DEFAULT clock_timestamp()
+);
+
+CREATE TABLE IF NOT EXISTS durai_improvement.policy_candidate (
+    candidate_id text PRIMARY KEY,
+    cluster_fingerprint text NOT NULL,
+    target_kind text NOT NULL CHECK (target_kind IN (
+        'LESSON_RULE', 'GUIDANCE_TOPIC', 'WEB_STATIC_RULE', 'SHELL_TEMPLATE', 'MODEL_ROUTE'
+    )),
+    target_ref text NOT NULL,
+    proposed_patch text NOT NULL,
+    status text NOT NULL DEFAULT 'PROPOSED' CHECK (status IN (
+        'DRAFT', 'PROPOSED', 'APPROVED', 'REJECTED', 'SUPERSEDED'
+    )),
+    proposed_by text NOT NULL,
+    approved_by text,
+    approved_at timestamptz,
+    created_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+    CHECK (status <> 'APPROVED' OR (approved_by IS NOT NULL AND approved_by <> proposed_by))
+);
+
+CREATE TABLE IF NOT EXISTS durai_improvement.policy_evaluation (
+    eval_id text PRIMARY KEY,
+    candidate_id text NOT NULL REFERENCES durai_improvement.policy_candidate(candidate_id),
+    baseline_episode_id text REFERENCES durai_improvement.execution_episode(episode_id),
+    treatment_episode_id text REFERENCES durai_improvement.execution_episode(episode_id),
+    delta_pass_rate numeric(6,4) NOT NULL,
+    delta_calls integer NOT NULL,
+    delta_tool_errors integer NOT NULL,
+    delta_list_cost_usd numeric(12,6) NOT NULL,
+    decision text NOT NULL CHECK (decision IN ('PASS_READY', 'REGRESSION', 'INCONCLUSIVE')),
+    evaluated_at timestamptz NOT NULL DEFAULT clock_timestamp()
+);
+
+CREATE TABLE IF NOT EXISTS durai_improvement.model_route_stats (
+    component_category text NOT NULL,
+    shell_profile text NOT NULL,
+    model_id text NOT NULL,
+    provider text NOT NULL,
+    pack_version text NOT NULL,
+    episodes_count integer NOT NULL DEFAULT 0 CHECK (episodes_count >= 0),
+    finish_rate numeric(5,4) NOT NULL DEFAULT 0,
+    avg_calls numeric(8,2) NOT NULL DEFAULT 0,
+    avg_list_cost_usd numeric(12,6) NOT NULL DEFAULT 0,
+    mean_reward numeric(8,4) NOT NULL DEFAULT 0,
+    updated_at timestamptz NOT NULL DEFAULT clock_timestamp(),
+    PRIMARY KEY (component_category, shell_profile, model_id, provider, pack_version)
+);

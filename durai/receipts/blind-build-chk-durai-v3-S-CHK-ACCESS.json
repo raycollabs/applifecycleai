@@ -1,0 +1,83 @@
+{
+  "label": "chk-durai-v3",
+  "sampleId": "S-CHK-ACCESS",
+  "revision": 1,
+  "digest": "3f009870c87acedfaae97edc413d989dfded148d83533fd4dc860d0cc5309db3",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "relace",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:33:50.363291+00:00",
+  "finishedAt": "2026-11-26T14:35:56.063172+00:00",
+  "bare": false,
+  "calls": 41,
+  "inputTokens": 1022009,
+  "outputTokens": 13493,
+  "estimatedEnterpriseCost": 2.178948,
+  "estimatedListCost": 0.146859,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "e7ba53e2b3f16b12992e33d7ce1740b3e6ca6edc9210fae368e4854d0b66dfe9"
+      ],
+      "at": "2026-11-26T14:34:18.045571+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "9da650fced83e89f3d6f17a64b291bc2151b4339a138b9e086805103efd0bab7"
+      ],
+      "at": "2026-11-26T14:34:24.452431+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/access.py",
+        "src/routes.py",
+        "src/schema/005_actor_merchant.sql"
+      ],
+      "sha256s": [
+        "727b88f45347b1e2b16b7c196980b42099b50078a5aba20f6d8de9d32f39f791",
+        "17b457013ad1986f85955b74f66b145049f7cf28e41d13a073ac0c02fb7323a1",
+        "25adbca22a99e86432be8740ada3391c118542fadb733b6d6291f4a3f87547c0"
+      ],
+      "at": "2026-11-26T14:35:50.332517+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_access.py"
+      ],
+      "sha256s": [
+        "bb06c4358b3ef4683faedb88be5c24be9c72f9ce327fbe425a6549b1f8df6d5a"
+      ],
+      "at": "2026-11-26T14:35:53.991999+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 66,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 0,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-durai-v3-S-CHK-ACCESS-a63b7bff73423a23f9b668111d0fee8106d8bf1497aa43cbf7423040c8c9670c.json",
+  "traceDigest": "a63b7bff73423a23f9b668111d0fee8106d8bf1497aa43cbf7423040c8c9670c",
+  "messageCount": 103,
+  "toolErrors": {}
+}

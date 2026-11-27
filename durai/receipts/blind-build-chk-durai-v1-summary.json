@@ -1,0 +1,26 @@
+{
+  "label": "chk-durai-v1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 9,
+  "bare": false,
+  "inputTokens": 44905,
+  "outputTokens": 2989,
+  "estimatedEnterpriseCost": 0.1197,
+  "estimatedListCost": 0.007124,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-INVENTORY",
+      "stopReason": "PROVIDER_ERROR",
+      "calls": 9,
+      "lastRunTests": null,
+      "stages": []
+    }
+  ]
+}

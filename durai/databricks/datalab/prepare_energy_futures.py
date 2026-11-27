@@ -93,6 +93,12 @@ def json_bytes(value):
     return (json.dumps(value, sort_keys=True, ensure_ascii=False) + '\n').encode('utf-8')
 
 
+def warehouse_rows(directory):
+    # Sample: Read contracts and booking files. Return each line with its entity name.
+    return [(name, line) for name in (*TABLES, 'replay_cases')
+            for line in (directory / (name + '.jsonl')).read_text(encoding='utf-8').splitlines()]
+
+
 def prepare(destination, source=SEED):
     # Sample: Export four contracts and two settlements. Check the file row counts and digests.
     source_bytes = source.read_bytes()

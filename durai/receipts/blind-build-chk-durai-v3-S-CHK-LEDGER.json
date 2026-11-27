@@ -1,0 +1,85 @@
+{
+  "label": "chk-durai-v3",
+  "sampleId": "S-CHK-LEDGER",
+  "revision": 1,
+  "digest": "7c7bab4e69525a6fa6627963209bb61fba2b9bbdacb47f17182d2a3a8c75b900",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "relace",
+  "fallbackUsed": false,
+  "startedAt": "2026-11-26T14:25:46.741167+00:00",
+  "finishedAt": "2026-11-26T14:33:50.361291+00:00",
+  "bare": false,
+  "calls": 27,
+  "inputTokens": 1502264,
+  "outputTokens": 79371,
+  "estimatedEnterpriseCost": 3.798238,
+  "estimatedListCost": 0.232541,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "e0831ee66ffc0c22dcec729ac7775dbd684b7913e9860b0627cab171493b352e"
+      ],
+      "at": "2026-11-26T14:29:16.486545+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "bdb2e40e16b215aaf4b43903680b3d8e3a6513c006bd850ee3e79cd433b34f61"
+      ],
+      "at": "2026-11-26T14:29:26.218194+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/ledger.py",
+        "src/schema/004_ledger.sql",
+        "src/payment.py",
+        "src/routes.py"
+      ],
+      "sha256s": [
+        "781492e96b1b9583ad3c012e9df27607480e53305a12c631b08d53cd9b33e052",
+        "ec1163f15510d1a937e2fb7571e74f0109fcc1e4e7209dd518eebfac5deb775d",
+        "26f22df93dbd2a68e7ede7b68b1a4cf4f4e11d49d6b66726334e3d1d29f8b4af",
+        "90c3df1e380713fef9b614712ec092532c6d78ec773cec060e0934b195119f09"
+      ],
+      "at": "2026-11-26T14:33:40.577364+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_ledger.py"
+      ],
+      "sha256s": [
+        "7cee6650c8d28d9c0ebd63da67c6ca3e1fc32e6de55f8c80539e3aea64f8f783"
+      ],
+      "at": "2026-11-26T14:33:45.628453+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 59,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 2,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-durai-v3-S-CHK-LEDGER-d9258425250bdffac1a70dae6c30505ae5e9f730d23d4b3d058c494e864dd403.json",
+  "traceDigest": "d9258425250bdffac1a70dae6c30505ae5e9f730d23d4b3d058c494e864dd403",
+  "messageCount": 68,
+  "toolErrors": {}
+}

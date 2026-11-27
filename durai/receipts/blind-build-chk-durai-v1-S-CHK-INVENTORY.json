@@ -1,0 +1,37 @@
+{
+  "label": "chk-durai-v1",
+  "sampleId": "S-CHK-INVENTORY",
+  "revision": 1,
+  "digest": "034133c9e0de7740ee90bb8b5d8247de18a44578cfcb2310a6c8b0c578fa384e",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "primaryProvider": "deepinfra-deepseek",
+  "fallbackUsed": true,
+  "startedAt": "2026-11-26T13:56:47.836513+00:00",
+  "finishedAt": "2026-11-26T14:06:56.439118+00:00",
+  "bare": false,
+  "calls": 9,
+  "inputTokens": 44905,
+  "outputTokens": 2989,
+  "estimatedEnterpriseCost": 0.1197,
+  "estimatedListCost": 0.007124,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [],
+  "lastRunTests": null,
+  "stopReason": "PROVIDER_ERROR",
+  "stopDetail": "OpenAIInvalidRequestError: Error code: 400 - The `reasoning_content` in the thinking mode must be passed back to the API. (request_id: 6a417b08-48e3-4e1c-a9be-4da46f554b41)",
+  "providerErrors": 8,
+  "nudges": 0,
+  "keepRecent": 10,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-chk-durai-v1-S-CHK-INVENTORY-3d50e7ae300457038acbf431af92e38e0c907e269a41cffcc068ccdc8a13d628.json",
+  "traceDigest": "3d50e7ae300457038acbf431af92e38e0c907e269a41cffcc068ccdc8a13d628",
+  "messageCount": 27,
+  "toolErrors": {
+    "list_files": 1
+  }
+}

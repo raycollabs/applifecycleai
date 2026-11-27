@@ -1,0 +1,191 @@
+{
+  "reports": [
+    {
+      "calculation_version": "usd-futures-book-close/v1",
+      "event_cutoff": "2026-11-03",
+      "format": "durai-report/v1",
+      "input_sha256": "f3efbed1493270b0c99f79a00c2f4e6e9557ae574d2212f1612114526dc99656",
+      "issues": [],
+      "key": {
+        "application": "energy-futures",
+        "book": "SYN-OIL",
+        "business_date": "2026-11-03",
+        "revision": 1
+      },
+      "known_at": "2026-11-03 23:00:00+00:00",
+      "mark_references": [
+        {
+          "cash_amount": "0",
+          "currency": "USD",
+          "instrument_code": "CLF27",
+          "settlement_date": "2026-11-02",
+          "settlement_price": "74.32"
+        },
+        {
+          "cash_amount": "300.00",
+          "currency": "USD",
+          "instrument_code": "CLF27",
+          "settlement_date": "2026-11-03",
+          "settlement_price": "74.47"
+        }
+      ],
+      "rows": [
+        {
+          "book": "SYN-OIL",
+          "business_date": "2026-11-03",
+          "closing_units": "2000",
+          "contract": "CLF27",
+          "currency": "USD",
+          "fees": "0",
+          "fill_pnl": "0",
+          "net_pnl": "300.00",
+          "opening_pnl": "300.00",
+          "opening_units": "2000",
+          "settlement_cash": "300.00"
+        }
+      ],
+      "status": "COMPLETE",
+      "content_sha256": "68547d890c362a392b429747e91a02c92d6feb13d7f03b4c5a98027ff38ba63e"
+    },
+    {
+      "calculation_version": "usd-futures-book-close/v1",
+      "event_cutoff": "2026-11-03",
+      "format": "durai-report/v1",
+      "input_sha256": "4342bca950878773fa7e6b87d17435606f16518b1ae7e4f781bcd0d39210a5b3",
+      "issues": [],
+      "key": {
+        "application": "energy-futures",
+        "book": "SYN-GAS",
+        "business_date": "2026-11-03",
+        "revision": 1
+      },
+      "known_at": "2026-11-03 23:00:00+00:00",
+      "mark_references": [
+        {
+          "cash_amount": "0",
+          "currency": "USD",
+          "instrument_code": "NGF27",
+          "settlement_date": "2026-11-02",
+          "settlement_price": "3.250"
+        },
+        {
+          "cash_amount": "300.000",
+          "currency": "USD",
+          "instrument_code": "NGF27",
+          "settlement_date": "2026-11-03",
+          "settlement_price": "3.235"
+        }
+      ],
+      "rows": [
+        {
+          "book": "SYN-GAS",
+          "business_date": "2026-11-03",
+          "closing_units": "-20000",
+          "contract": "NGF27",
+          "currency": "USD",
+          "fees": "0",
+          "fill_pnl": "0",
+          "net_pnl": "300.000",
+          "opening_pnl": "300.000",
+          "opening_units": "-20000",
+          "settlement_cash": "300.000"
+        }
+      ],
+      "status": "COMPLETE",
+      "content_sha256": "baffa57539c38af1c040a67acf00482d731c281d319a6edac5aba95a92e66e3e"
+    },
+    {
+      "calculation_version": "usd-futures-book-close/v1",
+      "event_cutoff": "2026-11-03",
+      "format": "durai-report/v1",
+      "input_sha256": "2a93ff7d0ee68705f83ddf0ca0b61a2709e3297a0e76d9bd37aad6a68e3abf4e",
+      "issues": [],
+      "key": {
+        "application": "energy-futures",
+        "book": "SYN-OIL",
+        "business_date": "2026-11-03",
+        "revision": 2
+      },
+      "known_at": "2026-11-03 23:00:00+00:00",
+      "mark_references": [
+        {
+          "cash_amount": "0",
+          "currency": "USD",
+          "instrument_code": "CLF27",
+          "settlement_date": "2026-11-02",
+          "settlement_price": "74.32"
+        },
+        {
+          "cash_amount": "320.00",
+          "currency": "USD",
+          "instrument_code": "CLF27",
+          "settlement_date": "2026-11-03",
+          "settlement_price": "74.48"
+        }
+      ],
+      "rows": [
+        {
+          "book": "SYN-OIL",
+          "business_date": "2026-11-03",
+          "closing_units": "2000",
+          "contract": "CLF27",
+          "currency": "USD",
+          "fees": "0",
+          "fill_pnl": "0",
+          "net_pnl": "320.00",
+          "opening_pnl": "320.00",
+          "opening_units": "2000",
+          "settlement_cash": "320.00"
+        }
+      ],
+      "status": "COMPLETE",
+      "content_sha256": "91a29a8a055d9d858342699bbf5f0b9d0a66c916b490f6c0b8dce8dd99fab96b"
+    },
+    {
+      "calculation_version": "usd-futures-book-close/v1",
+      "event_cutoff": "2026-11-03",
+      "format": "durai-report/v1",
+      "input_sha256": "392774a9ba237d7b349d4a12d7006433e4172fda982c2350066f415d83af2aab",
+      "issues": [
+        {
+          "code": "MISSING_CLOSE_MARK",
+          "instrument": "NGF27"
+        }
+      ],
+      "key": {
+        "application": "energy-futures",
+        "book": "SYN-GAS",
+        "business_date": "2026-11-03",
+        "revision": 2
+      },
+      "known_at": "2026-11-03 23:00:00+00:00",
+      "mark_references": [
+        {
+          "cash_amount": "0",
+          "currency": "USD",
+          "instrument_code": "NGF27",
+          "settlement_date": "2026-11-02",
+          "settlement_price": "3.250"
+        }
+      ],
+      "rows": [],
+      "status": "INCOMPLETE",
+      "content_sha256": "75e301a4ebc4c5fc0550f56b1cb6927f092edc491ed23a1eca22da8d8219812a"
+    }
+  ],
+  "access": {
+    "oil-reader": [
+      "SYN-OIL"
+    ],
+    "oil-author": [
+      "SYN-OIL"
+    ],
+    "gas-reader": [
+      "SYN-GAS"
+    ],
+    "gas-author": [
+      "SYN-GAS"
+    ],
+    "unscoped": []
+  }
+}

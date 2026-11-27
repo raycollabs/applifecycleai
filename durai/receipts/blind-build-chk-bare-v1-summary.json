@@ -1,0 +1,49 @@
+{
+  "label": "chk-bare-v1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "calls": 94,
+  "bare": true,
+  "inputTokens": 2658340,
+  "outputTokens": 70784,
+  "estimatedEnterpriseCost": 6.02452,
+  "estimatedListCost": 0.391987,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "components": [
+    {
+      "sampleId": "S-CHK-INVENTORY",
+      "stopReason": "STOP_BUDGET",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 1,
+        "failed": 0
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-CHK-INTENT",
+      "stopReason": "STOP_BUDGET",
+      "calls": 40,
+      "lastRunTests": {
+        "passed": 6,
+        "failed": 1
+      },
+      "stages": []
+    },
+    {
+      "sampleId": "S-CHK-FUNDS",
+      "stopReason": "STOP_COST",
+      "calls": 14,
+      "lastRunTests": {
+        "passed": 6,
+        "failed": 1
+      },
+      "stages": []
+    }
+  ]
+}

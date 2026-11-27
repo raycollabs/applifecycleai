@@ -1,0 +1,85 @@
+{
+  "label": "res-durai-v3",
+  "sampleId": "S-RES-CONFIRM",
+  "revision": 1,
+  "digest": "0825585975bf1804fb3fe8f1069a5e59620f6d6fc784d7f1baf39cb627c12c52",
+  "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+  "provider": "relace",
+  "primaryProvider": "deepinfra-deepseek",
+  "fallbackUsed": true,
+  "startedAt": "2026-11-26T14:44:38.223163+00:00",
+  "finishedAt": "2026-11-26T14:52:22.419110+00:00",
+  "bare": false,
+  "calls": 31,
+  "inputTokens": 1411222,
+  "outputTokens": 42754,
+  "estimatedEnterpriseCost": 3.249984,
+  "estimatedListCost": 0.209542,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.14,
+    "listOutputPerMillion": 0.28
+  },
+  "stages": [
+    {
+      "stage": "DESIGN",
+      "paths": [
+        "docs/design.md"
+      ],
+      "sha256s": [
+        "f0a406d0e60f57f2b61644288cb613ac3dd8787f3176b73ba5bc41a1e52d9c5a"
+      ],
+      "at": "2026-11-26T14:47:10.292552+00:00"
+    },
+    {
+      "stage": "PLAN",
+      "paths": [
+        "docs/plan.md"
+      ],
+      "sha256s": [
+        "b223467c3f67c9469c9dcc6b133d48bd1cc92aa3303004f59bf8e2e6d9e76144"
+      ],
+      "at": "2026-11-26T14:47:16.557449+00:00"
+    },
+    {
+      "stage": "IMPLEMENTATION",
+      "paths": [
+        "src/schema/003_confirm_payment.sql",
+        "src/seats.py",
+        "src/routes.py"
+      ],
+      "sha256s": [
+        "0aeeb1912f9ef8900efb4454c92ddf76366369970e34ddffdc7ccec3bedc51a8",
+        "f7653f7e94a49068beee7ccb1a75127d481d0c8594141d43a8861ff8e645b369",
+        "93bf54bb55c7354107241db99466540aeea0ca5bcab3f4c5421be4f11e9ffc82"
+      ],
+      "at": "2026-11-26T14:52:16.336099+00:00"
+    },
+    {
+      "stage": "TESTS",
+      "paths": [
+        "tests/test_seats.py"
+      ],
+      "sha256s": [
+        "8cc26641aa93c1413ef2cedb88996d8dbf29765b33c12ba24c4c4c1afeee2772"
+      ],
+      "at": "2026-11-26T14:52:19.519424+00:00"
+    }
+  ],
+  "lastRunTests": {
+    "passed": 30,
+    "failed": 0
+  },
+  "stopReason": "FINISHED",
+  "stopDetail": null,
+  "providerErrors": 0,
+  "nudges": 1,
+  "keepRecent": 20,
+  "tracePath": "D:\\plans\\durai-checkout-sample-20261125\\durai\\worker-evidence\\blind-res-durai-v3-S-RES-CONFIRM-2d85bd4bff9049ab9dc7de149f55168f71655c55f6c2d4a2b58d80780877d0c1.json",
+  "traceDigest": "2d85bd4bff9049ab9dc7de149f55168f71655c55f6c2d4a2b58d80780877d0c1",
+  "messageCount": 74,
+  "toolErrors": {
+    "run_tests": 2
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "format": "durai-reporting-workload/v1",
+  "fixture": "energy_futures_close.json",
+  "fixture_sha256": "4d012e24702d759cf5a6f4df9ade74a19418393b9fa3249d655c833c113e5667",
+  "query": {
+    "identity": "oil-reader",
+    "business_date": "2026-11-03",
+    "book": "SYN-OIL",
+    "order": ["contract", "currency"],
+    "expected_rows": 1,
+    "expected_revision": 2,
+    "expected_net_pnl": "320"
+  },
+  "measurement": {
+    "boundary": "database client query and complete result fetch",
+    "exclude": ["connection setup", "fixture load", "permission checks"],
+    "cache_state": "warm",
+    "warmup_queries": 1,
+    "measurements": 30,
+    "concurrency": 1,
+    "latency_statistics": ["p50_ms", "p95_ms"]
+  },
+  "release_targets": {
+    "query_p95_ms": null,
+    "report_lag_seconds": null,
+    "recovery_seconds": null,
+    "cost_usd": null
+  }
+}

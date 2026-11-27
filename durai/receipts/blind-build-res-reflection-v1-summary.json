@@ -1,0 +1,101 @@
+{
+  "label": "res-reflection-v1",
+  "provider": "reflection",
+  "model": "Beam-1.0-501B-A23B",
+  "calls": 345,
+  "bare": false,
+  "inputTokens": 9374152,
+  "outputTokens": 122706,
+  "estimatedEnterpriseCost": 19.975364,
+  "estimatedListCost": 1.948454,
+  "pricingRates": {
+    "enterpriseInputPerMillion": 2.0,
+    "enterpriseOutputPerMillion": 10.0,
+    "listInputPerMillion": 0.2,
+    "listOutputPerMillion": 0.6
+  },
+  "components": [
+    {
+      "sampleId": "S-RES-SEATS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 12,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-RES-HOLD",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 22,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-RES-CONFIRM",
+      "stopReason": "FINISHED",
+      "calls": 45,
+      "lastRunTests": {
+        "passed": 29,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    },
+    {
+      "sampleId": "S-RES-CANCEL",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 37,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-RES-ACCESS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 42,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN"
+      ]
+    },
+    {
+      "sampleId": "S-RES-SCREENS",
+      "stopReason": "STOP_BUDGET",
+      "calls": 60,
+      "lastRunTests": {
+        "passed": 45,
+        "failed": 0
+      },
+      "stages": [
+        "DESIGN",
+        "PLAN",
+        "IMPLEMENTATION",
+        "TESTS"
+      ]
+    }
+  ]
+}

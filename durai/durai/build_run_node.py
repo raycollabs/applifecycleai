@@ -29,8 +29,21 @@ def copy_workspace(workspace, target):
     return target
 
 
+def _vitest_failures(data):
+    # Sample: Extract failing assertion names and messages from vitest JSON report data.
+    lines = []
+    for suite in data.get('testResults') or ():
+        name = suite.get('name') or 'vitest'
+        for case in suite.get('assertionResults') or ():
+            if case.get('status') == 'failed':
+                title = case.get('fullName') or case.get('title') or 'unknown'
+                msg = '\n'.join(case.get('failureMessages') or ())[:600]
+                lines.append(f'FAIL {name} :: {title}\n{msg}'.strip())
+    return '\n'.join(lines)
+
+
 def run_node_tests(workspace, seconds=300):
-    # Sample: Workspace with one passing and one failing vitest test. Return passed 1, failed 1, exitCode 1 and timedOut False.
+    # Sample: Workspace with one passing and one failing vitest test. Return passed 1, failed 1, exitCode 1, failure details, and timedOut False.
     with tempfile.TemporaryDirectory(prefix='durai-node-test-') as folder:
         copy = copy_workspace(workspace, Path(folder, 'app'))
         command = ['docker', 'run', '--rm', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
@@ -44,10 +57,14 @@ def run_node_tests(workspace, seconds=300):
             return {'passed': 0, 'failed': 0, 'exitCode': None, 'timedOut': True, 'output': text[-OUTPUT_TAIL:]}
         report = Path(copy, '.vitest', 'json', 'output.json')
         counts = {'passed': 0, 'failed': 0}
+        failures = ''
         if report.exists():
             data = json.loads(report.read_text(encoding='utf-8'))
             counts = {'passed': int(data.get('numPassedTests', 0)), 'failed': int(data.get('numFailedTests', 0))}
-        output = ((done.stdout or '') + (done.stderr or ''))[-OUTPUT_TAIL:]
+            failures = _vitest_failures(data)
+        raw = ((done.stdout or '') + (done.stderr or '')).strip()
+        combined = (raw + ('\n' + failures if failures else '')).strip()
+        output = combined[-OUTPUT_TAIL:]
         return {**counts, 'exitCode': done.returncode, 'timedOut': False, 'output': output}
 
 
@@ -143,7 +160,8 @@ def check_node_app(workspace, seconds=APP_WAIT_SECONDS, port=APP_PORT):
                         break
                     time.sleep(2)
                 if response['status'] == 200 and mode:
-                    behavior = check_sign_in(fetch, TRADER, secret if mode == 'shell' else '')
+                    paths = None if mode == 'shell' else ('/positions', '/book', '/prices', '/cash')
+                    behavior = check_sign_in(fetch, TRADER, secret if mode == 'shell' else '', paths=paths)
                     return {'status': 200 if behavior['passed'] else 422, 'body': '', 'started': True,
                             'output': json.dumps(behavior, sort_keys=True), 'behavior': behavior}
                 logs = subprocess.run(['docker', 'logs', '--tail', '20', name], capture_output=True, encoding='utf-8', timeout=15)
